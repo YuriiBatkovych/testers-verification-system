@@ -24,3 +24,4 @@ hs_err_pid*
 /02-backend/spring-boot-ecommerce/mvnw.cmd
 /02-backend/spring-boot-ecommerce/mvnw
 
+/03-frontend/.idea
