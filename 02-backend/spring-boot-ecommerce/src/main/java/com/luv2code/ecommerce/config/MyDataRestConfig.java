@@ -30,6 +30,6 @@ public class MyDataRestConfig implements RepositoryRestConfigurer {
     }
 
     private void exposeIds(RepositoryRestConfiguration config) {
-        config.exposeIdsFor(ProductCategory.class);
+        config.exposeIdsFor(ProductCategory.class, Product.class);
     }
 }
