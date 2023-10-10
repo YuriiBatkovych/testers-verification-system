@@ -25,10 +25,10 @@ public class Order {
     @Column(name = "order_tracking_number")
     private String orderTrackingNumber;
 
-    @Column(name = "tatal_quantity")
+    @Column(name = "total_quantity")
     private int totalQuantity;
 
-    @Column(name = "tatal_price")
+    @Column(name = "total_price")
     private BigDecimal totalPrice;
 
     @Column(name = "status")
@@ -49,11 +49,11 @@ public class Order {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "shipping_address_id", referencedColumnName = "id")
     private Address shippingAddress;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "billing_address_id", referencedColumnName = "id")
     private Address billingAddress;
 
