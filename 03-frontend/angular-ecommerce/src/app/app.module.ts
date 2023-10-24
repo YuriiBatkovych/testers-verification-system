@@ -16,6 +16,10 @@ import { CartStatusComponent } from './components/cart-status/cart-status.compon
 import { CartDetailsComponent } from './components/cart-details/cart-details.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LoginStatusComponent } from './components/login-status/login-status.component';
+
+import { AuthModule } from '@auth0/auth0-angular';
+import appConfig from './config/app-config';
 
 const routes: Routes = [
   {path: 'search/:keyword', component: ProductListComponent},
@@ -38,14 +42,20 @@ const routes: Routes = [
     ProductDetailsComponent,
     CartStatusComponent,
     CartDetailsComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    LoginStatusComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
     BrowserModule,
     HttpClientModule,
     NgbModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AuthModule.forRoot({
+      domain: appConfig.oktaConfig.domain,
+      clientId: appConfig.oktaConfig.clientId,
+      authorizationParams: appConfig.oktaConfig.authorizationParams
+    })
   ],
   providers: [ProductService],
   bootstrap: [AppComponent]
