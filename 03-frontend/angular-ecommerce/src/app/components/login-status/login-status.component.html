@@ -10,4 +10,9 @@
     <button *ngIf="(auth.isAuthenticated$ | async) === false" (click)="login()" class="security-btn">
         Login
     </button>
+
+    <button *ngIf="auth.isAuthenticated$ | async" routerLink="/members" class="security-btn ml-1">
+        Members
+    </button>
+    
 </div>

@@ -20,8 +20,12 @@ import { LoginStatusComponent } from './components/login-status/login-status.com
 
 import { AuthModule } from '@auth0/auth0-angular';
 import appConfig from './config/app-config';
+import { MembersPageComponent } from './components/members-page/members-page.component';
+
 
 const routes: Routes = [
+  {path: 'members', component: MembersPageComponent},
+
   {path: 'search/:keyword', component: ProductListComponent},
   {path: 'checkout', component: CheckoutComponent},
   {path: 'products/:id', component: ProductDetailsComponent},
@@ -43,7 +47,8 @@ const routes: Routes = [
     CartStatusComponent,
     CartDetailsComponent,
     CheckoutComponent,
-    LoginStatusComponent
+    LoginStatusComponent,
+    MembersPageComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
