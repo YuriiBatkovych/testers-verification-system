@@ -4,6 +4,7 @@ import com.luv2code.ecommerce.entity.Country;
 import com.luv2code.ecommerce.entity.Product;
 import com.luv2code.ecommerce.entity.ProductCategory;
 import com.luv2code.ecommerce.entity.State;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
@@ -12,6 +13,9 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
 @Configuration
 public class MyDataRestConfig implements RepositoryRestConfigurer {
+
+    @Value("${allowed.origins}")
+    private String[] allowedOrigins;
 
     @Override
     public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config, CorsRegistry cors) {
@@ -23,6 +27,8 @@ public class MyDataRestConfig implements RepositoryRestConfigurer {
         disableHttpMethods(State.class, config, theUnsupportedActions);
 
         exposeIds(config);
+
+        cors.addMapping(config.getBasePath()+"/**").allowedOrigins(allowedOrigins);
 
     }
 
