@@ -21,7 +21,7 @@ export class LoginStatusComponent implements OnInit {
         if(result != undefined){
           this.userName = result.name as string;
           const userEmail = result.email as string;
-
+          
           this.storage.setItem('userEmail', JSON.stringify(userEmail));
         }
       }
@@ -34,6 +34,7 @@ export class LoginStatusComponent implements OnInit {
 
   logout(){
     this.auth.logout({ logoutParams: { returnTo: document.location.origin } });
+    this.storage.setItem('userEmail', JSON.stringify(""));
   }
   
 
