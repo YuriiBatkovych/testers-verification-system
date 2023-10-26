@@ -1,6 +1,6 @@
 <div class="login-status-header"> 
     <div *ngIf="auth.user$ | async as user " class="login-status-user-info">
-        Welcome back {{ user.name }}
+        Welcome {{ user.name }}
     </div>
 
     <button *ngIf="auth.isAuthenticated$ | async" (click)="logout()" class="security-btn">
@@ -15,4 +15,8 @@
         Members
     </button>
     
+    <button *ngIf="auth.isAuthenticated$ | async" routerLink="/order-history" class="security-btn ml-1">
+        Orders
+    </button>
+
 </div>

@@ -9,11 +9,23 @@ import { AuthService } from '@auth0/auth0-angular';
 })
 export class LoginStatusComponent implements OnInit {
 
-  isAuthenticated: boolean = false;
+  userName: string = "";
+
+  storage: Storage = sessionStorage;
 
   constructor(@Inject(DOCUMENT) public document: Document, public auth: AuthService){}
 
   ngOnInit(): void {
+    this.auth.user$.subscribe(
+      (result) => {
+        if(result != undefined){
+          this.userName = result.name as string;
+          const userEmail = result.email as string;
+
+          this.storage.setItem('userEmail', JSON.stringify(userEmail));
+        }
+      }
+    )
   }
 
   login(){
