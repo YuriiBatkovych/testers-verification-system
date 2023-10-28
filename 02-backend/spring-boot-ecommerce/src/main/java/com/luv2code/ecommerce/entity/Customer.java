@@ -31,6 +31,15 @@ public class Customer {
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private Set<Order> orders = new HashSet<>();
 
+    @ManyToMany
+    @JoinTable(
+            name = "customer_roles",
+            joinColumns = @JoinColumn(
+                    name = "customer_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "role_id", referencedColumnName = "id"))
+    private Set<Role> roles;
+
     public  void add(Order order){
 
         if(order != null){
