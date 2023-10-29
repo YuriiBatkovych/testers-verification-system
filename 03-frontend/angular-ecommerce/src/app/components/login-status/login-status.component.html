@@ -3,19 +3,19 @@
         Welcome {{ user.name }}
     </div>
 
-    <button *ngIf="auth.isAuthenticated$ | async" (click)="logout()" class="security-btn">
+    <button *ngIf="auth.isAuthenticated$ | async" (click)="logout()" class="au-btn-submit">
         Logout
     </button>
 
-    <button *ngIf="(auth.isAuthenticated$ | async) === false" (click)="login()" class="security-btn">
+    <button *ngIf="(auth.isAuthenticated$ | async) === false" (click)="login()" class="au-btn-submit">
         Login
     </button>
 
-    <button *ngIf="auth.isAuthenticated$ | async" routerLink="/members" class="security-btn ml-1">
+    <button *ngIf="auth.isAuthenticated$ | async" routerLink="/members" class="au-btn-submit">
         Members
     </button>
     
-    <button *ngIf="auth.isAuthenticated$ | async" routerLink="/order-history" class="security-btn ml-1">
+    <button *ngIf="auth.isAuthenticated$ | async" routerLink="/order-history" class="au-btn-submit">
         Orders
     </button>
 

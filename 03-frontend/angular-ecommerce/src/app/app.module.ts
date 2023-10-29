@@ -22,6 +22,7 @@ import { AuthModule } from '@auth0/auth0-angular';
 import appConfig from './config/app-config';
 import { MembersPageComponent } from './components/members-page/members-page.component';
 import { OrderHistoryComponent } from './components/order-history/order-history.component';
+import { StaffAccessorsComponent } from './components/staff-accessors/staff-accessors.component';
 
 
 const routes: Routes = [
@@ -51,7 +52,8 @@ const routes: Routes = [
     CheckoutComponent,
     LoginStatusComponent,
     MembersPageComponent,
-    OrderHistoryComponent
+    OrderHistoryComponent,
+    StaffAccessorsComponent
   ],
   imports: [
     RouterModule.forRoot(routes),

@@ -24,6 +24,16 @@ export class CustomerService {
     return roles;
   }
 
+  isSTAFF(): boolean{
+    const roles: string[] = this.getRoles();
+    return roles.includes(constants.roles.STAFF) || this.isADMIN();
+  }
+
+  isADMIN(): boolean{
+    const roles: string[] = this.getRoles();
+    return roles.includes(constants.roles.ADMIN) 
+  }
+
   setUserRoles(email: string){
     this.getUserRoles(email).subscribe(
       data => {

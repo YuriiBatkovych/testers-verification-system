@@ -21,6 +21,8 @@ export class LoginStatusComponent implements OnInit {
               public customerService: CustomerService){}
 
   ngOnInit(): void {
+    this.customerService.setDefaultRole();
+    
     this.auth.user$.subscribe(
       (result) => {
         if(result != undefined){

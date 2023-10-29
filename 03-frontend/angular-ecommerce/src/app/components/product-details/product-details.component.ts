@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CartItem } from 'src/app/common/cart-item';
 import { Product } from 'src/app/common/product';
 import { CartService } from 'src/app/services/cart.service';
+import { CustomerService } from 'src/app/services/customer.service';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -15,12 +16,17 @@ export class ProductDetailsComponent implements OnInit {
   product!: Product;
   constructor(private productService: ProductService,
               private cartService: CartService,
+              private customerService: CustomerService,
               private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(() => {
       this.handleProductDetails();
     })
+  }
+
+  hasUpdateRights(): boolean{
+    return this.customerService.isSTAFF();
   }
 
   handleProductDetails() {
