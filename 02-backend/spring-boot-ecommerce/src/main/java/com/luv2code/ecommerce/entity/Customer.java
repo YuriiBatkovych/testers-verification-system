@@ -1,6 +1,7 @@
 package com.luv2code.ecommerce.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -51,5 +52,10 @@ public class Customer {
             order.setCustomer(this);
         }
 
+    }
+
+    @Override
+    public String toString(){
+        return "{"+id+","+firstName+","+lastName+","+email+"}";
     }
 }

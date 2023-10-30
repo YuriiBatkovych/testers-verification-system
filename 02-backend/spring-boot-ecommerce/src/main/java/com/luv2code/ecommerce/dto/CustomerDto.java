@@ -26,4 +26,16 @@ public class CustomerDto {
 
         return customerDto;
     }
+
+    public static Customer customerFromDto(CustomerDto customerDto){
+        Customer customer = new Customer();
+
+        customer.setId(customerDto.getId());
+        customer.setFirstName(customerDto.getFirstName());
+        customer.setLastName(customerDto.getLastName());
+        customer.setEmail(customerDto.getEmail());
+        customer.setRoles(customerDto.getRoles());
+
+        return customer;
+    }
 }

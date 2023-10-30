@@ -1,7 +1,5 @@
 package com.luv2code.ecommerce.controller;
 
-
-import com.luv2code.ecommerce.dao.ProductCategoryRepository;
 import com.luv2code.ecommerce.dto.CategoryDto;
 import com.luv2code.ecommerce.entity.ProductCategory;
 import com.luv2code.ecommerce.service.CategoryService;
@@ -26,6 +24,13 @@ public class CategoryController {
     public ResponseEntity<ProductCategory> addNewCategory(@RequestBody CategoryDto categoryDto){
         ProductCategory productCategory = categoryService.addCategory(categoryDto);
         return ResponseEntity.status(HttpStatus.OK).body(productCategory);
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<String> updateCategory(@RequestParam("id") Long id,
+                                                 @RequestParam(name = "updatedName") String name){
+        categoryService.updateCategory(id, name);
+        return ResponseEntity.status(HttpStatus.OK).body("updated");
     }
 
     @DeleteMapping

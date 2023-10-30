@@ -25,4 +25,10 @@ public class CategoryService {
         categoryRepository.deleteById(id);
     }
 
+    public void updateCategory(Long id, String newName){
+        ProductCategory productCategory = categoryRepository.getReferenceById(id);
+        productCategory.setCategoryName(newName);
+        categoryRepository.save(productCategory);
+    }
+
 }

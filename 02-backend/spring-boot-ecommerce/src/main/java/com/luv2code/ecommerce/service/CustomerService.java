@@ -9,6 +9,7 @@ import com.luv2code.ecommerce.entity.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -23,6 +24,21 @@ public class CustomerService {
         this.customerRepository = customerRepository;
     }
 
+    public Customer addNewUser(CustomerDto customerDto){
+        Customer customer = CustomerDto.customerFromDto(customerDto);
+        return customerRepository.save(customer);
+    }
+
+    public Customer updateUser(CustomerDto customerDto){
+        Customer customer = customerRepository.getReferenceById(customerDto.getId());
+
+        customer.setFirstName(customerDto.getFirstName());
+        customer.setLastName(customerDto.getLastName());
+        customer.setEmail(customerDto.getEmail());
+        customer.setRoles(customerDto.getRoles());
+
+        return customerRepository.save(customer);
+    }
 
     public CustomerDto getCustomerByEmail(String email){
         Customer customer = customerRepository.findByEmail(email);
@@ -31,6 +47,10 @@ public class CustomerService {
             return null;
         }
         return CustomerDto.customerToDto(customer);
+    }
+
+    public List<Customer> getCustomers(){
+        return customerRepository.findAll();
     }
 
     public Set<RoleDto> getCustomerRoles(String email){
@@ -48,6 +68,18 @@ public class CustomerService {
         return roles.stream()
                 .map(RoleDto::roleToEnum)
                 .collect(Collectors.toSet());
+    }
+
+    public void deleteByEmail(String email){
+        Customer customer = customerRepository.findByEmail(email);
+        if(customer != null){
+            deleteById(customer.getId());
+        }
+    }
+
+
+    public void deleteById(Long id){
+        customerRepository.deleteById(id);
     }
 
 }
