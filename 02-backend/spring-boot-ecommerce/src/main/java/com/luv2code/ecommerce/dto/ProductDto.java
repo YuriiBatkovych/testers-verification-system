@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 @Data
 public class ProductDto {
     private Long id;
-    private Long categoryId;
+    private String categoryName;
     private String sku;
     private String name;
     private String description;
@@ -33,5 +33,35 @@ public class ProductDto {
         product.setUnitsInStock(productDto.getUnitsInStock());
 
         return product;
+    }
+
+    public static ProductDto productToDto(Product product){
+        ProductDto productDto = new ProductDto();
+
+        productDto.setId(product.getId());
+        productDto.setCategoryName(product.getCategory().getCategoryName());
+        productDto.setSku(product.getSku());
+        productDto.setName(product.getName());
+        productDto.setDescription(product.getDescription());
+        productDto.setUnitPrice(product.getUnitPrice());
+        productDto.setImageUrl(product.getImageUrl());
+        productDto.setActive(product.isActive());
+        productDto.setUnitsInStock(product.getUnitsInStock());
+
+        return productDto;
+    }
+
+    @Override
+    public String toString(){
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("id=").append(id).append("\n");
+        stringBuilder.append("categoryName=").append(categoryName).append("\n");
+        stringBuilder.append("sku=").append(sku).append("\n");
+        stringBuilder.append("imageUrl=").append(imageUrl).append("\n");
+        stringBuilder.append("description=").append(description).append("\n");
+        stringBuilder.append("unitsInStock=").append(unitsInStock).append("\n");
+        stringBuilder.append("unitPrice=").append(unitPrice).append("\n");
+
+        return stringBuilder.toString();
     }
 }

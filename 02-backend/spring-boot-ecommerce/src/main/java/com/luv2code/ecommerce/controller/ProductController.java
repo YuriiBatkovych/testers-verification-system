@@ -10,7 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/product")
+@RequestMapping("api/products")
+@CrossOrigin("http://localhost:4200")
 public class ProductController {
 
     ProductService productService;
@@ -28,9 +29,16 @@ public class ProductController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<Product> updateCategory(@RequestBody ProductDto productDto){
+    public ResponseEntity<Product> updateProduct(@RequestBody ProductDto productDto){
+        System.out.println(productDto);
         Product product = productService.updateProduct(productDto);
         return ResponseEntity.status(HttpStatus.OK).body(product);
+    }
+
+    @GetMapping
+    public  ResponseEntity<ProductDto> getById(@Param("id") Long id){
+        ProductDto productDto = productService.getById(id);
+        return ResponseEntity.ok(productDto);
     }
 
     @DeleteMapping

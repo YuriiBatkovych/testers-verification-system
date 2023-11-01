@@ -13,7 +13,13 @@
 
         <a routerLink="/products" class="mt-5 btn-space">Back to product list</a>
         
-        <button class="btn btn-primary btn-sm btn-space">Update product</button>
-        <button class="btn btn-danger btn-sm btn-space">Delete product</button>
+        <button *ngIf="hasUpdateRights()" routerLink="/products/{{this.product.id}}/edit" 
+                 class="btn btn-primary btn-sm btn-space">
+            Update product
+        </button>
+        
+        <button *ngIf="hasUpdateRights()" (click)="deleteProduct()" class="btn btn-danger btn-sm btn-space">
+            Delete product
+        </button>
     </div>
 </div>

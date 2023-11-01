@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CartItem } from 'src/app/common/cart-item';
-import { Product } from 'src/app/common/product';
+import { ProductEdition } from 'src/app/common/product-edition';
 import { CartService } from 'src/app/services/cart.service';
 import { CustomerService } from 'src/app/services/customer.service';
 import { ProductService } from 'src/app/services/product.service';
@@ -13,11 +13,12 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class ProductDetailsComponent implements OnInit {
 
-  product!: Product;
+  product!: ProductEdition;
   constructor(private productService: ProductService,
               private cartService: CartService,
               private customerService: CustomerService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(() => {
@@ -41,9 +42,25 @@ export class ProductDetailsComponent implements OnInit {
   addToCart(){
     console.log(`Added product ${this.product.name} price ${this.product.unitPrice}`);
 
-    const cartItem = new CartItem(this.product);
+    const cartItem = new CartItem(this.product.id, this.product.name, this.product.imageUrl, this.product.unitPrice);
 
     this.cartService.addToCart(cartItem);
+  }
+
+  deleteProduct(){
+    this.productService.deleteProduct(this.product).subscribe({
+      next: response => {
+        alert(`Product is deleted`);
+        this.reset();
+      },
+      error: err =>{
+        alert(`There was an error: ${err.message}`);
+      }
+    })
+  }
+
+  reset() {
+    this.router.navigateByUrl("/products");
   }
 
 }

@@ -22,14 +22,20 @@ public class ProductService {
     }
 
     public Product addProduct(ProductDto productDto){
-        ProductCategory productCategory = productCategoryRepository.getReferenceById(productDto.getCategoryId());
+        ProductCategory productCategory = productCategoryRepository.findByCategoryName(productDto.getCategoryName());
         Product product = ProductDto.productFromDto(productDto, productCategory);
 
         return productRepository.save(product);
     }
 
+    public ProductDto getById(Long id){
+        Product product = productRepository.getReferenceById(id);
+        ProductDto productDto = ProductDto.productToDto(product);
+        return productDto;
+    }
+
     public Product updateProduct(ProductDto productDto){
-        ProductCategory newProductCategory = productCategoryRepository.getReferenceById(productDto.getCategoryId());
+        ProductCategory newProductCategory = productCategoryRepository.findByCategoryName(productDto.getCategoryName());
         Product oldProduct = productRepository.getReferenceById(productDto.getId());
 
         oldProduct.setName(productDto.getName());

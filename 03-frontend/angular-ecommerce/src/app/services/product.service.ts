@@ -3,6 +3,9 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { Product } from '../common/product';
 import { ProductCategory } from '../common/product-category';
+import { ProductEdition } from '../common/product-edition';
+import { ProductForForm } from '../common/product-for-form';
+import { ProductForAdd } from '../common/product-for-add';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +13,6 @@ import { ProductCategory } from '../common/product-category';
 export class ProductService {
 
   private baseUrl = 'http://localhost:8081/api/products';
-  private categoryUrl = 'http://localhost:8081/api/product-category';
 
   constructor(private httpClient : HttpClient) {
   }
@@ -48,16 +50,26 @@ export class ProductService {
     );
   }
 
-  getProductCategories(): Observable<ProductCategory[]>{
-    return this.httpClient.get<GetResponseProductCategories>(this.categoryUrl).pipe(
-      map(response => response._embedded.productCategory)
-    );
+  getProduct(productId: number): Observable<ProductEdition> {
+    const searchUrl = `${this.baseUrl}?id=${productId}`;
+    return this.httpClient.get<ProductEdition>(searchUrl);
   }
 
-  getProduct(productId: number): Observable<Product> {
-    const searchUrl = `${this.baseUrl}/${productId}`;
-    return this.httpClient.get<Product>(searchUrl);
+  updateProduct(product: ProductForForm): Observable<any>{
+    const updateUrl = `${this.baseUrl}/update`;
+    return this.httpClient.put<ProductForForm>(updateUrl, product);
   }
+
+  addProduct(product: ProductForAdd): Observable<any>{
+    const addUrl = `${this.baseUrl}/add`;
+    return this.httpClient.post<ProductForForm>(addUrl, product);
+  }
+
+  deleteProduct(product: ProductEdition): Observable<any>{
+    const deleteUrl = `${this.baseUrl}?id=${product.id}`;
+    return this.httpClient.delete(deleteUrl, {responseType: 'text'});
+  }
+
 }
 
 interface GetResponseProducts{
@@ -69,11 +81,5 @@ interface GetResponseProducts{
     totalElements : number,
     totalPages : number,
     number : number
-  }
-}
-
-interface GetResponseProductCategories{
-  _embedded : {
-    productCategory : ProductCategory[];
   }
 }

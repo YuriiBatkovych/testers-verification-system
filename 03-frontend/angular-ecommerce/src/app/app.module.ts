@@ -23,6 +23,7 @@ import appConfig from './config/app-config';
 import { MembersPageComponent } from './components/members-page/members-page.component';
 import { OrderHistoryComponent } from './components/order-history/order-history.component';
 import { StaffAccessorsComponent } from './components/staff-accessors/staff-accessors.component';
+import { ProductEditionComponent } from './components/product-edition/product-edition.component';
 
 
 const routes: Routes = [
@@ -32,6 +33,8 @@ const routes: Routes = [
   {path: 'search/:keyword', component: ProductListComponent},
   {path: 'checkout', component: CheckoutComponent},
   {path: 'products/:id', component: ProductDetailsComponent},
+  {path: 'products/:id/edit', component: ProductEditionComponent},
+  {path: 'add/product', component: ProductEditionComponent},
   {path: 'cart-details', component: CartDetailsComponent},
   {path: 'category/:id', component: ProductListComponent},
   {path: 'category', component: ProductListComponent},
@@ -53,7 +56,8 @@ const routes: Routes = [
     LoginStatusComponent,
     MembersPageComponent,
     OrderHistoryComponent,
-    StaffAccessorsComponent
+    StaffAccessorsComponent,
+    ProductEditionComponent
   ],
   imports: [
     RouterModule.forRoot(routes),

@@ -1,4 +1,4 @@
-import { Product } from "./product";
+import { ProductEdition } from "./product-edition";
 
 export class CartItem {
     id: number;
@@ -8,11 +8,11 @@ export class CartItem {
 
     quantity: number;
 
-    constructor(product: Product){
-        this.id = product.id;
-        this.name = product.name;
-        this.imageUrl = product.imageUrl;
-        this.unitPrice = product.unitPrice;
+    constructor(productId: number, productName: string, productImageUrl: string, productUnitPrice: number){
+        this.id = productId;
+        this.name = productName;
+        this.imageUrl = productImageUrl;
+        this.unitPrice = productUnitPrice;
 
         this.quantity = 1;
     }
