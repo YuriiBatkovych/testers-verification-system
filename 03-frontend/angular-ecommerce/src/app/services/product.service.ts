@@ -2,10 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { Product } from '../common/product';
-import { ProductCategory } from '../common/product-category';
 import { ProductEdition } from '../common/product-edition';
 import { ProductForForm } from '../common/product-for-form';
-import { ProductForAdd } from '../common/product-for-add';
 
 @Injectable({
   providedIn: 'root'
@@ -60,7 +58,7 @@ export class ProductService {
     return this.httpClient.put<ProductForForm>(updateUrl, product);
   }
 
-  addProduct(product: ProductForAdd): Observable<any>{
+  addProduct(product: ProductForForm): Observable<any>{
     const addUrl = `${this.baseUrl}/add`;
     return this.httpClient.post<ProductForForm>(addUrl, product);
   }

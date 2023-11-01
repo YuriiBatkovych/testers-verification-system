@@ -3,7 +3,6 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductCategory } from 'src/app/common/product-category';
 import { ProductEdition } from 'src/app/common/product-edition';
-import { ProductForAdd } from 'src/app/common/product-for-add';
 import { ProductForForm } from 'src/app/common/product-for-form';
 import { CategoryService } from 'src/app/services/category.service';
 import { ProductService } from 'src/app/services/product.service';
@@ -129,12 +128,18 @@ export class ProductEditionComponent implements OnInit {
     }
   }
 
-  addProduct(){
-    let addProduct = new ProductForAdd();
-    addProduct = this.productFormGroup.controls['product'].value;
+  getProductFromForm(): ProductForForm{
+    let formProduct = new ProductForForm();
+    formProduct = this.productFormGroup.controls['product'].value;
 
-    const category: ProductCategory = JSON.parse(JSON.stringify(addProduct.categoryName));
-    addProduct.categoryName = category.categoryName;
+    const category: ProductCategory = JSON.parse(JSON.stringify(formProduct.categoryName));
+    formProduct.categoryName = category.categoryName;
+
+    return formProduct;
+  }
+
+  addProduct(){
+    const addProduct = this.getProductFromForm();
 
     this.productService.addProduct(addProduct).subscribe({
       next: response => {
@@ -149,12 +154,7 @@ export class ProductEditionComponent implements OnInit {
   }
 
   editProduct(){
-    let editedProduct = new ProductForForm();
-    editedProduct = this.productFormGroup.controls['product'].value;
-
-    const category: ProductCategory = JSON.parse(JSON.stringify(editedProduct.categoryName));
-    editedProduct.categoryName = category.categoryName;
-
+    let editedProduct = this.getProductFromForm();
     editedProduct.id = this.product.id;
     
     this.productService.updateProduct(editedProduct).subscribe({
