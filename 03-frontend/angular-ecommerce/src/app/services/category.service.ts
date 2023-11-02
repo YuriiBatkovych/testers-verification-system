@@ -9,6 +9,7 @@ import { ProductCategory } from '../common/product-category';
 export class CategoryService {
 
   private categoryUrl = 'http://localhost:8081/api/product-category';
+  private baseCategoryUrl = 'http://localhost:8081/api/category';
 
   constructor(private httpClient : HttpClient) {
   }
@@ -18,6 +19,21 @@ export class CategoryService {
       map(response => response._embedded.productCategory)
     );
   }
+
+  updateCategory(id: number, newName: string): Observable<any>{
+    const updateUrl = `${this.baseCategoryUrl}/update`;
+    let newCategory = new ProductCategory(id, newName);
+    return this.httpClient.post<any>(updateUrl, newCategory);
+  }
+
+  addNewCategory(categoryName: string): Observable<ProductCategory>{
+    const addUrl = `${this.baseCategoryUrl}/add`;
+
+    let newCategory = new ProductCategory(0, categoryName);
+
+    return this.httpClient.post<ProductCategory>(addUrl, newCategory); 
+  }
+
 }
 
 interface GetResponseProductCategories{

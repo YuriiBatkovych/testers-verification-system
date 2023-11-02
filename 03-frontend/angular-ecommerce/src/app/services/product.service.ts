@@ -27,7 +27,7 @@ export class ProductService {
     const searchUrl = `${this.baseUrl}/search/findByCategoryId?id=${categoryId}`
                       +`&page=${page}&size=${pageSize}`;
     return this.httpClient.get<GetResponseProducts>(searchUrl);
-  }
+  } 
 
   getSearchProducts(keyword: string): Observable<Product[]>{
     const searchUrl = `${this.baseUrl}/search/findByNameContaining?name=${keyword}`;
@@ -67,7 +67,7 @@ export class ProductService {
     const deleteUrl = `${this.baseUrl}?id=${product.id}`;
     return this.httpClient.delete(deleteUrl, {responseType: 'text'});
   }
-
+  
 }
 
 interface GetResponseProducts{

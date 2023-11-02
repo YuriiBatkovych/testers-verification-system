@@ -24,6 +24,7 @@ import { MembersPageComponent } from './components/members-page/members-page.com
 import { OrderHistoryComponent } from './components/order-history/order-history.component';
 import { StaffAccessorsComponent } from './components/staff-accessors/staff-accessors.component';
 import { ProductEditionComponent } from './components/product-edition/product-edition.component';
+import { CategoryEditionComponent } from './components/category-edition/category-edition.component';
 
 
 const routes: Routes = [
@@ -35,6 +36,8 @@ const routes: Routes = [
   {path: 'products/:id', component: ProductDetailsComponent},
   {path: 'products/:id/edit', component: ProductEditionComponent},
   {path: 'add/product', component: ProductEditionComponent},
+  {path: 'add/category', component: CategoryEditionComponent},
+  {path: 'edit/category', component: CategoryEditionComponent},
   {path: 'cart-details', component: CartDetailsComponent},
   {path: 'category/:id', component: ProductListComponent},
   {path: 'category', component: ProductListComponent},
@@ -57,7 +60,8 @@ const routes: Routes = [
     MembersPageComponent,
     OrderHistoryComponent,
     StaffAccessorsComponent,
-    ProductEditionComponent
+    ProductEditionComponent,
+    CategoryEditionComponent
   ],
   imports: [
     RouterModule.forRoot(routes),

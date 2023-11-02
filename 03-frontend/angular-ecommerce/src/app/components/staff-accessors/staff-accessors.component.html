@@ -3,7 +3,10 @@
         <button class="au-btn-submit" routerLink="/add/product">Add new product</button>
     </li>
     <li class="nav-item">
-        <button class="au-btn-submit">Add new category</button>
+        <button class="au-btn-submit" routerLink="/add/category">Add new category</button>
+    </li>
+    <li class="nav-item">
+        <button class="au-btn-submit" routerLink="/edit/category">Edit category</button>
     </li>
     <li *ngIf="hasRightsForUserManagement()" class="nav-item">
         <button class="au-btn-submit">User managment</button>

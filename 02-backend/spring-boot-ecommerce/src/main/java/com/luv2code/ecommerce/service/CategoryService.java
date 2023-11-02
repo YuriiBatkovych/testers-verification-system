@@ -18,6 +18,7 @@ public class CategoryService {
 
     public ProductCategory addCategory(CategoryDto categoryDto){
         ProductCategory productCategory = CategoryDto.productCategoryFromDto(categoryDto);
+        System.out.println(productCategory.getCategoryName());
         return categoryRepository.save(productCategory);
     }
 
@@ -25,10 +26,10 @@ public class CategoryService {
         categoryRepository.deleteById(id);
     }
 
-    public void updateCategory(Long id, String newName){
-        ProductCategory productCategory = categoryRepository.getReferenceById(id);
-        productCategory.setCategoryName(newName);
-        categoryRepository.save(productCategory);
+    public ProductCategory updateCategory(CategoryDto categoryDto){
+        ProductCategory productCategory = categoryRepository.getReferenceById(categoryDto.getId());
+        productCategory.setCategoryName(categoryDto.getCategoryName());
+        return categoryRepository.save(productCategory);
     }
 
 }

@@ -11,9 +11,10 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/category")
+@CrossOrigin(origins = "http://localhost:4200")
 public class CategoryController {
 
-    private CategoryService categoryService;
+    private final CategoryService categoryService;
 
     @Autowired
     public CategoryController(CategoryService categoryService){
@@ -26,11 +27,10 @@ public class CategoryController {
         return ResponseEntity.status(HttpStatus.OK).body(productCategory);
     }
 
-    @PutMapping("/update")
-    public ResponseEntity<String> updateCategory(@RequestParam("id") Long id,
-                                                 @RequestParam(name = "updatedName") String name){
-        categoryService.updateCategory(id, name);
-        return ResponseEntity.status(HttpStatus.OK).body("updated");
+    @PostMapping("/update")
+    public ResponseEntity<ProductCategory> updateCategory(@RequestBody CategoryDto categoryDto){
+        ProductCategory productCategory = categoryService.updateCategory(categoryDto);
+        return ResponseEntity.status(HttpStatus.OK).body(productCategory);
     }
 
     @DeleteMapping
