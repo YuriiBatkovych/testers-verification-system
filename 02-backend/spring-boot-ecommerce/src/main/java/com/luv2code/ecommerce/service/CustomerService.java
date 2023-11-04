@@ -49,8 +49,10 @@ public class CustomerService {
         return CustomerDto.customerToDto(customer);
     }
 
-    public List<Customer> getCustomers(){
-        return customerRepository.findAll();
+    public List<CustomerDto> getCustomers(){
+        return customerRepository.findAll()
+                .stream().map(CustomerDto::customerToDto)
+                .toList();
     }
 
     public Set<RoleDto> getCustomerRoles(String email){
