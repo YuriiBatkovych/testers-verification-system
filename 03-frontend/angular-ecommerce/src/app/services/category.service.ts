@@ -34,6 +34,11 @@ export class CategoryService {
     return this.httpClient.post<ProductCategory>(addUrl, newCategory); 
   }
 
+  deleteCategory(id: number): Observable<any>{
+    const deleteUrl = `${this.baseCategoryUrl}?id=${id}`;
+    return this.httpClient.delete(deleteUrl, {responseType: 'text'});
+  }
+
 }
 
 interface GetResponseProductCategories{

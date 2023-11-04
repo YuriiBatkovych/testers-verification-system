@@ -38,6 +38,7 @@ const routes: Routes = [
   {path: 'add/product', component: ProductEditionComponent},
   {path: 'add/category', component: CategoryEditionComponent},
   {path: 'edit/category', component: CategoryEditionComponent},
+  {path: 'delete/category', component: CategoryEditionComponent},
   {path: 'cart-details', component: CartDetailsComponent},
   {path: 'category/:id', component: ProductListComponent},
   {path: 'category', component: ProductListComponent},
