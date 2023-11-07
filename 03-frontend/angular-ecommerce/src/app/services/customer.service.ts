@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import constants from '../config/constants';
 import { Customer } from '../common/customer';
+import { Role } from '../common/role';
 
 @Injectable({
   providedIn: 'root'
@@ -15,9 +16,9 @@ export class CustomerService {
 
   constructor(private httpClient : HttpClient) { }
 
-  getUserRoles(email: string) : Observable<string[]>{
+  getUserRole(email: string) : Observable<Role>{
     const searchUrl = `${this.baseUrl}/roles?email=${email}`;
-    return this.httpClient.get<string[]>(searchUrl);
+    return this.httpClient.get<Role>(searchUrl);
   }
 
   getAllUsers() : Observable<Customer[]>{
@@ -25,26 +26,51 @@ export class CustomerService {
     return this.httpClient.get<Customer[]>(searchUrl);
   }
 
-  getRoles(): string[] {
-    const roles: string[] = JSON.parse(this.storage.getItem(constants.storageParams.USER_ROLES)!);
-    return roles;
+  getUserById(id: number) : Observable<Customer>{
+    const searchUrl = `${this.baseUrl}/search?id=${id}`;
+    return this.httpClient.get<Customer>(searchUrl);
+  }
+
+  getAllRolesList() : Observable<Role[]>{
+    const searchUrl = `${this.baseUrl}/allroles`;
+    return this.httpClient.get<Role[]>(searchUrl);
+  }
+
+  getRole(): string {
+    const role: string = JSON.parse(this.storage.getItem(constants.storageParams.USER_ROLES)!);
+    return role;
   }
 
   isSTAFF(): boolean{
-    const roles: string[] = this.getRoles();
-    return roles.includes(constants.roles.STAFF) || this.isADMIN();
+    const role: string = this.getRole();
+    return (role === constants.roles.STAFF) || this.isADMIN();
   }
 
   isADMIN(): boolean{
-    const roles: string[] = this.getRoles();
-    return roles.includes(constants.roles.ADMIN) 
+    const role: string = this.getRole();
+    return (role === constants.roles.ADMIN); 
   }
 
-  setUserRoles(email: string){
-    this.getUserRoles(email).subscribe(
+  addUser(user: Customer){
+    const updateUrl = `${this.baseUrl}/add`;
+    return this.httpClient.post<Customer>(updateUrl, user);
+  }
+
+  updateUser(user: Customer){
+    const updateUrl = `${this.baseUrl}/update`;
+    return this.httpClient.put<Customer>(updateUrl, user);
+  }
+
+  deleteUser(userId: number){
+    const deleteUrl = `${this.baseUrl}?id=${userId}`;
+    return this.httpClient.delete(deleteUrl, {responseType: 'text'});
+  }
+
+  setUserRole(email: string){
+    this.getUserRole(email).subscribe(
       data => {
-        const roles: string[] = data;
-        this.storage.setItem(constants.storageParams.USER_ROLES, JSON.stringify(roles));
+        const role: string = data.name;
+        this.storage.setItem(constants.storageParams.USER_ROLES, JSON.stringify(role));
       }
     )
   }

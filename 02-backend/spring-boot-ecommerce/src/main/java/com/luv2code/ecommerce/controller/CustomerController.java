@@ -15,6 +15,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("api/customer")
+@CrossOrigin("http://localhost:4200")
 public class CustomerController {
 
     private final CustomerService customerService;
@@ -30,17 +31,28 @@ public class CustomerController {
         return  customerResponse;
     }
 
+    @GetMapping("/search")
+    public CustomerDto getCustomerById(@Param("id") Long id){
+        CustomerDto customerResponse = customerService.getCustomerById(id);
+        return  customerResponse;
+    }
+
     @GetMapping("/all")
     public List<CustomerDto> getCustomers(){
         return customerService.getCustomers();
     }
 
     @GetMapping("/roles")
-    public Set<RoleDto> getCustomerRolesByEmail(@Param("email") String email){
-        Set<RoleDto> roles = customerService.getCustomerRoles(email);
-        return  roles;
+    public RoleDto getCustomerRoleByEmail(@Param("email") String email){
+        RoleDto role = customerService.getCustomerRole(email);
+        return  role;
     }
 
+    @GetMapping("/allroles")
+    public Set<RoleDto> getRoles(){
+        Set<RoleDto> roles = customerService.getAllRoles();
+        return  roles;
+    }
 
     @PostMapping("/add")
     public ResponseEntity<Customer> addNewUser(@RequestBody CustomerDto customerDto){

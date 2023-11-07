@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Customer } from 'src/app/common/customer';
 import { CustomerService } from 'src/app/services/customer.service';
 
@@ -11,7 +12,8 @@ export class UserManagementComponent implements OnInit {
 
   users: Customer[] = [];
 
-  constructor(private customerService: CustomerService) { }
+  constructor(private customerService: CustomerService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.handleAllCustomers();
@@ -21,6 +23,38 @@ export class UserManagementComponent implements OnInit {
     this.customerService.getAllUsers().subscribe(
       data => this.users = data
     );
+  }
+
+  deleteUser(userId: number){
+    console.log("In user delete");
+    this.customerService.deleteUser(userId).subscribe({
+      next: response => {
+        this.handleSuccess("User deleted");
+      },
+      error: err =>{
+        this.handleError(err);
+      }
+    });
+  }
+
+  reloadPage(){
+    window.location.reload();
+  }
+
+
+  handleSuccess(message: string){
+    alert(message);
+    this.reset();
+  }
+
+  handleError(err : Error){
+    alert(`There was an error: ${err.message}`);
+  }
+
+
+  reset() {
+    window.location.reload();
+    this.router.navigateByUrl("/users");
   }
 
 }

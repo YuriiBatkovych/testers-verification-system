@@ -52,7 +52,7 @@
                                 <input formControlName="sku" type="text">
 
                                 <div *ngIf="sku?.invalid && (sku?.dirty || sku?.touched)" class="alert alert-danger mt-1">
-                                    <div *ngIf="sku?.hasError('required') || name?.hasError('notOnlyWhitespace')">
+                                    <div *ngIf="sku?.hasError('required') || sku?.hasError('notOnlyWhitespace')">
                                         Sku is required
                                     </div>
 

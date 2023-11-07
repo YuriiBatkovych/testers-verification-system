@@ -26,6 +26,9 @@ import { StaffAccessorsComponent } from './components/staff-accessors/staff-acce
 import { ProductEditionComponent } from './components/product-edition/product-edition.component';
 import { CategoryEditionComponent } from './components/category-edition/category-edition.component';
 import { UserManagementComponent } from './components/user-management/user-management.component';
+import { UserEditionComponent } from './components/user-edition/user-edition.component';
+
+
 
 
 const routes: Routes = [
@@ -45,6 +48,8 @@ const routes: Routes = [
   {path: 'category', component: ProductListComponent},
   {path: 'products', component: ProductListComponent},
   {path: 'users', component: UserManagementComponent},
+  {path: 'users/:id/edit', component: UserEditionComponent},
+  {path: 'users/add', component: UserEditionComponent},
   {path: '', redirectTo: '/products', pathMatch:'full'},
   {path: '**', redirectTo: '/products', pathMatch:'full'}
 ]
@@ -65,7 +70,8 @@ const routes: Routes = [
     StaffAccessorsComponent,
     ProductEditionComponent,
     CategoryEditionComponent,
-    UserManagementComponent
+    UserManagementComponent,
+    UserEditionComponent
   ],
   imports: [
     RouterModule.forRoot(routes),

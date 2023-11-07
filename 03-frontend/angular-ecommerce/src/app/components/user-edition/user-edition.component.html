@@ -1,0 +1,85 @@
+<div class="main-content">
+    <div class="section-content section-content-p30">
+        <div class="conteiner-fluid">
+            <div class="form-area">
+                <h3>User</h3>
+
+                <div class="row">
+                    <div class="col-md-2"><label>First Name</label></div>
+                    <div class="col-md-9">
+                        <div class="input-space">
+                            <input [formControl]="firstName" type="text">
+
+                            <div *ngIf="firstName?.invalid && (firstName?.dirty || firstName?.touched)" class="alert alert-danger mt-1">
+                                <div *ngIf="firstName?.hasError('required') || firstName?.hasError('notOnlyWhitespace')">
+                                    FirstName is required
+                                </div>
+
+                                <div *ngIf="firstName?.hasError('minlength')">
+                                    First name must be at least 2 characters long
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2"><label>Last Name</label></div>
+                    <div class="col-md-9">
+                        <div class="input-space">
+                            <input [formControl]="lastName" type="text">
+
+                            <div *ngIf="lastName?.invalid && (lastName?.dirty || lastName?.touched)" class="alert alert-danger mt-1">
+                                <div *ngIf="lastName?.hasError('required') || lastName?.hasError('notOnlyWhitespace')">
+                                    Last name is required
+                                </div>
+
+                                <div *ngIf="lastName?.hasError('minlength')">
+                                    Last name nust be at least 2 characters long
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2"><label>Email</label></div>
+                    <div class="col-md-9">
+                        <div class="input-space">
+                            <input [formControl]="email" type="text">
+
+                            <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="alert alert-danger mt-1">
+                                <div *ngIf="email?.hasError('required')">
+                                    Email is required
+                                </div>
+
+                                <div *ngIf="email?.hasError('pattern')">
+                                    Email must be a valid email address format
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2"><label>Role</label></div>
+                    <div class="col-md-9">
+                        <div class="input-space">
+                            <select [formControl]="role">
+                                <option *ngFor="let role of rolesList" [ngValue]="role">
+                                    {{ role.name }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button  (click)="onSubmit()" class="btn btn-info">{{getSubmitButtonText()}}</button>
+            </div>
+        </div>
+    </div>
+</div>

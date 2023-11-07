@@ -9,6 +9,8 @@ CREATE TABLE `customer` (
   `first_name` varchar(255) DEFAULT NULL,
   `last_name` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
+  `role` bigint NOT NULL,
+  CONSTRAINT `FK_customer_role_id` FOREIGN KEY (`role`) REFERENCES `roles` (`id`),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 

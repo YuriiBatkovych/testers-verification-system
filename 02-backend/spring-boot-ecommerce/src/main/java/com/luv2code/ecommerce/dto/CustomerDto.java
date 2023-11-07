@@ -4,7 +4,9 @@ import com.luv2code.ecommerce.entity.Customer;
 import com.luv2code.ecommerce.entity.Role;
 import lombok.Data;
 
+import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Data
 public class CustomerDto {
@@ -12,7 +14,7 @@ public class CustomerDto {
     private String firstName;
     private String lastName;
     private String email;
-    private Set<Role> roles;
+    private RoleDto role;
 
 
     public static CustomerDto customerToDto(Customer customer){
@@ -22,7 +24,7 @@ public class CustomerDto {
         customerDto.setFirstName(customer.getFirstName());
         customerDto.setLastName(customer.getLastName());
         customerDto.setEmail(customer.getEmail());
-        customerDto.setRoles(customer.getRoles());
+        customerDto.setRole(RoleDto.roleToDto(customer.getRole()));
 
         return customerDto;
     }
@@ -34,7 +36,7 @@ public class CustomerDto {
         customer.setFirstName(customerDto.getFirstName());
         customer.setLastName(customerDto.getLastName());
         customer.setEmail(customerDto.getEmail());
-        customer.setRoles(customerDto.getRoles());
+        customer.setRole(RoleDto.roleDtoToRole(customerDto.getRole()));
 
         return customer;
     }

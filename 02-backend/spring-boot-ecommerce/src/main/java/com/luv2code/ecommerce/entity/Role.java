@@ -22,9 +22,16 @@ public class Role {
     @Column(name = "role_name")
     private String name;
 
-    @ManyToMany(mappedBy = "roles")
+    @OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<Customer> customers;
+
+    public Role(){}
+
+    public Role(Long id, String name){
+        this.id = id;
+        this.name = name;
+    }
 
     @Override
     public String toString(){

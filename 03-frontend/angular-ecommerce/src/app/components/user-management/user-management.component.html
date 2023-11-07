@@ -9,7 +9,9 @@
                         <th width="10%">First Name</th>
                         <th width="10%">Last Name</th>
                         <th width="15%">Email</th>
-                        <th width="15%">Roles</th>
+                        <th width="10%">Roles</th>
+                        <th width="10%"></th>
+                        <th width="10%"></th>
                     </tr>
 
                     <tr *ngFor="let user of users">
@@ -23,12 +25,22 @@
                             {{ user.email }}
                         </td>
                         <td>
-                            <p *ngFor="let role of user.roles">
-                                {{ role.name }}
-                            </p>
+                            {{ user.role.name }}
+                        </td>
+                        <td>
+                            <a routerLink="/users/{{user.id}}/edit" class="btn-primary">Update</a>
+                        </td>
+                        <td>
+                            <a (click)="deleteUser(user.id)" class="btn btn-block">
+                                Delete
+                            </a>
                         </td>
                     </tr>
                 </table>
+            </div>
+
+            <div class="text-center">
+                <button routerLink="/users/add" class="btn btn-info">Add</button>
             </div>
 
             <div *ngIf="users.length == 0" class="alert alert-warning col-md-12" role="alert">
