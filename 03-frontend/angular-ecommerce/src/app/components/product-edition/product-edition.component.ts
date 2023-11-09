@@ -181,7 +181,7 @@ export class ProductEditionComponent implements OnInit {
 
   reset() {
     this.addMode = false;
-    this.router.navigateByUrl("/products");
+    window.location.reload();
   }
 
 }

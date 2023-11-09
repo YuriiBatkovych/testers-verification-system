@@ -1,6 +1,6 @@
 <div class="login-status-header"> 
     <div *ngIf="auth.user$ | async as user " class="login-status-user-info">
-        Welcome {{ user.name }}
+        Welcome
     </div>
 
     <button *ngIf="auth.isAuthenticated$ | async" (click)="logout()" class="au-btn-submit">

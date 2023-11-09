@@ -13,7 +13,6 @@ import { Luv2ShopValidators } from 'src/app/validators/luv2-shop-validators';
 })
 
 export class UserEditionComponent implements OnInit {
-  // userFormGroup: FormGroup = new FormGroup({});
   rolesList: Role[] = [];
   user!: Customer;
 
@@ -158,6 +157,4 @@ export class UserEditionComponent implements OnInit {
       return "Edit";
     }
   }
-    
-
 }

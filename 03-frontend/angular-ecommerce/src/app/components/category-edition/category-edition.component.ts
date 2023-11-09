@@ -170,7 +170,7 @@ export class CategoryEditionComponent implements OnInit {
 
   reset() {
     this.addMode = false;
-    this.router.navigateByUrl("/products");
+    window.location.reload();
   }
 
 }
