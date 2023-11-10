@@ -18,8 +18,8 @@ public class CategoryDto {
     @Override
     public String toString(){
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("id=").append(id).append("\n");
-        stringBuilder.append("categoryName=").append(categoryName).append("\n");
+        stringBuilder.append("id=").append(id).append(", ");
+        stringBuilder.append("categoryName=").append(categoryName);
         return stringBuilder.toString();
     }
 }

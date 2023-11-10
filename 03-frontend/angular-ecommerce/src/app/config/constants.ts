@@ -11,6 +11,10 @@ export default{
     storageParams:{
         USER_EMAIL: 'userEmail',
         USER_ROLES: 'userRoles'
-    }
+    },
 
+    backendSecurity:{
+        USER_NAME: 'angular_user',
+        PASSWORD: 'X&9sP#4L2aQ8oDv!5Gy1'
+    }
 }

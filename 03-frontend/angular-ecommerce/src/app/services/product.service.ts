@@ -4,6 +4,7 @@ import { map, Observable } from 'rxjs';
 import { Product } from '../common/product';
 import { ProductEdition } from '../common/product-edition';
 import { ProductForForm } from '../common/product-for-form';
+import httpConsts from '../config/httpConsts';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,7 @@ export class ProductService {
                          categoryId: number): Observable<GetResponseProducts> {
     const searchUrl = `${this.baseUrl}/search/findByCategoryId?id=${categoryId}`
                       +`&page=${page}&size=${pageSize}`;
-    return this.httpClient.get<GetResponseProducts>(searchUrl);
+    return this.httpClient.get<GetResponseProducts>(searchUrl, httpConsts.httpOptions);
   } 
 
   getSearchProducts(keyword: string): Observable<Product[]>{
@@ -39,7 +40,7 @@ export class ProductService {
                             keyword: string): Observable<GetResponseProducts> {
     const searchUrl = `${this.baseUrl}/search/findByNameContaining?name=${keyword}`
                        +`&page=${page}&size=${pageSize}`;
-    return this.httpClient.get<GetResponseProducts>(searchUrl);
+    return this.httpClient.get<GetResponseProducts>(searchUrl, httpConsts.httpOptions);
   }
 
   getProducts(searchUrl: string){
@@ -50,17 +51,17 @@ export class ProductService {
 
   getProduct(productId: number): Observable<ProductEdition> {
     const searchUrl = `${this.baseUrl}?id=${productId}`;
-    return this.httpClient.get<ProductEdition>(searchUrl);
+    return this.httpClient.get<ProductEdition>(searchUrl, httpConsts.httpOptions);
   }
 
   updateProduct(product: ProductForForm): Observable<any>{
     const updateUrl = `${this.baseUrl}/update`;
-    return this.httpClient.put<ProductForForm>(updateUrl, product);
+    return this.httpClient.put<ProductForForm>(updateUrl, product, httpConsts.httpOptions);
   }
 
   addProduct(product: ProductForForm): Observable<any>{
     const addUrl = `${this.baseUrl}/add`;
-    return this.httpClient.post<ProductForForm>(addUrl, product);
+    return this.httpClient.post<ProductForForm>(addUrl, product, httpConsts.httpOptions);
   }
 
   deleteProduct(product: ProductEdition): Observable<any>{

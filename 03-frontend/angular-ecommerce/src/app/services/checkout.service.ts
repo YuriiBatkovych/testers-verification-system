@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Purchase } from '../common/purchase';
+import httpConsts from '../config/httpConsts';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,6 @@ export class CheckoutService {
   constructor(private httpClient: HttpClient) {}
 
   placeOrder(purchase: Purchase): Observable<any>{
-    return this.httpClient.post<Purchase>(this.purchaseUrl, purchase);
+    return this.httpClient.post<Purchase>(this.purchaseUrl, purchase, httpConsts.httpOptions);
   }
 }

@@ -18,7 +18,6 @@ public class CategoryService {
 
     public ProductCategory addCategory(CategoryDto categoryDto){
         ProductCategory productCategory = CategoryDto.productCategoryFromDto(categoryDto);
-        System.out.println(productCategory.getCategoryName());
         return categoryRepository.save(productCategory);
     }
 

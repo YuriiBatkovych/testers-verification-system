@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import constants from '../config/constants';
 import { Customer } from '../common/customer';
 import { Role } from '../common/role';
+import httpConsts from '../config/httpConsts';
 
 @Injectable({
   providedIn: 'root'
@@ -18,22 +19,22 @@ export class CustomerService {
 
   getUserRole(email: string) : Observable<Role>{
     const searchUrl = `${this.baseUrl}/roles?email=${email}`;
-    return this.httpClient.get<Role>(searchUrl);
+    return this.httpClient.get<Role>(searchUrl, httpConsts.httpOptions);
   }
 
   getAllUsers() : Observable<Customer[]>{
     const searchUrl = `${this.baseUrl}/all`;
-    return this.httpClient.get<Customer[]>(searchUrl);
+    return this.httpClient.get<Customer[]>(searchUrl, httpConsts.httpOptions);
   }
 
   getUserById(id: number) : Observable<Customer>{
     const searchUrl = `${this.baseUrl}/search?id=${id}`;
-    return this.httpClient.get<Customer>(searchUrl);
+    return this.httpClient.get<Customer>(searchUrl, httpConsts.httpOptions);
   }
 
   getAllRolesList() : Observable<Role[]>{
     const searchUrl = `${this.baseUrl}/allroles`;
-    return this.httpClient.get<Role[]>(searchUrl);
+    return this.httpClient.get<Role[]>(searchUrl, httpConsts.httpOptions);
   }
 
   getRole(): string {
@@ -53,17 +54,17 @@ export class CustomerService {
 
   addUser(user: Customer){
     const updateUrl = `${this.baseUrl}/add`;
-    return this.httpClient.post<Customer>(updateUrl, user);
+    return this.httpClient.post<Customer>(updateUrl, user, httpConsts.httpOptions);
   }
 
   updateUser(user: Customer){
     const updateUrl = `${this.baseUrl}/update`;
-    return this.httpClient.put<Customer>(updateUrl, user);
+    return this.httpClient.put<Customer>(updateUrl, user, httpConsts.httpOptions);
   }
 
   deleteUser(userId: number){
     const deleteUrl = `${this.baseUrl}?id=${userId}`;
-    return this.httpClient.delete(deleteUrl, {responseType: 'text'});
+    return this.httpClient.delete(deleteUrl, {headers: httpConsts.httpOptions.headers, responseType: 'text'});
   }
 
   setUserRole(email: string){
