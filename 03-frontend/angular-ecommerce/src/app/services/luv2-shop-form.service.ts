@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, map, of } from 'rxjs';
 import { Country } from '../common/country';
 import { State } from '../common/state';
-import httpConsts from '../config/httpConsts';
+import { GeneralHttpService } from './common/general-http.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +13,12 @@ export class Luv2ShopFormService {
   private countriesUrl = 'http://localhost:8081/api/countries';
   private statesUrl = 'http://localhost:8081/api/states';
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient,
+              private commonHttpService: GeneralHttpService) { }
 
   getCountries(): Observable<Country[]>{
 
-    return this.httpClient.get<GetResponseCountries>(this.countriesUrl, httpConsts.httpOptions).pipe(
+    return this.httpClient.get<GetResponseCountries>(this.countriesUrl, this.commonHttpService.getHttpOptions()).pipe(
       map(response => response._embedded.countries)
     );
 
@@ -27,7 +28,7 @@ export class Luv2ShopFormService {
 
     const searchUrl = `${this.statesUrl}/search/findByCountryCode?code=${countryCode}`;
 
-    return this.httpClient.get<GetResponseStates>(searchUrl, httpConsts.httpOptions).pipe(
+    return this.httpClient.get<GetResponseStates>(searchUrl, this.commonHttpService.getHttpOptions()).pipe(
       map(response => response._embedded.states)
     );
 

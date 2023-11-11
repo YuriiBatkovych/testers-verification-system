@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from 'src/app/common/product';
 import { ProductService } from 'src/app/services/product.service';
 import { ActivatedRoute } from '@angular/router';
 import { CartItem } from 'src/app/common/cart-item';
 import { CartService } from 'src/app/services/cart.service';
+import { ProductEdition } from 'src/app/common/product-edition';
 
 @Component({
   selector: 'app-product-list',
@@ -12,7 +12,7 @@ import { CartService } from 'src/app/services/cart.service';
 })
 export class ProductListComponent implements OnInit {
 
-  products: Product[] = [];
+  products: ProductEdition[] = [];
   currentCategoryId: number = 1;
   previousCategoryId: number = 1;
   searchMode: boolean = false;
@@ -71,8 +71,6 @@ export class ProductListComponent implements OnInit {
       this.currentCategoryId = 1;
     }
 
-    console.log(this.currentCategoryId);
-
     //Check if we have the different category then previous
     //Note: Angular will reuse a component if it is currently being viewed
 
@@ -97,14 +95,14 @@ export class ProductListComponent implements OnInit {
 
   processResults(){
     return (data: any) => {
-      this.products = data._embedded.products;
-      this.pageNumber = data.page.number + 1;
-      this.pageSize = data.page.size;
-      this.totalElements = data.page.totalElements;
+      this.products = data.content;
+      this.pageNumber = data.number + 1;
+      this.pageSize = data.size;
+      this.totalElements = data.totalElements;
     }
   }
 
-  addToCart(addedProduct: Product) {
+  addToCart(addedProduct: ProductEdition) {
     console.log(`Added product ${addedProduct.name} price ${addedProduct.unitPrice}`);
 
     const cartItem = new CartItem(addedProduct.id, addedProduct.name, addedProduct.imageUrl, addedProduct.unitPrice);

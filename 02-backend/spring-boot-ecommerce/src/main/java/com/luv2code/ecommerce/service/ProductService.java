@@ -1,12 +1,17 @@
 package com.luv2code.ecommerce.service;
 
+import com.luv2code.ecommerce.consts.ContextProperties;
 import com.luv2code.ecommerce.dao.ProductCategoryRepository;
 import com.luv2code.ecommerce.dao.ProductRepository;
 import com.luv2code.ecommerce.dto.ProductDto;
 import com.luv2code.ecommerce.entity.Product;
 import com.luv2code.ecommerce.entity.ProductCategory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.Set;
 
 @Service
 public class ProductService {
@@ -32,6 +37,16 @@ public class ProductService {
         Product product = productRepository.getReferenceById(id);
         ProductDto productDto = ProductDto.productToDto(product);
         return productDto;
+    }
+
+    public Page<ProductDto> getByCategoryId(Long id, Pageable pageable){
+        Page<Product> products = productRepository.findByCategoryId(id, pageable);
+        return  products.map(ProductDto::productToDto);
+    }
+
+    public Page<ProductDto> getByNameContaining(String name, Pageable pageable){
+        Page<Product> products = productRepository.findByNameContaining(name, pageable);
+        return  products.map(ProductDto::productToDto);
     }
 
     public Product updateProduct(ProductDto productDto){

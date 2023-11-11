@@ -1,3 +1,5 @@
+import { ContentChild } from "@angular/core";
+
 export default{
 
     roles:{
