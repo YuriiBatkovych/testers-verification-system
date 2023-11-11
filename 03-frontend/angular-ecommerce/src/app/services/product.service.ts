@@ -27,9 +27,7 @@ export class ProductService {
                          categoryId: number): Observable<GetResponseProducts> {
     const searchUrl = `${this.baseUrl}/category?id=${categoryId}`
                       +`&page=${page}&size=${pageSize}`;
-    var oprions = this.handleHttpOptions();
-    console.log(oprions);
-    return this.httpClient.get<GetResponseProducts>(searchUrl, oprions);
+    return this.httpClient.get<GetResponseProducts>(searchUrl, this.handleHttpOptions());
   } 
 
   getSearchProducts(keyword: string): Observable<ProductEdition[]>{

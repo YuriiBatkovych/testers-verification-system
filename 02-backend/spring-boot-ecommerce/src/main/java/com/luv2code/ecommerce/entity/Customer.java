@@ -30,10 +30,12 @@ public class Customer {
     private String email;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    @JsonIgnore
     private Set<Order> orders = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "role")
+    @JsonIgnore
     private Role role;
 
     public  void add(Order order){

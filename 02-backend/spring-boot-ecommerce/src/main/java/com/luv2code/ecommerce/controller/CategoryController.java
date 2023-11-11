@@ -2,6 +2,7 @@ package com.luv2code.ecommerce.controller;
 
 import com.luv2code.ecommerce.dto.CategoryDto;
 import com.luv2code.ecommerce.entity.ProductCategory;
+import com.luv2code.ecommerce.exceptions.AuthorisationException;
 import com.luv2code.ecommerce.service.CategoryService;
 import com.luv2code.ecommerce.service.CheckoutService;
 import org.apache.commons.logging.Log;
@@ -24,13 +25,13 @@ public class CategoryController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<ProductCategory> addNewCategory(@RequestBody CategoryDto categoryDto){
+    public ResponseEntity<ProductCategory> addNewCategory(@RequestBody CategoryDto categoryDto) throws AuthorisationException {
         ProductCategory productCategory = categoryService.addCategory(categoryDto);
         return ResponseEntity.status(HttpStatus.OK).body(productCategory);
     }
 
     @PostMapping("/update")
-    public ResponseEntity<ProductCategory> updateCategory(@RequestBody CategoryDto categoryDto){
+    public ResponseEntity<ProductCategory> updateCategory(@RequestBody CategoryDto categoryDto) throws AuthorisationException {
         ProductCategory productCategory = categoryService.updateCategory(categoryDto);
         return ResponseEntity.status(HttpStatus.OK).body(productCategory);
     }

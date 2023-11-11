@@ -1,8 +1,11 @@
 package com.luv2code.ecommerce.interceptors;
 
+import com.luv2code.ecommerce.config.MyAppContext;
 import com.luv2code.ecommerce.consts.ContextProperties;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -15,6 +18,12 @@ import org.springframework.web.servlet.ModelAndView;
 public class RequestInterceptor implements HandlerInterceptor {
 
     private final Log log = LogFactory.getLog(RequestInterceptor.class);
+    MyAppContext myAppContext;
+
+    @Autowired
+    public RequestInterceptor(MyAppContext myAppContext){
+        this.myAppContext = myAppContext;
+    }
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object object) {
@@ -40,7 +49,7 @@ public class RequestInterceptor implements HandlerInterceptor {
     }
 
     private void registerUserEmail(String userEmail){
-        System.setProperty(ContextProperties.USER_EMAIL, userEmail);
+        myAppContext.setProperty(ContextProperties.USER_EMAIL, userEmail);
     }
 
     @Override
@@ -50,5 +59,12 @@ public class RequestInterceptor implements HandlerInterceptor {
         message.append("Status: ").append(response.getStatus());
 
         log.info(message);
+    }
+
+    @Override
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, @Nullable Exception ex) throws Exception {
+        if(ex != null){
+            log.error(ex);
+        }
     }
 }

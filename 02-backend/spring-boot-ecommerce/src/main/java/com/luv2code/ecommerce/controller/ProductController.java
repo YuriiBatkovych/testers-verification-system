@@ -2,6 +2,7 @@ package com.luv2code.ecommerce.controller;
 
 import com.luv2code.ecommerce.dto.ProductDto;
 import com.luv2code.ecommerce.entity.Product;
+import com.luv2code.ecommerce.exceptions.AuthorisationException;
 import com.luv2code.ecommerce.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -26,14 +27,14 @@ public class ProductController {
     }
 
     @PostMapping("/add")
-    public Product addNewProduct(@RequestBody ProductDto productDto){
+    public Product addNewProduct(@RequestBody ProductDto productDto) throws AuthorisationException {
         Product product = productService.addProduct(productDto);
         System.out.println(product);
         return product;
     }
 
     @PutMapping("/update")
-    public ResponseEntity<Product> updateProduct(@RequestBody ProductDto productDto){
+    public ResponseEntity<Product> updateProduct(@RequestBody ProductDto productDto) throws AuthorisationException {
         System.out.println(productDto);
         Product product = productService.updateProduct(productDto);
         return ResponseEntity.status(HttpStatus.OK).body(product);

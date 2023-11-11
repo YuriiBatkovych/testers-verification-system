@@ -1,5 +1,6 @@
 package com.luv2code.ecommerce.service;
 
+import com.luv2code.ecommerce.authentication.AuthorizationService;
 import com.luv2code.ecommerce.consts.RolesConsts;
 import com.luv2code.ecommerce.dao.CustomerRepository;
 import com.luv2code.ecommerce.dao.CustomerRolesRepository;
@@ -7,12 +8,11 @@ import com.luv2code.ecommerce.dto.CustomerDto;
 import com.luv2code.ecommerce.dto.RoleDto;
 import com.luv2code.ecommerce.entity.Customer;
 import com.luv2code.ecommerce.entity.Role;
+import com.luv2code.ecommerce.exceptions.AuthorisationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -23,19 +23,25 @@ public class CustomerService {
     private final CustomerRepository customerRepository;
     private final CustomerRolesRepository rolesRepository;
 
+    private final AuthorizationService authorizationService;
+
     @Autowired
     public CustomerService(CustomerRepository customerRepository,
-                           CustomerRolesRepository rolesRepository){
+                           CustomerRolesRepository rolesRepository,
+                           AuthorizationService authorizationService){
         this.customerRepository = customerRepository;
         this.rolesRepository = rolesRepository;
+        this.authorizationService = authorizationService;
     }
 
-    public Customer addNewUser(CustomerDto customerDto){
+    public Customer addNewUser(CustomerDto customerDto) throws AuthorisationException {
+        authorizationService.authorizeAsAdmin();
         Customer customer = CustomerDto.customerFromDto(customerDto);
         return customerRepository.save(customer);
     }
 
-    public Customer updateUser(CustomerDto customerDto){
+    public Customer updateUser(CustomerDto customerDto) throws AuthorisationException {
+        authorizationService.authorizeAsAdmin();
         Customer customer = customerRepository.getReferenceById(customerDto.getId());
 
         customer.setFirstName(customerDto.getFirstName());
@@ -77,7 +83,8 @@ public class CustomerService {
         }
     }
 
-    public void deleteByEmail(String email){
+    public void deleteByEmail(String email) throws AuthorisationException {
+        authorizationService.authorizeAsAdmin();
         Customer customer = customerRepository.findByEmail(email);
         if(customer != null){
             deleteById(customer.getId());
@@ -85,7 +92,8 @@ public class CustomerService {
     }
 
 
-    public void deleteById(Long id){
+    public void deleteById(Long id) throws AuthorisationException {
+        authorizationService.authorizeAsAdmin();
         customerRepository.deleteById(id);
     }
 

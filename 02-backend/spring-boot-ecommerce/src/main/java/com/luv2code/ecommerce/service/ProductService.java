@@ -1,11 +1,13 @@
 package com.luv2code.ecommerce.service;
 
+import com.luv2code.ecommerce.authentication.AuthorizationService;
 import com.luv2code.ecommerce.consts.ContextProperties;
 import com.luv2code.ecommerce.dao.ProductCategoryRepository;
 import com.luv2code.ecommerce.dao.ProductRepository;
 import com.luv2code.ecommerce.dto.ProductDto;
 import com.luv2code.ecommerce.entity.Product;
 import com.luv2code.ecommerce.entity.ProductCategory;
+import com.luv2code.ecommerce.exceptions.AuthorisationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,15 +20,19 @@ public class ProductService {
 
     ProductRepository productRepository;
     ProductCategoryRepository productCategoryRepository;
+    AuthorizationService authorizationService;
 
     @Autowired
     ProductService(ProductRepository productRepository,
-                   ProductCategoryRepository productCategoryRepository){
+                   ProductCategoryRepository productCategoryRepository,
+                   AuthorizationService authorizationService){
         this.productRepository = productRepository;
         this.productCategoryRepository = productCategoryRepository;
+        this.authorizationService = authorizationService;
     }
 
-    public Product addProduct(ProductDto productDto){
+    public Product addProduct(ProductDto productDto) throws AuthorisationException {
+        authorizationService.authorizeAsStaff();
         ProductCategory productCategory = productCategoryRepository.findByCategoryName(productDto.getCategoryName());
         Product product = ProductDto.productFromDto(productDto, productCategory);
 
@@ -49,7 +55,8 @@ public class ProductService {
         return  products.map(ProductDto::productToDto);
     }
 
-    public Product updateProduct(ProductDto productDto){
+    public Product updateProduct(ProductDto productDto) throws AuthorisationException {
+        authorizationService.authorizeAsStaff();
         ProductCategory newProductCategory = productCategoryRepository.findByCategoryName(productDto.getCategoryName());
         Product oldProduct = productRepository.getReferenceById(productDto.getId());
 

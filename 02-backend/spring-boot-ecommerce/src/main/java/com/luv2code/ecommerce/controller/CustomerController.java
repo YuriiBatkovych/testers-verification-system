@@ -3,6 +3,7 @@ package com.luv2code.ecommerce.controller;
 import com.luv2code.ecommerce.dto.CustomerDto;
 import com.luv2code.ecommerce.dto.RoleDto;
 import com.luv2code.ecommerce.entity.Customer;
+import com.luv2code.ecommerce.exceptions.AuthorisationException;
 import com.luv2code.ecommerce.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -55,13 +56,13 @@ public class CustomerController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Customer> addNewUser(@RequestBody CustomerDto customerDto){
+    public ResponseEntity<Customer> addNewUser(@RequestBody CustomerDto customerDto) throws AuthorisationException {
         Customer customer = customerService.addNewUser(customerDto);
         return  ResponseEntity.status(HttpStatus.OK).body(customer);
     }
 
     @PutMapping("/update")
-    public ResponseEntity<Customer> updateUser(@RequestBody CustomerDto customerDto){
+    public ResponseEntity<Customer> updateUser(@RequestBody CustomerDto customerDto) throws AuthorisationException {
         Customer customer = customerService.updateUser(customerDto);
         return  ResponseEntity.status(HttpStatus.OK).body(customer);
     }

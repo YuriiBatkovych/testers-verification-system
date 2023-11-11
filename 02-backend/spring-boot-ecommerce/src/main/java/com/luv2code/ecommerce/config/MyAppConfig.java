@@ -2,6 +2,7 @@ package com.luv2code.ecommerce.config;
 
 import com.luv2code.ecommerce.interceptors.RequestInterceptor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -23,6 +24,11 @@ public class MyAppConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new RequestInterceptor());
+        registry.addInterceptor(new RequestInterceptor(myAppContext()));
+    }
+
+    @Bean
+    public MyAppContext myAppContext() {
+        return new MyAppContext();
     }
 }
