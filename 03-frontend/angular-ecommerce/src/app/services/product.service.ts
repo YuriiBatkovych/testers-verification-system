@@ -4,13 +4,14 @@ import { map, Observable } from 'rxjs';
 import { ProductEdition } from '../common/product-edition';
 import { ProductForForm } from '../common/product-for-form';
 import { GeneralHttpService } from './common/general-http.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  private baseUrl = 'http://localhost:8081/api/products';
+  private baseUrl = environment.backendApiUrl + '/products';
 
   constructor(private httpClient : HttpClient,
               private commonHttpService: GeneralHttpService) {
@@ -27,6 +28,8 @@ export class ProductService {
                          categoryId: number): Observable<GetResponseProducts> {
     const searchUrl = `${this.baseUrl}/category?id=${categoryId}`
                       +`&page=${page}&size=${pageSize}`;
+
+    console.log(searchUrl);
     return this.httpClient.get<GetResponseProducts>(searchUrl, this.handleHttpOptions());
   } 
 

@@ -5,13 +5,14 @@ import constants from '../config/constants';
 import { Customer } from '../common/customer';
 import { Role } from '../common/role';
 import { GeneralHttpService } from './common/general-http.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CustomerService {
 
-  private baseUrl: string = "http://localhost:8081/api/customer";
+  private baseUrl: string = environment.backendApiUrl + "/customer";
 
   storage: Storage = sessionStorage;
 

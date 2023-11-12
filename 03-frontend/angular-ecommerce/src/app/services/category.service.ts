@@ -3,14 +3,15 @@ import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { ProductCategory } from '../common/product-category';
 import { GeneralHttpService } from './common/general-http.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryService {
 
-  private categoryUrl = 'http://localhost:8081/api/product-category';
-  private baseCategoryUrl = 'http://localhost:8081/api/category';
+  private categoryUrl = environment.backendApiUrl + '/product-category';
+  private baseCategoryUrl = environment.backendApiUrl + '/category';
 
   constructor(private httpClient : HttpClient,
               private commonHttpService : GeneralHttpService) {
