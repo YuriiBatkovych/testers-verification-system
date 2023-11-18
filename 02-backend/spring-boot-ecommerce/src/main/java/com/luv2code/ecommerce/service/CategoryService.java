@@ -6,10 +6,14 @@ import com.luv2code.ecommerce.dto.CategoryDto;
 import com.luv2code.ecommerce.entity.ProductCategory;
 import com.luv2code.ecommerce.exceptions.AuthorisationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CategoryService {
+
+    @Value("${bug.save.new.category}")
+    private boolean saveNewCategory;
 
     private final ProductCategoryRepository categoryRepository;
     private final AuthorizationService authorizationService;
@@ -21,9 +25,14 @@ public class CategoryService {
     }
 
     public ProductCategory addCategory(CategoryDto categoryDto) throws AuthorisationException {
-        authorizationService.authorizeAsStaff();
-        ProductCategory productCategory = CategoryDto.productCategoryFromDto(categoryDto);
-        return categoryRepository.save(productCategory);
+        if(saveNewCategory) {
+            authorizationService.authorizeAsStaff();
+            ProductCategory productCategory = CategoryDto.productCategoryFromDto(categoryDto);
+            return categoryRepository.save(productCategory);
+        }
+        else{
+            return mockCategory();
+        }
     }
 
     public void deleteCategory(Long id) throws AuthorisationException {
@@ -36,6 +45,10 @@ public class CategoryService {
         ProductCategory productCategory = categoryRepository.getReferenceById(categoryDto.getId());
         productCategory.setCategoryName(categoryDto.getCategoryName());
         return categoryRepository.save(productCategory);
+    }
+
+    private ProductCategory mockCategory(){
+        return new ProductCategory();
     }
 
 }
