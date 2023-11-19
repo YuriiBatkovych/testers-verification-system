@@ -1,20 +1,17 @@
-package com.luv2code.ecommerce.service;
+package com.luv2code.ecommerce.service.impl;
 
 import com.luv2code.ecommerce.authentication.AuthorizationService;
 import com.luv2code.ecommerce.dao.ProductCategoryRepository;
 import com.luv2code.ecommerce.dto.CategoryDto;
 import com.luv2code.ecommerce.entity.ProductCategory;
 import com.luv2code.ecommerce.exceptions.AuthorisationException;
+import com.luv2code.ecommerce.service.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CategoryService {
-
-    @Value("${bug.save.new.category}")
-    private boolean saveNewCategory;
-
+public class CategoryService implements ICategoryService {
     private final ProductCategoryRepository categoryRepository;
     private final AuthorizationService authorizationService;
 
@@ -25,14 +22,9 @@ public class CategoryService {
     }
 
     public ProductCategory addCategory(CategoryDto categoryDto) throws AuthorisationException {
-        if(saveNewCategory) {
-            authorizationService.authorizeAsStaff();
-            ProductCategory productCategory = CategoryDto.productCategoryFromDto(categoryDto);
-            return categoryRepository.save(productCategory);
-        }
-        else{
-            return mockCategory();
-        }
+        authorizationService.authorizeAsStaff();
+        ProductCategory productCategory = CategoryDto.productCategoryFromDto(categoryDto);
+        return categoryRepository.save(productCategory);
     }
 
     public void deleteCategory(Long id) throws AuthorisationException {

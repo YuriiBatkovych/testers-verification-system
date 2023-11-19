@@ -3,7 +3,8 @@ package com.luv2code.ecommerce.controller;
 import com.luv2code.ecommerce.dto.ProductDto;
 import com.luv2code.ecommerce.entity.Product;
 import com.luv2code.ecommerce.exceptions.AuthorisationException;
-import com.luv2code.ecommerce.service.ProductService;
+import com.luv2code.ecommerce.service.IProductService;
+import com.luv2code.ecommerce.service.impl.bugfacades.ProductServiceFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,17 +13,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Set;
-
 @RestController
 @RequestMapping("api/products")
 @CrossOrigin("http://localhost:4200")
 public class ProductController {
 
-    ProductService productService;
+    IProductService productService;
 
     @Autowired
-    ProductController(ProductService productService){
+    ProductController(ProductServiceFacade productService){
         this.productService = productService;
     }
 

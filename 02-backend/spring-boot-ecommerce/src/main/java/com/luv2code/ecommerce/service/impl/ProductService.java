@@ -1,4 +1,4 @@
-package com.luv2code.ecommerce.service;
+package com.luv2code.ecommerce.service.impl;
 
 import com.luv2code.ecommerce.authentication.AuthorizationService;
 import com.luv2code.ecommerce.consts.ContextProperties;
@@ -8,6 +8,7 @@ import com.luv2code.ecommerce.dto.ProductDto;
 import com.luv2code.ecommerce.entity.Product;
 import com.luv2code.ecommerce.entity.ProductCategory;
 import com.luv2code.ecommerce.exceptions.AuthorisationException;
+import com.luv2code.ecommerce.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,7 +17,7 @@ import org.springframework.stereotype.Service;
 import java.util.Set;
 
 @Service
-public class ProductService {
+public class ProductService implements IProductService {
 
     ProductRepository productRepository;
     ProductCategoryRepository productCategoryRepository;
@@ -41,8 +42,7 @@ public class ProductService {
 
     public ProductDto getById(Long id){
         Product product = productRepository.getReferenceById(id);
-        ProductDto productDto = ProductDto.productToDto(product);
-        return productDto;
+        return ProductDto.productToDto(product);
     }
 
     public Page<ProductDto> getByCategoryId(Long id, Pageable pageable){

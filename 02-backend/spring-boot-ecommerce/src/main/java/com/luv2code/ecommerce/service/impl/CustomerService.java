@@ -1,4 +1,4 @@
-package com.luv2code.ecommerce.service;
+package com.luv2code.ecommerce.service.impl;
 
 import com.luv2code.ecommerce.authentication.AuthorizationService;
 import com.luv2code.ecommerce.consts.RolesConsts;
@@ -9,6 +9,7 @@ import com.luv2code.ecommerce.dto.RoleDto;
 import com.luv2code.ecommerce.entity.Customer;
 import com.luv2code.ecommerce.entity.Role;
 import com.luv2code.ecommerce.exceptions.AuthorisationException;
+import com.luv2code.ecommerce.service.ICustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,7 @@ import java.util.stream.Collectors;
 
 
 @Service
-public class CustomerService {
+public class CustomerService implements ICustomerService {
 
     private final CustomerRepository customerRepository;
     private final CustomerRolesRepository rolesRepository;

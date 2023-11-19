@@ -1,18 +1,18 @@
 package com.luv2code.ecommerce.controller;
 
-
 import com.luv2code.ecommerce.dto.Purchase;
 import com.luv2code.ecommerce.dto.PurchaseResponse;
-import com.luv2code.ecommerce.service.CheckoutService;
+import com.luv2code.ecommerce.service.ICheckoutService;
+import com.luv2code.ecommerce.service.impl.bugfacades.CheckoutServiceFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/checkout")
 public class CheckoutController {
-    private final CheckoutService checkoutService;
+    private final ICheckoutService checkoutService;
     @Autowired
-    public CheckoutController(CheckoutService checkoutService){
+    public CheckoutController(CheckoutServiceFacade checkoutService){
         this.checkoutService = checkoutService;
     }
 

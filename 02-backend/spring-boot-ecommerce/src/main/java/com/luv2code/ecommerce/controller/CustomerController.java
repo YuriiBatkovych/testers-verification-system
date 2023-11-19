@@ -4,7 +4,8 @@ import com.luv2code.ecommerce.dto.CustomerDto;
 import com.luv2code.ecommerce.dto.RoleDto;
 import com.luv2code.ecommerce.entity.Customer;
 import com.luv2code.ecommerce.exceptions.AuthorisationException;
-import com.luv2code.ecommerce.service.CustomerService;
+import com.luv2code.ecommerce.service.ICustomerService;
+import com.luv2code.ecommerce.service.impl.bugfacades.CustomerServiceFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
@@ -19,10 +20,10 @@ import java.util.Set;
 @CrossOrigin("http://localhost:4200")
 public class CustomerController {
 
-    private final CustomerService customerService;
+    private final ICustomerService customerService;
 
     @Autowired
-    public CustomerController(CustomerService customerService){
+    public CustomerController(CustomerServiceFacade customerService){
         this.customerService = customerService;
     }
 

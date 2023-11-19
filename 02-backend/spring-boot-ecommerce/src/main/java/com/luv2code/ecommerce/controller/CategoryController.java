@@ -3,10 +3,8 @@ package com.luv2code.ecommerce.controller;
 import com.luv2code.ecommerce.dto.CategoryDto;
 import com.luv2code.ecommerce.entity.ProductCategory;
 import com.luv2code.ecommerce.exceptions.AuthorisationException;
-import com.luv2code.ecommerce.service.CategoryService;
-import com.luv2code.ecommerce.service.CheckoutService;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.luv2code.ecommerce.service.ICategoryService;
+import com.luv2code.ecommerce.service.impl.bugfacades.CategoryServiceFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
@@ -17,10 +15,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("api/category")
 @CrossOrigin(origins = "http://localhost:4200")
 public class CategoryController {
-    private final CategoryService categoryService;
+    private final ICategoryService categoryService;
 
     @Autowired
-    public CategoryController(CategoryService categoryService){
+    public CategoryController(CategoryServiceFacade categoryService){
         this.categoryService = categoryService;
     }
 

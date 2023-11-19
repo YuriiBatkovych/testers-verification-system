@@ -1,4 +1,4 @@
-package com.luv2code.ecommerce.service;
+package com.luv2code.ecommerce.service.impl;
 
 import com.luv2code.ecommerce.dao.CustomerRepository;
 import com.luv2code.ecommerce.dto.Purchase;
@@ -6,6 +6,7 @@ import com.luv2code.ecommerce.dto.PurchaseResponse;
 import com.luv2code.ecommerce.entity.Customer;
 import com.luv2code.ecommerce.entity.Order;
 import com.luv2code.ecommerce.entity.OrderItem;
+import com.luv2code.ecommerce.service.ICheckoutService;
 import jakarta.transaction.Transactional;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -16,9 +17,7 @@ import java.util.Set;
 import java.util.UUID;
 
 @Service
-public class CheckoutService{
-
-    private final Log log = LogFactory.getLog(CheckoutService.class);
+public class CheckoutService implements ICheckoutService {
     private final CustomerRepository customerRepository;
 
     @Autowired
@@ -56,7 +55,7 @@ public class CheckoutService{
         return new PurchaseResponse(orderTrackingNumber);
     }
 
-    private String generateOrderTrackingNumber() {
+    public String generateOrderTrackingNumber() {
         return UUID.randomUUID().toString();
     }
 }
