@@ -20,7 +20,7 @@ public class CategoryServiceFacade implements ICategoryService {
     @Value("${bug.delete.category}")
     private boolean deleteCategory;
 
-    CategoryService categoryService;
+    private final CategoryService categoryService;
     @Autowired
     CategoryServiceFacade(CategoryService categoryService){
         this.categoryService = categoryService;

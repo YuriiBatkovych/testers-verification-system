@@ -24,7 +24,7 @@ public class CustomerServiceFacade implements ICustomerService {
 
     @Value("${bug.delete.user}")
     private boolean deleteUser;
-    CustomerService customerService;
+    private final CustomerService customerService;
     @Autowired
     CustomerServiceFacade(CustomerService customerService){
         this.customerService = customerService;
@@ -66,11 +66,6 @@ public class CustomerServiceFacade implements ICustomerService {
     }
 
     @Override
-    public RoleDto getCustomerRole(String email) {
-        return customerService.getCustomerRole(email);
-    }
-
-    @Override
     public void deleteByEmail(String email) throws AuthorisationException {
         if(deleteUser){
             customerService.deleteByEmail(email);
@@ -82,11 +77,6 @@ public class CustomerServiceFacade implements ICustomerService {
         if(deleteUser){
             customerService.deleteById(id);
         }
-    }
-
-    @Override
-    public Set<RoleDto> getAllRoles() {
-        return customerService.getAllRoles();
     }
 
     private Customer mockCustomer(){

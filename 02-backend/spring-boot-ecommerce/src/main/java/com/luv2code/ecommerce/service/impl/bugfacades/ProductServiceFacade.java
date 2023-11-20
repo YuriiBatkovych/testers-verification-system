@@ -22,7 +22,7 @@ public class ProductServiceFacade implements IProductService {
 
     @Value("${bug.delete.product}")
     private boolean deleteProduct;
-    ProductService productService;
+    private final ProductService productService;
     @Autowired
     ProductServiceFacade(ProductService productService){
         this.productService = productService;

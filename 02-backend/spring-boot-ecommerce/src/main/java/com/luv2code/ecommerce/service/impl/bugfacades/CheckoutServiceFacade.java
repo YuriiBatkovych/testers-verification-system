@@ -12,7 +12,7 @@ public class CheckoutServiceFacade implements ICheckoutService {
 
     @Value("${bug.save.new.purchase}")
     private boolean saveNewPurchase;
-    CheckoutService checkoutService;
+    private final CheckoutService checkoutService;
 
     CheckoutServiceFacade(CheckoutService checkoutService){
         this.checkoutService = checkoutService;

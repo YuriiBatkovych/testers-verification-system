@@ -5,7 +5,9 @@ import com.luv2code.ecommerce.dto.RoleDto;
 import com.luv2code.ecommerce.entity.Customer;
 import com.luv2code.ecommerce.exceptions.AuthorisationException;
 import com.luv2code.ecommerce.service.ICustomerService;
+import com.luv2code.ecommerce.service.IRolesService;
 import com.luv2code.ecommerce.service.impl.bugfacades.CustomerServiceFacade;
+import com.luv2code.ecommerce.service.impl.bugfacades.RolesServiceFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
@@ -21,10 +23,12 @@ import java.util.Set;
 public class CustomerController {
 
     private final ICustomerService customerService;
+    private final IRolesService rolesService;
 
     @Autowired
-    public CustomerController(CustomerServiceFacade customerService){
+    public CustomerController(CustomerServiceFacade customerService, RolesServiceFacade rolesService){
         this.customerService = customerService;
+        this.rolesService = rolesService;
     }
 
     @GetMapping
@@ -46,13 +50,13 @@ public class CustomerController {
 
     @GetMapping("/roles")
     public RoleDto getCustomerRoleByEmail(@Param("email") String email){
-        RoleDto role = customerService.getCustomerRole(email);
+        RoleDto role = rolesService.getCustomerRole(email);
         return  role;
     }
 
     @GetMapping("/allroles")
     public Set<RoleDto> getRoles(){
-        Set<RoleDto> roles = customerService.getAllRoles();
+        Set<RoleDto> roles = rolesService.getAllRoles();
         return  roles;
     }
 

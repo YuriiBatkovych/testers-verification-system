@@ -1,29 +1,23 @@
 package com.luv2code.ecommerce.service.impl;
 
 import com.luv2code.ecommerce.authentication.AuthorizationService;
-import com.luv2code.ecommerce.consts.RolesConsts;
 import com.luv2code.ecommerce.dao.CustomerRepository;
 import com.luv2code.ecommerce.dao.CustomerRolesRepository;
 import com.luv2code.ecommerce.dto.CustomerDto;
 import com.luv2code.ecommerce.dto.RoleDto;
 import com.luv2code.ecommerce.entity.Customer;
-import com.luv2code.ecommerce.entity.Role;
 import com.luv2code.ecommerce.exceptions.AuthorisationException;
 import com.luv2code.ecommerce.service.ICustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 
 @Service
 public class CustomerService implements ICustomerService {
 
     private final CustomerRepository customerRepository;
-    private final CustomerRolesRepository rolesRepository;
-
     private final AuthorizationService authorizationService;
 
     @Autowired
@@ -31,7 +25,6 @@ public class CustomerService implements ICustomerService {
                            CustomerRolesRepository rolesRepository,
                            AuthorizationService authorizationService){
         this.customerRepository = customerRepository;
-        this.rolesRepository = rolesRepository;
         this.authorizationService = authorizationService;
     }
 
@@ -73,17 +66,6 @@ public class CustomerService implements ICustomerService {
                 .toList();
     }
 
-    public RoleDto getCustomerRole(String email){
-        Customer customer = customerRepository.findByEmail(email);
-
-        if(customer == null){
-            return RolesConsts.standardRoles;
-        }
-        else{
-            return RoleDto.roleToDto(customer.getRole());
-        }
-    }
-
     public void deleteByEmail(String email) throws AuthorisationException {
         authorizationService.authorizeAsAdmin();
         Customer customer = customerRepository.findByEmail(email);
@@ -96,12 +78,6 @@ public class CustomerService implements ICustomerService {
     public void deleteById(Long id) throws AuthorisationException {
         authorizationService.authorizeAsAdmin();
         customerRepository.deleteById(id);
-    }
-
-    public Set<RoleDto> getAllRoles(){
-        List<Role> roles = rolesRepository.findAll();
-        return roles.stream()
-                .map(RoleDto::roleToDto).collect(Collectors.toSet());
     }
 
 }
