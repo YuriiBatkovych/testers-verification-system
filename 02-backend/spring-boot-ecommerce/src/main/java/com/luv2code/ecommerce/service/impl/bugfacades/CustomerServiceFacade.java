@@ -1,7 +1,6 @@
 package com.luv2code.ecommerce.service.impl.bugfacades;
 
 import com.luv2code.ecommerce.dto.CustomerDto;
-import com.luv2code.ecommerce.dto.RoleDto;
 import com.luv2code.ecommerce.entity.Customer;
 import com.luv2code.ecommerce.exceptions.AuthorisationException;
 import com.luv2code.ecommerce.service.ICustomerService;
@@ -11,7 +10,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class CustomerServiceFacade implements ICustomerService {
