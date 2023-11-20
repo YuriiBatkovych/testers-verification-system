@@ -9,6 +9,7 @@ import java.util.List;
 public interface ICustomerService {
     Customer addNewUser(CustomerDto customerDto) throws AuthorisationException;
     Customer updateUser(CustomerDto customerDto) throws AuthorisationException;
+    CustomerDto registerUser(CustomerDto customerDto);
     CustomerDto getCustomerByEmail(String email);
     CustomerDto getCustomerById(Long id);
     List<CustomerDto> getCustomers();

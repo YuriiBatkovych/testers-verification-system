@@ -35,7 +35,6 @@ public class Customer {
 
     @ManyToOne
     @JoinColumn(name = "role")
-    @JsonIgnore
     private Role role;
 
     public  void add(Order order){

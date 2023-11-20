@@ -19,10 +19,10 @@ export class CustomerService {
   constructor(private httpClient : HttpClient,
               private commonHttpservice: GeneralHttpService) { }
 
-  getUserRole(email: string) : Observable<Role>{
-    const searchUrl = `${this.baseUrl}/roles?email=${email}`;
-    return this.httpClient.get<Role>(searchUrl, this.commonHttpservice.getHttpOptions());
-  }
+  // getUserRole(email: string) : Observable<Role>{
+  //   const searchUrl = `${this.baseUrl}/roles?email=${email}`;
+  //   return this.httpClient.get<Role>(searchUrl, this.commonHttpservice.getHttpOptions());
+  // }
 
   getAllUsers() : Observable<Customer[]>{
     const searchUrl = `${this.baseUrl}/all`;
@@ -55,8 +55,15 @@ export class CustomerService {
   }
 
   addUser(user: Customer){
-    const updateUrl = `${this.baseUrl}/add`;
-    return this.httpClient.post<Customer>(updateUrl, user, this.commonHttpservice.getHttpOptions());
+    const addUrl = `${this.baseUrl}/add`;
+    return this.httpClient.post<Customer>(addUrl, user, this.commonHttpservice.getHttpOptions());
+  }
+
+  registerUser(user: Customer){
+    const registerUrl = `${this.baseUrl}/register`;
+    console.log("in register user");
+    console.log(registerUrl);
+    return this.httpClient.post<Customer>(registerUrl, user, this.commonHttpservice.getHttpOptions());
   }
 
   updateUser(user: Customer){
@@ -70,14 +77,14 @@ export class CustomerService {
                                               responseType: 'text'});
   }
 
-  setUserRole(email: string){
-    this.getUserRole(email).subscribe(
-      data => {
-        const role: string = data.name;
-        this.storage.setItem(constants.storageParams.USER_ROLES, JSON.stringify(role));
-      }
-    )
-  }
+  // setUserRole(email: string){
+  //   this.getUserRole(email).subscribe(
+  //     data => {
+  //       const role: string = data.name;
+  //       this.storage.setItem(constants.storageParams.USER_ROLES, JSON.stringify(role));
+  //     }
+  //   )
+  // }
 
   setDefaultRole(){
     const roles: string[] = [constants.roles.USER];

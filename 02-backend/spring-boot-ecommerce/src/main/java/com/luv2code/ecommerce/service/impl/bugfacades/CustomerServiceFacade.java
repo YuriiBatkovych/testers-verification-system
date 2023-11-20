@@ -1,15 +1,19 @@
 package com.luv2code.ecommerce.service.impl.bugfacades;
 
+import com.luv2code.ecommerce.bugmappers.RoleBugMapper;
 import com.luv2code.ecommerce.dto.CustomerDto;
+import com.luv2code.ecommerce.dto.RoleDto;
 import com.luv2code.ecommerce.entity.Customer;
 import com.luv2code.ecommerce.exceptions.AuthorisationException;
 import com.luv2code.ecommerce.service.ICustomerService;
 import com.luv2code.ecommerce.service.impl.CustomerService;
+import com.luv2code.ecommerce.service.impl.RolesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class CustomerServiceFacade implements ICustomerService {
@@ -23,9 +27,14 @@ public class CustomerServiceFacade implements ICustomerService {
     @Value("${bug.delete.user}")
     private boolean deleteUser;
     private final CustomerService customerService;
+    private final RolesService rolesService;
+    private final RoleBugMapper roleBugMapper;
     @Autowired
-    CustomerServiceFacade(CustomerService customerService){
+    CustomerServiceFacade(CustomerService customerService, RolesService rolesService,
+                          RoleBugMapper roleBugMapper){
         this.customerService = customerService;
+        this.rolesService = rolesService;
+        this.roleBugMapper = roleBugMapper;
     }
 
     @Override
@@ -46,6 +55,16 @@ public class CustomerServiceFacade implements ICustomerService {
         else{
             return mockCustomer();
         }
+    }
+
+    @Override
+    public CustomerDto registerUser(CustomerDto customerDto){
+        CustomerDto customer = customerService.registerUser(customerDto);
+
+        Set<RoleDto> allRoles = rolesService.getAllRoles();
+        customer.setRole(roleBugMapper.getBugCustomerRole(customer.getRole(), allRoles));
+
+        return customer;
     }
 
     @Override

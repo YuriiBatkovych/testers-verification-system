@@ -48,12 +48,6 @@ public class CustomerController {
         return customerService.getCustomers();
     }
 
-    @GetMapping("/roles")
-    public RoleDto getCustomerRoleByEmail(@Param("email") String email){
-        RoleDto role = rolesService.getCustomerRole(email);
-        return  role;
-    }
-
     @GetMapping("/allroles")
     public Set<RoleDto> getRoles(){
         Set<RoleDto> roles = rolesService.getAllRoles();
@@ -64,6 +58,12 @@ public class CustomerController {
     public ResponseEntity<Customer> addNewUser(@RequestBody CustomerDto customerDto) throws AuthorisationException {
         Customer customer = customerService.addNewUser(customerDto);
         return  ResponseEntity.status(HttpStatus.OK).body(customer);
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<CustomerDto> registerUser(@RequestBody CustomerDto customerDto){
+        CustomerDto customer = customerService.registerUser(customerDto);
+        return ResponseEntity.status(HttpStatus.OK).body(customer);
     }
 
     @PutMapping("/update")

@@ -1,8 +1,8 @@
 package com.luv2code.ecommerce.service.impl;
 
 import com.luv2code.ecommerce.authentication.AuthorizationService;
+import com.luv2code.ecommerce.consts.RolesConsts;
 import com.luv2code.ecommerce.dao.CustomerRepository;
-import com.luv2code.ecommerce.dao.CustomerRolesRepository;
 import com.luv2code.ecommerce.dto.CustomerDto;
 import com.luv2code.ecommerce.dto.RoleDto;
 import com.luv2code.ecommerce.entity.Customer;
@@ -25,6 +25,20 @@ public class CustomerService implements ICustomerService {
                            AuthorizationService authorizationService){
         this.customerRepository = customerRepository;
         this.authorizationService = authorizationService;
+    }
+
+    @Override
+    public CustomerDto registerUser(CustomerDto customerDto){
+        Customer customerFromDB = customerRepository.findByEmail(customerDto.getEmail());
+
+        if(customerFromDB == null){
+            customerDto.setRole(RolesConsts.standardRoles);
+            Customer customer = CustomerDto.customerFromDto(customerDto);
+            return CustomerDto.customerToDto(customerRepository.save(customer));
+        }
+        else{
+            return CustomerDto.customerToDto(customerFromDB);
+        }
     }
 
     public Customer addNewUser(CustomerDto customerDto) throws AuthorisationException {

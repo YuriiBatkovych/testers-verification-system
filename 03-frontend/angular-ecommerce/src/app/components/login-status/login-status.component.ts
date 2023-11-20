@@ -4,6 +4,7 @@ import { AuthService } from '@auth0/auth0-angular';
 import { CustomerService } from 'src/app/services/customer.service';
 
 import constants from 'src/app/config/constants';
+import { Customer } from 'src/app/common/customer';
 
 @Component({
   selector: 'app-login-status',
@@ -28,9 +29,16 @@ export class LoginStatusComponent implements OnInit {
         if(result != undefined){
           this.userName = result.name as string;
           const userEmail = result.email as string;
-        
-          this.storage.setItem(constants.storageParams.USER_EMAIL, JSON.stringify(userEmail));
-          this.customerService.setUserRole(userEmail);
+
+          let customer = new Customer();
+          customer.email = userEmail;
+          
+          this.customerService.registerUser(customer).subscribe(
+            data => {
+              this.storage.setItem(constants.storageParams.USER_EMAIL, JSON.stringify(data.email));
+              this.storage.setItem(constants.storageParams.USER_ROLES, JSON.stringify(data.role.name));
+            }
+          )
         }
       }
     )
