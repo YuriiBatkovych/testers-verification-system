@@ -16,13 +16,9 @@ class App(customtkinter.CTk):
 
     def __init__(self):
         super().__init__()
-        self.bg = self.cget("fg_color")
         self.num_of_frames = 0
-        # self.state('withdraw')
-        self.title("Bug Management")
 
-        # screen size
-        self.geometry("800x600")
+        self.def_main_screen()
 
         # root!
         main_container = customtkinter.CTkFrame(self, corner_radius=8, fg_color=self.bg)
@@ -39,6 +35,11 @@ class App(customtkinter.CTk):
         self.right_side_panel.configure(border_color="#323232")
         self.create_nav(self.left_side_panel, BACKEND_FRAME)
         self.create_nav(self.left_side_panel, FRONTEND_FRAME)
+
+    def def_main_screen(self):
+        self.bg = self.cget("fg_color")
+        self.title("Bug Management")
+        self.geometry("1100x700")
 
     def frame_selector_bt(self, parent, frame_id):
         # create frame
