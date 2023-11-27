@@ -3,6 +3,7 @@ import customtkinter
 from functools import partial
 
 from ui.backend_bugs_frame import BackendBugsFrame
+from ui.frontend_bugs_frame import FrontendBugsFrame
 
 BACKEND_FRAME = "Backend Bugs"
 FRONTEND_FRAME = "Frontend Bugs"
@@ -37,7 +38,7 @@ class App(customtkinter.CTk):
         self.right_side_panel.configure(border_width=1)
         self.right_side_panel.configure(border_color="#323232")
         self.create_nav(self.left_side_panel, BACKEND_FRAME)
-        # self.create_nav(self.left_side_panel, FRONTEND_FRAME)
+        self.create_nav(self.left_side_panel, FRONTEND_FRAME)
 
     def frame_selector_bt(self, parent, frame_id):
         # create frame
@@ -54,7 +55,10 @@ class App(customtkinter.CTk):
 
     # create the frame
     def create_frame(self, frame_id):
-        App.frames[frame_id] = BackendBugsFrame(self)
+        if frame_id == BACKEND_FRAME:
+            App.frames[frame_id] = BackendBugsFrame(self)
+        elif frame_id == FRONTEND_FRAME:
+            App.frames[frame_id] = FrontendBugsFrame(self)
 
     # method to change frames
     def toggle_frame_by_id(self, frame_id):
