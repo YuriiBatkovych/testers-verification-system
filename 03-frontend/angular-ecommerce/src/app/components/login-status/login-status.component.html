@@ -4,7 +4,7 @@
     </div>
 
     <button *ngIf="auth.isAuthenticated$ | async" (click)="logout()" class="au-btn-submit">
-        Logout
+        {{ env.bugTextButtonLogout }}
     </button>
 
     <button *ngIf="(auth.isAuthenticated$ | async) === false" (click)="login()" class="au-btn-submit">
@@ -12,11 +12,11 @@
     </button>
 
     <button *ngIf="auth.isAuthenticated$ | async" routerLink="/members" class="au-btn-submit">
-        Members
+        {{ env.bugTextButtonMembers }}
     </button>
     
     <button *ngIf="auth.isAuthenticated$ | async" routerLink="/order-history" class="au-btn-submit">
-        Orders
+        {{ env.bugTextButtonOrders }}
     </button>
 
 </div>

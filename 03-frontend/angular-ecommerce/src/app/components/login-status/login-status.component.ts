@@ -5,6 +5,7 @@ import { CustomerService } from 'src/app/services/customer.service';
 
 import constants from 'src/app/config/constants';
 import { Customer } from 'src/app/common/customer';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login-status',
@@ -13,8 +14,9 @@ import { Customer } from 'src/app/common/customer';
 })
 export class LoginStatusComponent implements OnInit {
 
-  userName: string = "";
+  env = environment
 
+  userName: string = "";
   storage: Storage = sessionStorage;
 
   constructor(@Inject(DOCUMENT) public document: Document, 

@@ -19,10 +19,6 @@ export class CustomerService {
   constructor(private httpClient : HttpClient,
               private commonHttpservice: GeneralHttpService) { }
 
-  // getUserRole(email: string) : Observable<Role>{
-  //   const searchUrl = `${this.baseUrl}/roles?email=${email}`;
-  //   return this.httpClient.get<Role>(searchUrl, this.commonHttpservice.getHttpOptions());
-  // }
 
   getAllUsers() : Observable<Customer[]>{
     const searchUrl = `${this.baseUrl}/all`;
@@ -76,15 +72,6 @@ export class CustomerService {
     return this.httpClient.delete(deleteUrl, {headers: this.commonHttpservice.getHttpHeaders(), 
                                               responseType: 'text'});
   }
-
-  // setUserRole(email: string){
-  //   this.getUserRole(email).subscribe(
-  //     data => {
-  //       const role: string = data.name;
-  //       this.storage.setItem(constants.storageParams.USER_ROLES, JSON.stringify(role));
-  //     }
-  //   )
-  // }
 
   setDefaultRole(){
     const roles: string[] = [constants.roles.USER];

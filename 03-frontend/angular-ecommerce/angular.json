@@ -60,14 +60,6 @@
               ],
               "outputHashing": "all"
             },
-            "demo": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.demo.ts"
-                }
-              ]
-            },
             "development": {
               "buildOptimizer": false,
               "optimization": false,
@@ -84,9 +76,6 @@
           "configurations": {
             "production": {
               "browserTarget": "angular-ecommerce:build:production"
-            },
-            "demo":{
-              "browserTarget": "angular-ecommerce:build:demo"
             },
             "development": {
               "browserTarget": "angular-ecommerce:build:development"
@@ -121,6 +110,9 @@
     }
   },
   "cli": {
-    "analytics": false
+    "analytics": false,
+    "cache": {
+      "enabled": false
+    }
   }
 }
