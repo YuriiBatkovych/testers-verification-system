@@ -42,16 +42,11 @@ class App(customtkinter.CTk):
         self.geometry("1100x700")
 
     def frame_selector_bt(self, parent, frame_id):
-        # create frame
         bt_frame = customtkinter.CTkButton(parent)
-        # style frame
         bt_frame.configure(height=40)
-        # creates a text label
         bt_frame.configure(text=frame_id)
         bt_frame.configure(command=partial(self.toggle_frame_by_id, frame_id))
-        # set layout
         bt_frame.grid(pady=3, row=self.num_of_frames, column=0)
-        # update state
         self.num_of_frames = self.num_of_frames + 1
 
     # create the frame

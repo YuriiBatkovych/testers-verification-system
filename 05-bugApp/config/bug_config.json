@@ -1,0 +1,101 @@
+{
+  "backend":
+  [
+    {
+      "name": "bug.save.new.category",
+      "description": "if bug config is set to true, new categories will not be saved",
+      "allowedValues": ["true", "false"],
+      "valueType": "string"
+    },
+
+    {
+      "name": "bug.save.new.product",
+      "description": "if bug config is set to true, new products will not be saved",
+      "allowedValues": ["true", "false"],
+      "valueType": "string"
+    },
+
+    {
+      "name": "bug.save.new.purchase",
+      "description": "if bug config is set to true, new purchases will not be saved",
+      "allowedValues": ["true", "false"],
+      "valueType": "string"
+    },
+
+    {
+      "name": "bug.save.new.user",
+      "description": "if bug config is set to true, new users will not be saved",
+      "allowedValues": ["true", "false"],
+      "valueType": "string"
+    },
+
+    {
+      "name": "bug.save.edit.category",
+      "description": "if bug config is set to true, categories editions will not be saved",
+      "allowedValues": ["true", "false"],
+      "valueType": "string"
+    },
+
+    {
+      "name": "bug.save.edit.product",
+      "description": "if bug config is set to true, products editions will not be saved",
+      "allowedValues": ["true", "false"],
+      "valueType": "string"
+    },
+
+    {
+      "name": "bug.save.edit.user",
+      "description": "if bug config is set to true, user editions will not be saved",
+      "allowedValues": ["true", "false"],
+      "valueType": "string"
+    },
+
+    {
+      "name": "bug.delete.category",
+      "description": "if bug config is set to true, categories will not be deleted after the users` requests to do that",
+      "allowedValues": ["true", "false"],
+      "valueType": "string"
+    },
+
+    {
+      "name": "bug.delete.product",
+      "description": "if bug config is set to true, product will not be deleted after the users` requests to do that",
+      "allowedValues": ["true", "false"],
+      "valueType": "string"
+    },
+
+    {
+      "name": "bug.delete.user",
+      "description": "if bug config is set to true, user will not be deleted after the users` requests to do that",
+      "allowedValues": ["true", "false"],
+      "valueType": "string"
+    },
+
+    {
+      "name": "bug.role.for.admin",
+      "description": "Every ADMIN will get role which is set in that bug config field",
+      "allowedValues": ["ADMIN", "STAFF", "USER"],
+      "valueType": "string"
+    },
+
+    {
+      "name": "bug.role.for.staff",
+      "description": "Every STAFF user will get role which is set in that bug config field",
+      "allowedValues": ["ADMIN", "STAFF", "USER"],
+      "valueType": "string"
+    },
+
+    {
+      "name": "bug.role.for.user",
+      "description": "Every USER will get role which is set in that bug config field",
+      "allowedValues": ["ADMIN", "STAFF", "USER"],
+      "valueType": "string"
+    },
+
+    {
+      "name": "bug.truncate.roles.number",
+      "description": "When the list of user roles is displayed on GUI, it will be incomplete and the number (from 0 to anyone) of roles entered will not be sufficient",
+      "valueType": "number"
+    }
+  ]
+}
