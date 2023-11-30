@@ -23,5 +23,12 @@ class Bug:
             entry.insert(0, self.current_value)
             return entry
 
+    def validate(self, value):
+        match self.value_type:
+            case "number":
+                return value.isnumeric()
+            case _:
+                return True
+
     def __repr__(self):
         return f"Bug name: {self.name}, description: {self.description}, allowed_values: {self.allowed_values}, value: {self.current_value}, valueType: {self.value_type}"
