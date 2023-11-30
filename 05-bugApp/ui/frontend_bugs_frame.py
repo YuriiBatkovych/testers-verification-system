@@ -1,6 +1,8 @@
 import customtkinter
 from tktooltip import ToolTip
-from properties_management.manage_front_properties import read_frontend_properties, write_frontend_properties
+
+from properties_management.manage_bugs import get_frontend_bugs
+from properties_management.manage_front_properties import write_frontend_properties
 
 
 class FrontendBugsFrame(customtkinter.CTkScrollableFrame):
@@ -18,25 +20,25 @@ class FrontendBugsFrame(customtkinter.CTkScrollableFrame):
 
         self.create_frontend_fields()
 
-    def create_field(self, label_text, value):
+    def create_field(self, bug_config):
         custom_font = ("Lato", 14, 'bold')
-        label = customtkinter.CTkLabel(self, text=label_text, text_color="black", font=custom_font)
+        label = customtkinter.CTkLabel(self, text=bug_config.name, text_color="black", font=custom_font)
         label.grid(row=len(self.frontend_fields), column=0, padx=15, pady=15)
 
-        entry = customtkinter.CTkEntry(self, width=450)
-        entry.grid(row=len(self.frontend_fields), column=1, padx=15, pady=15)
-        entry.insert(0, value)
+        field = bug_config.get_widget(self)
+        field.configure(width=450)
+        field.grid(row=len(self.frontend_fields), column=1, padx=15, pady=15)
 
-        ToolTip(label, msg="Hover info", delay=0.01,
+        ToolTip(label, msg=bug_config.description, delay=0.01,
                 fg="#ffffff", bg="#1c1c1c", padx=10, pady=10)
 
-        self.frontend_fields[label_text] = entry
+        self.frontend_fields[bug_config.name] = field
 
     def create_frontend_fields(self):
-        back_props = read_frontend_properties(True)
+        front_bug_configs = get_frontend_bugs()
 
-        for key, value in back_props.items():
-            self.create_field(key, value)
+        for bug_config in front_bug_configs:
+            self.create_field(bug_config)
 
         button = customtkinter.CTkButton(self, text="Submit", command=self.submit_front())
         button.grid(row=len(self.frontend_fields), column=0, columnspan=2, pady=10)

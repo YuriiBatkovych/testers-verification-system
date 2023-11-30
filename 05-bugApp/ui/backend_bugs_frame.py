@@ -1,6 +1,8 @@
 import customtkinter
+from tktooltip import ToolTip
 
-from properties_management.manage_back_properties import read_backend_properties, write_backend_properties
+from properties_management.manage_back_properties import write_backend_properties
+from properties_management.manage_bugs import get_backend_bugs
 
 
 class BackendBugsFrame(customtkinter.CTkScrollableFrame):
@@ -18,21 +20,24 @@ class BackendBugsFrame(customtkinter.CTkScrollableFrame):
 
         self.create_back_fields()
 
-    def create_field(self, label_text, value):
-        label = customtkinter.CTkLabel(self, text=label_text, text_color="black")
+    def create_field(self, bug):
+        label = customtkinter.CTkLabel(self, text=bug.name, text_color="black")
         label.grid(row=len(self.backend_fields), column=0, padx=10, pady=10)
 
-        entry = customtkinter.CTkEntry(self, width=350)
-        entry.grid(row=len(self.backend_fields), column=1, padx=10, pady=10)
-        entry.insert(0, value)
+        field = bug.get_widget(self)
+        field.configure(width=450)
+        field.grid(row=len(self.backend_fields), column=1, padx=10, pady=10)
 
-        self.backend_fields[label_text] = entry
+        ToolTip(label, msg=bug.description, delay=0.01,
+                fg="#ffffff", bg="#1c1c1c", padx=10, pady=10)
+
+        self.backend_fields[bug.name] = field
 
     def create_back_fields(self):
-        back_props = read_backend_properties()
+        back_bugs = get_backend_bugs()
 
-        for key, value in back_props.items():
-            self.create_field(key, value)
+        for bug in back_bugs:
+            self.create_field(bug)
 
         button = customtkinter.CTkButton(self, text="Submit", command=self.submit_back)
         button.grid(row=len(self.backend_fields), column=0, columnspan=2, pady=10)

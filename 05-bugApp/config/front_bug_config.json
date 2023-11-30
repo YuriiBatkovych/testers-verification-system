@@ -1,0 +1,25 @@
+{
+  "bugs":
+  [
+    {
+      "name": "bugTextButtonLogout",
+      "description": "Text on the Logout button will be changed to the one configured",
+      "valueType": "string"
+    },
+    {
+      "name": "bugTextButtonMembers",
+      "description": "Text on the Members button will be changed to the one configured",
+      "valueType": "string"
+    },
+    {
+      "name": "bugTextButtonOrders",
+      "description": "Text on the Orders button will be changed to the one configured",
+      "valueType": "string"
+    },
+    {
+      "name": "bugTextButtonSearch",
+      "description": "Text on the Search button will be changed to the one configured",
+      "valueType": "string"
+    }
+  ]
+}
