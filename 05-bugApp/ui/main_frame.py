@@ -2,8 +2,11 @@ import tkinter
 import customtkinter
 from functools import partial
 
-from ui.backend_bugs_frame import BackendBugsFrame
-from ui.frontend_bugs_frame import FrontendBugsFrame
+from properties_management.manage_back_properties import write_backend_properties
+from properties_management.manage_bugs import get_backend_bugs, get_frontend_bugs
+from properties_management.manage_front_properties import write_frontend_properties
+from ui.bug_frame import BugsFrame
+from ui.common import prepare_bug_configs_map
 
 BACKEND_FRAME = "Backend Bugs"
 FRONTEND_FRAME = "Frontend Bugs"
@@ -52,9 +55,11 @@ class App(customtkinter.CTk):
     # create the frame
     def create_frame(self, frame_id):
         if frame_id == BACKEND_FRAME:
-            App.frames[frame_id] = BackendBugsFrame(self)
+            bug_configs = prepare_bug_configs_map(get_backend_bugs())
+            App.frames[frame_id] = BugsFrame(self, bug_configs, write_backend_properties)
         elif frame_id == FRONTEND_FRAME:
-            App.frames[frame_id] = FrontendBugsFrame(self)
+            bug_configs = prepare_bug_configs_map(get_frontend_bugs())
+            App.frames[frame_id] = BugsFrame(self, bug_configs, write_frontend_properties)
 
     # method to change frames
     def toggle_frame_by_id(self, frame_id):
