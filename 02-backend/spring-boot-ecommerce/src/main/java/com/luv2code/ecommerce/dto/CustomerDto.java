@@ -1,12 +1,7 @@
 package com.luv2code.ecommerce.dto;
 
 import com.luv2code.ecommerce.entity.Customer;
-import com.luv2code.ecommerce.entity.Role;
 import lombok.Data;
-
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Data
 public class CustomerDto {
