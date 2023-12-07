@@ -57,8 +57,6 @@ export class CustomerService {
 
   registerUser(user: Customer){
     const registerUrl = `${this.baseUrl}/register`;
-    console.log("in register user");
-    console.log(registerUrl);
     return this.httpClient.post<Customer>(registerUrl, user, this.commonHttpservice.getHttpOptions());
   }
 

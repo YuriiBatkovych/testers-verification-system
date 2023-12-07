@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CartItem } from 'src/app/common/cart-item';
 import { CartService } from 'src/app/services/cart.service';
+import { LogsService } from 'src/app/services/logs.service';
 
 @Component({
   selector: 'app-cart-details',
@@ -13,7 +14,8 @@ export class CartDetailsComponent implements OnInit {
   totalPrice: number = 0;
   totalQuantity: number = 0; 
 
-  constructor(private cartService: CartService) { }
+  constructor(private cartService: CartService,
+              private logsService: LogsService) { }
 
   ngOnInit(): void {
     this.listCartDetails();
@@ -35,14 +37,17 @@ export class CartDetailsComponent implements OnInit {
   }
 
   incrementQuantity(theCartItem: CartItem){
+    this.logsService.logMessage("incrementing quantity of product in cart-details");
     this.cartService.addToCart(theCartItem);
   }
 
   decrementQuantity(theCartItem: CartItem){
+    this.logsService.logMessage("decrementing quantity of product in cart-details");
     this.cartService.decrementQuantity(theCartItem);
   }
 
   removeItem(theCartItem: CartItem){
+    this.logsService.logMessage("Removing product in cart-details");
     this.cartService.removeItem(theCartItem);
   }
 
