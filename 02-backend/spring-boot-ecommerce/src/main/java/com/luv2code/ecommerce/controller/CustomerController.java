@@ -32,15 +32,25 @@ public class CustomerController {
     }
 
     @GetMapping
-    public CustomerDto getCustomerByEmail(@Param("email") String email){
-        CustomerDto customerResponse = customerService.getCustomerByEmail(email);
-        return  customerResponse;
+    public ResponseEntity<CustomerDto> getCustomerByEmail(@Param("email") String email){
+        try {
+            CustomerDto customerResponse = customerService.getCustomerByEmail(email);
+            return ResponseEntity.status(HttpStatus.OK).body(customerResponse);
+        }
+        catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new CustomerDto());
+        }
     }
 
     @GetMapping("/search")
-    public CustomerDto getCustomerById(@Param("id") Long id){
-        CustomerDto customerResponse = customerService.getCustomerById(id);
-        return  customerResponse;
+    public ResponseEntity<CustomerDto> getCustomerById(@Param("id") Long id){
+        try {
+            CustomerDto customerResponse = customerService.getCustomerById(id);
+            return ResponseEntity.status(HttpStatus.OK).body(customerResponse);
+        }
+        catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new CustomerDto());
+        }
     }
 
     @GetMapping("/all")
@@ -56,20 +66,35 @@ public class CustomerController {
 
     @PostMapping("/add")
     public ResponseEntity<Customer> addNewUser(@RequestBody CustomerDto customerDto) throws AuthorisationException {
-        Customer customer = customerService.addNewUser(customerDto);
-        return  ResponseEntity.status(HttpStatus.OK).body(customer);
+        try {
+            Customer customer = customerService.addNewUser(customerDto);
+            return ResponseEntity.status(HttpStatus.OK).body(customer);
+        }
+        catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Customer());
+        }
     }
 
     @PostMapping("/register")
     public ResponseEntity<CustomerDto> registerUser(@RequestBody CustomerDto customerDto){
-        CustomerDto customer = customerService.registerUser(customerDto);
-        return ResponseEntity.status(HttpStatus.OK).body(customer);
+        try {
+            CustomerDto customer = customerService.registerUser(customerDto);
+            return ResponseEntity.status(HttpStatus.OK).body(customer);
+        }
+        catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new CustomerDto());
+        }
     }
 
     @PutMapping("/update")
     public ResponseEntity<Customer> updateUser(@RequestBody CustomerDto customerDto) throws AuthorisationException {
-        Customer customer = customerService.updateUser(customerDto);
-        return  ResponseEntity.status(HttpStatus.OK).body(customer);
+        try {
+            Customer customer = customerService.updateUser(customerDto);
+            return ResponseEntity.status(HttpStatus.OK).body(customer);
+        }
+        catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Customer());
+        }
     }
 
     @DeleteMapping("/byEmail")
