@@ -29,7 +29,6 @@ public class DiscountController {
     @GetMapping
     public ResponseEntity<DiscountDto> getDiscount(@Param("email") String email){
         try {
-            log.info("{DISCOUNT}");
             DiscountDto discountDto = discountService.getDiscount(email);
             return ResponseEntity.status(HttpStatus.OK).body(discountDto);
         }
