@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CartItem } from '../common/cart-item';
 import { BehaviorSubject, Subject } from 'rxjs';
+import { DiscountService } from './discount.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class CartService {
 
   storage: Storage = localStorage;
 
-  constructor() { 
+  constructor(private discountService: DiscountService) { 
     let data = JSON.parse(this.storage.getItem('cartItems')!);
 
     if(data != null){
@@ -52,11 +53,17 @@ export class CartService {
   computeCartTotals() {
     let totalPriceValue: number = 0;
     let totalQuantityValue: number = 0;
+    let discount = this.discountService.getDiscount()/100.;
+
+    console.log("in cart totals compute, discount");
+    console.log(discount);
 
     for(let tempCartItem of this.cartItems){
        totalPriceValue = totalPriceValue + tempCartItem.unitPrice*tempCartItem.quantity;
        totalQuantityValue = totalQuantityValue + tempCartItem.quantity;
     }
+
+    totalPriceValue = totalPriceValue - totalPriceValue*discount;
 
     this.totalPrice.next(totalPriceValue);
     this.totalQuantity.next(totalQuantityValue);

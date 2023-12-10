@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import constants from 'src/app/config/constants';
 import { DiscountService } from 'src/app/services/discount.service';
 
 @Component({
@@ -10,15 +11,12 @@ export class MembersPageComponent implements OnInit {
 
   discountPercentage: number = 0;
 
-  constructor(public discountService: DiscountService) { }
+  storage: Storage = sessionStorage;
+
+  constructor(private discountService: DiscountService) { }
 
   ngOnInit(): void {
-    this.discountService.getDiscount().subscribe(
-      data => {
-        this.discountPercentage = data.percentage;
-        console.log(data);
-      }
-    )
+    this.discountPercentage = this.discountService.getDiscount();
   }
 
 

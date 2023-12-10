@@ -58,6 +58,11 @@
                             <p>Total Quantity: {{totalQuantity}}</p>
                             <p>Shipping: FREE</p>
                             <p>Total Price: {{totalPrice}}</p>
+
+                            <div *ngIf="discountPercentage > 0">
+                                <p class="text-danger">{{discountPercentage}}% discount applied</p>
+                            </div>
+
                             <a routerLink="/checkout" class="btn-primary">Checkout</a>
                         </td>
                     </tr>

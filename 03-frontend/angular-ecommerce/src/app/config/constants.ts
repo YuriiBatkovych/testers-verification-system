@@ -12,7 +12,8 @@ export default{
 
     storageParams:{
         USER_EMAIL: 'userEmail',
-        USER_ROLES: 'userRoles'
+        USER_ROLES: 'userRoles',
+        USER_DISCOUNT: 'discount'
     },
 
     backendSecurity:{

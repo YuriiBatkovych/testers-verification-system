@@ -18,11 +18,34 @@ export class DiscountService {
               private commonHttpservice: GeneralHttpService) { }
 
   
-  getDiscount(){
+  getDiscountPercentage(){
     const userEmail: string = JSON.parse(this.storage.getItem(constants.storageParams.USER_EMAIL)!);
     const disountUrl = this.baseUrl+`?email=${userEmail}`;
     console.log(disountUrl);
     return this.httpClient.get<Discount>(disountUrl, this.commonHttpservice.getHttpOptions());
+  }
+
+  storeDiscount(){
+    this.getDiscountPercentage().subscribe(
+      data => {
+        this.storage.setItem(constants.storageParams.USER_DISCOUNT, JSON.stringify(data.percentage));
+      }
+    )
+  }
+
+  storeDefaultDiscount(){
+    this.storage.setItem(constants.storageParams.USER_DISCOUNT, JSON.stringify(0));
+  }
+
+  getDiscount() : number{
+    let discountPercentage = this.storage.getItem(constants.storageParams.USER_DISCOUNT);
+
+    if(discountPercentage == null){
+      return 0;
+    }
+    else{
+      return +discountPercentage;
+    }
   }
   
 }

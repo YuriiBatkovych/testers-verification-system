@@ -6,6 +6,8 @@ import { CustomerService } from 'src/app/services/customer.service';
 import constants from 'src/app/config/constants';
 import { Customer } from 'src/app/common/customer';
 import { environment } from 'src/environments/environment';
+import { DiscountService } from 'src/app/services/discount.service';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-login-status',
@@ -21,7 +23,9 @@ export class LoginStatusComponent implements OnInit {
 
   constructor(@Inject(DOCUMENT) public document: Document, 
               public auth: AuthService,
-              public customerService: CustomerService){}
+              public customerService: CustomerService,
+              public cartService: CartService,
+              public discountService: DiscountService){}
 
   ngOnInit(): void {
     this.customerService.setDefaultRole();
@@ -39,9 +43,19 @@ export class LoginStatusComponent implements OnInit {
             data => {
               this.storage.setItem(constants.storageParams.USER_EMAIL, JSON.stringify(data.email));
               this.storage.setItem(constants.storageParams.USER_ROLES, JSON.stringify(data.role.name));
+              this.updateDiscountInfo();
             }
           )
         }
+      }
+    )
+  }
+
+  updateDiscountInfo(){
+    this.discountService.getDiscountPercentage().subscribe(
+      data => {
+        this.storage.setItem(constants.storageParams.USER_DISCOUNT, JSON.stringify(data.percentage));
+        this.cartService.computeCartTotals();
       }
     )
   }
@@ -54,6 +68,8 @@ export class LoginStatusComponent implements OnInit {
     this.auth.logout({ logoutParams: { returnTo: document.location.origin } });
     this.customerService.setDefaultRole();
     this.customerService.setDefaultEmail();
+    this.discountService.storeDefaultDiscount();
+    this.cartService.computeCartTotals();
   }
   
 

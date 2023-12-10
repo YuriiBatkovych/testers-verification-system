@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CartItem } from 'src/app/common/cart-item';
 import { CartService } from 'src/app/services/cart.service';
+import { DiscountService } from 'src/app/services/discount.service';
 import { LogsService } from 'src/app/services/logs.service';
 
 @Component({
@@ -13,11 +14,16 @@ export class CartDetailsComponent implements OnInit {
   cartItems: CartItem[] = [];
   totalPrice: number = 0;
   totalQuantity: number = 0; 
+  discountPercentage: number = 0;
+
+  storage: Storage = sessionStorage;
 
   constructor(private cartService: CartService,
-              private logsService: LogsService) { }
+              private logsService: LogsService,
+              private discountService: DiscountService) { }
 
   ngOnInit(): void {
+    this.discountPercentage = this.discountService.getDiscount();
     this.listCartDetails();
   }
 
