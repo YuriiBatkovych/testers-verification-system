@@ -1,10 +1,13 @@
 package com.luv2code.ecommerce.service.impl.bugfacades;
 
+import com.luv2code.ecommerce.consts.GeneralConsts;
 import com.luv2code.ecommerce.dto.ProductDto;
 import com.luv2code.ecommerce.entity.Product;
 import com.luv2code.ecommerce.exceptions.AuthorisationException;
 import com.luv2code.ecommerce.service.IProductService;
 import com.luv2code.ecommerce.service.impl.ProductService;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -13,6 +16,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ProductServiceFacade implements IProductService {
+
+    private static final Log log = LogFactory.getLog(GeneralConsts.BUG_LOGGER);
 
     @Value("${bug.save.new.product}")
     private boolean saveNewProduct;
@@ -62,6 +67,7 @@ public class ProductServiceFacade implements IProductService {
 
     @Override
     public Page<ProductDto> getByCategoryId(Long id, Pageable pageable) {
+        log.info("Getting products by category id");
         return productService.getByCategoryId(id, pageable);
     }
 

@@ -1,7 +1,7 @@
 package com.luv2code.ecommerce.controller;
 
+import com.luv2code.ecommerce.consts.GeneralConsts;
 import com.luv2code.ecommerce.dto.DiscountDto;
-import com.luv2code.ecommerce.interceptors.RequestInterceptor;
 import com.luv2code.ecommerce.service.IDiscountService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/discount")
 @CrossOrigin("http://localhost:4200")
 public class DiscountController {
-    private final Log log = LogFactory.getLog(DiscountController.class);
+    private final Log log = LogFactory.getLog(GeneralConsts.BUG_LOGGER);
     private final IDiscountService discountService;
 
     @Autowired
@@ -29,6 +29,7 @@ public class DiscountController {
     @GetMapping
     public ResponseEntity<DiscountDto> getDiscount(@Param("email") String email){
         try {
+            log.info("Getting discount");
             DiscountDto discountDto = discountService.getDiscount(email);
             return ResponseEntity.status(HttpStatus.OK).body(discountDto);
         }
