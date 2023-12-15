@@ -4,6 +4,7 @@ import com.luv2code.ecommerce.dto.OrderDto;
 import com.luv2code.ecommerce.entity.Order;
 import com.luv2code.ecommerce.service.IOrdersService;
 import com.luv2code.ecommerce.service.impl.OrdersService;
+import com.luv2code.ecommerce.service.impl.bugfacades.OrdersServiceFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,7 +24,7 @@ public class OrdersController {
     private final IOrdersService ordersService;
 
     @Autowired
-    public OrdersController(OrdersService ordersService){
+    public OrdersController(OrdersServiceFacade ordersService){
         this.ordersService = ordersService;
     }
 
