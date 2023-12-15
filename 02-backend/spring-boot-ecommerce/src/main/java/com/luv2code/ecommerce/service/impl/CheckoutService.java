@@ -1,8 +1,10 @@
 package com.luv2code.ecommerce.service.impl;
 
+import com.luv2code.ecommerce.consts.RolesConsts;
 import com.luv2code.ecommerce.dao.CustomerRepository;
 import com.luv2code.ecommerce.dto.Purchase;
 import com.luv2code.ecommerce.dto.PurchaseResponse;
+import com.luv2code.ecommerce.dto.RoleDto;
 import com.luv2code.ecommerce.entity.Customer;
 import com.luv2code.ecommerce.entity.Order;
 import com.luv2code.ecommerce.entity.OrderItem;
@@ -46,6 +48,9 @@ public class CheckoutService implements ICheckoutService {
 
         if(customerFromDB != null){
             customer = customerFromDB;
+        }
+        else {
+            customer.setRole(RoleDto.roleDtoToRole(RolesConsts.standardRoles));
         }
 
         customer.add(order);

@@ -16,13 +16,11 @@ export class OrderHistoryService {
               private commonHttpService: GeneralHttpService) { }
 
   getOrderHistory(theEmail: string): Observable<GetResponseOrderHistory>{
-    const orderHistoryUrl = `${this.orderUrl}/search/findByCustomerEmail?email=${theEmail}`;
+    const orderHistoryUrl = `${this.orderUrl}?email=${theEmail}`;
     return this.httpClient.get<GetResponseOrderHistory>(orderHistoryUrl, this.commonHttpService.getHttpOptions());
   }
 }
 
 interface GetResponseOrderHistory{
-  _embedded: {
-    orders: OrderHistory[];
-  }
+  content:  OrderHistory[];
 }
