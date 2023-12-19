@@ -5,6 +5,8 @@ import { ProductCategory } from 'src/app/common/product-category';
 import { CategoryService } from 'src/app/services/category.service';
 import { Luv2ShopValidators } from 'src/app/validators/luv2-shop-validators';
 
+import { environment } from 'src/environments/environment';
+
 @Component({
   selector: 'app-category-edition',
   templateUrl: './category-edition.component.html',
@@ -55,7 +57,7 @@ export class CategoryEditionComponent implements OnInit {
   }
 
   getNewCategoryNameValidators() : ValidatorFn[] {
-    if(!this.deleteMode){
+    if(!this.deleteMode && environment.bugCategoryNameRequired){
       return [Validators.required, 
               Validators.minLength(2), 
               Luv2ShopValidators.notOnlyWhiteSpace]

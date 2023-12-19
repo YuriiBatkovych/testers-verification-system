@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Route, Router } from '@angular/router';
 import { Country } from 'src/app/common/country';
 import { Order } from 'src/app/common/order';
@@ -10,6 +10,8 @@ import { CartService } from 'src/app/services/cart.service';
 import { CheckoutService } from 'src/app/services/checkout.service';
 import { Luv2ShopFormService } from 'src/app/services/luv2-shop-form.service';
 import { Luv2ShopValidators } from 'src/app/validators/luv2-shop-validators';
+
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-checkout',
@@ -41,55 +43,7 @@ export class CheckoutComponent implements OnInit {
   ngOnInit(): void {
 
     this.reviewCartDetails();
-
-    const theEmail = JSON.parse(this.storage.getItem('userEmail')!);
-
-    this.checkoutFormGroup = this.formBuilder.group({
-      customer: this.formBuilder.group({
-        firstName: new FormControl('', 
-                                  [Validators.required, 
-                                   Validators.minLength(2), 
-                                  Luv2ShopValidators.notOnlyWhiteSpace]),
-        lastName: new FormControl('', 
-                                  [Validators.required, 
-                                   Validators.minLength(2), 
-                                   Luv2ShopValidators.notOnlyWhiteSpace]),
-        email: new FormControl(theEmail, 
-                              [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')])
-      }),
-
-      shippingAddress: this.formBuilder.group({
-        street: new FormControl('', [Validators.required, Validators.minLength(2), 
-                                     Luv2ShopValidators.notOnlyWhiteSpace]),
-        city: new FormControl('', [Validators.required, Validators.minLength(2), 
-                                   Luv2ShopValidators.notOnlyWhiteSpace]),
-        state: new FormControl('', [Validators.required]),
-        country: new FormControl('', [Validators.required]),
-        zipCode: new FormControl('', [Validators.required, Validators.minLength(2), 
-                                      Luv2ShopValidators.notOnlyWhiteSpace]),
-      }),
-
-      billingAddress: this.formBuilder.group({
-        street: new FormControl('', [Validators.required, Validators.minLength(2), 
-                                     Luv2ShopValidators.notOnlyWhiteSpace]),
-        city: new FormControl('', [Validators.required, Validators.minLength(2), 
-                                   Luv2ShopValidators.notOnlyWhiteSpace]),
-        state: new FormControl('', [Validators.required]),
-        country: new FormControl('', [Validators.required]),
-        zipCode: new FormControl('', [Validators.required, Validators.minLength(2), 
-                                      Luv2ShopValidators.notOnlyWhiteSpace]),
-      }),
-
-      creditCard: this.formBuilder.group({
-        cardType: new FormControl('', [Validators.required]),
-        nameOfCard: new FormControl('', [Validators.required, Validators.minLength(2), 
-                                         Luv2ShopValidators.notOnlyWhiteSpace]),
-        cardNumber: new FormControl('', [Validators.required, Validators.pattern('[0-9]{16}')]),
-        securityCode: new FormControl('', [Validators.required, Validators.pattern('[0-9]{3}')]),
-        expirationMonth: [''],
-        expirationYear: ['']
-      }),
-    });
+    this.createCheckoutForm();
 
     const startMonth: number = new Date().getMonth() + 1;
 
@@ -111,6 +65,60 @@ export class CheckoutComponent implements OnInit {
       }
     )
   }
+
+  createCheckoutForm(){
+    const theEmail = JSON.parse(this.storage.getItem('userEmail')!);
+    const cardNumberPattern = `[0-9]{${environment.bugCardNumberLength}}`;
+    const securityCodePattern = `[0-9]{${environment.bugSecurityCodeLength}}`;
+
+
+    this.checkoutFormGroup = this.formBuilder.group({
+      customer: this.formBuilder.group({
+        firstName: new FormControl('', 
+                                  [Validators.required, 
+                                   Validators.minLength(environment.bugFirstNameMinLength), 
+                                  Luv2ShopValidators.notOnlyWhiteSpace]),
+        lastName: new FormControl('', 
+                                  [Validators.required, 
+                                   Validators.minLength(2), 
+                                   Luv2ShopValidators.notOnlyWhiteSpace]),
+        email: new FormControl(theEmail, 
+                              [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')])
+      }),
+
+      shippingAddress: this.formBuilder.group({
+        street: new FormControl('', [Validators.required, Validators.minLength(environment.bugShippingAddressStreetMinLength), 
+                                     Luv2ShopValidators.notOnlyWhiteSpace]),
+        city: new FormControl('', [Validators.required, Validators.minLength(2), Luv2ShopValidators.notOnlyWhiteSpace]),
+        state: new FormControl('', [Validators.required]),
+        country: new FormControl('', [Validators.required]),
+        zipCode: new FormControl('', [Validators.required, Validators.minLength(2), 
+                                      Luv2ShopValidators.notOnlyWhiteSpace]),
+      }),
+
+      billingAddress: this.formBuilder.group({
+        street: new FormControl('', [Validators.required, Validators.minLength(2), 
+                                     Luv2ShopValidators.notOnlyWhiteSpace]),
+        city: new FormControl('', [Validators.required, Validators.minLength(2), 
+                                   Luv2ShopValidators.notOnlyWhiteSpace]),
+        state: new FormControl('', [Validators.required]),
+        country: new FormControl('', [Validators.required]),
+        zipCode: new FormControl('', [Validators.required, Validators.minLength(2), 
+                                      Luv2ShopValidators.notOnlyWhiteSpace]),
+      }),
+
+      creditCard: this.formBuilder.group({
+        cardType: new FormControl('', [Validators.required]),
+        nameOfCard: new FormControl('', [Validators.required, Validators.minLength(2), 
+                                         Luv2ShopValidators.notOnlyWhiteSpace]),
+        cardNumber: new FormControl('', [Validators.required, Validators.pattern(cardNumberPattern)]),
+        securityCode: new FormControl('', [Validators.required, Validators.pattern(securityCodePattern)]),
+        expirationMonth: [''],
+        expirationYear: ['']
+      }),
+    });
+  }
+
   
   reviewCartDetails() {
     

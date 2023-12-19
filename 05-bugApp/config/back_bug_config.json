@@ -96,6 +96,12 @@
       "name": "bug.truncate.roles.number",
       "description": "When the list of user roles is displayed on GUI, it will be incomplete and the number (from 0 to anyone) of roles entered will not be sufficient",
       "valueType": "number"
+    },
+
+    {
+      "name": "bug.truncate.orders.number",
+      "description": "When the list of user`s orders will be displayed, it will be incomplete and the number (from 0 to anyone) of orders entered will not be sufficient",
+      "valueType": "number"
     }
   ]
 }

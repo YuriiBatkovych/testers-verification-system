@@ -1,6 +1,6 @@
 import { FormControl, ValidationErrors } from "@angular/forms";
 
-export class Luv2ShopValidators {
+export class Luv2ShopValidators{
 
     static notOnlyWhiteSpace(control: FormControl) : null | ValidationErrors{
 

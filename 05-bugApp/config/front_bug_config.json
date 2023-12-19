@@ -20,6 +20,64 @@
       "name": "bugTextButtonSearch",
       "description": "Text on the Search button will be changed to the one configured",
       "valueType": "string"
+    },
+
+    {
+      "name": "bugEditCategoryRoute",
+      "description": "This route will be used when clicking on Edit Category button",
+      "allowedValues": ["'/edit/category'", "'/add/category'", "'/delete/category'"],
+      "valueType": "string"
+    },
+
+    {
+      "name": "bugAddCategoryRoute",
+      "description": "This route will be used when clicking on Add Category button",
+      "allowedValues": ["'/edit/category'", "'/add/category'", "'/delete/category'"],
+      "valueType": "string"
+    },
+
+    {
+      "name": "bugDeleteCategoryRoute",
+      "description": "This route will be used when clicking on Delete Category button",
+      "allowedValues": ["'/edit/category'", "'/add/category'", "'/delete/category'"],
+      "valueType": "string"
+    },
+
+    {
+      "name": "bugShippingAddressStreetMinLength",
+      "description": "Min length of Shipping Address street field in checkout form",
+      "valueType": "number"
+    },
+
+    {
+      "name": "bugFirstNameMinLength",
+      "description": "Min length of Customer First Name field in checkout form",
+      "valueType": "number"
+    },
+
+    {
+      "name": "bugProductNameMinLength",
+      "description": "Min length of Product Name field in product edition form",
+      "valueType": "number"
+    },
+
+    {
+      "name": "bugCardNumberLength",
+      "description": "Length of Card Number field in checkout form (must be 16)",
+      "valueType": "number"
+    },
+
+    {
+      "name": "bugSecurityCodeLength",
+      "description": "Length of Card Security Code field in checkout form (must be 3)",
+      "valueType": "number"
+    },
+
+    {
+      "name": "bugCategoryNameRequired",
+      "description": "If true new category name required check will be set for category-edition form",
+      "allowedValues": ["true", "false"],
+      "valueType": "string"
     }
   ]
 }

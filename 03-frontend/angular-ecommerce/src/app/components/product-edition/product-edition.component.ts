@@ -8,6 +8,8 @@ import { CategoryService } from 'src/app/services/category.service';
 import { ProductService } from 'src/app/services/product.service';
 import { Luv2ShopValidators } from 'src/app/validators/luv2-shop-validators';
 
+import { environment } from 'src/environments/environment';
+
 @Component({
   selector: 'app-product-edition',
   templateUrl: './product-edition.component.html',
@@ -87,7 +89,7 @@ export class ProductEditionComponent implements OnInit {
       product: this.formBuilder.group({
         name: new FormControl(this.product.name, 
                                   [Validators.required, 
-                                   Validators.minLength(2), 
+                                   Validators.minLength(environment.bugProductNameMinLength), 
                                   Luv2ShopValidators.notOnlyWhiteSpace]),
         categoryName: new FormControl('',
                                   [Validators.required]),

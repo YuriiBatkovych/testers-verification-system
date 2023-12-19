@@ -28,9 +28,6 @@ import { CategoryEditionComponent } from './components/category-edition/category
 import { UserManagementComponent } from './components/user-management/user-management.component';
 import { UserEditionComponent } from './components/user-edition/user-edition.component';
 
-
-
-
 const routes: Routes = [
   {path: 'members', component: MembersPageComponent},
   {path: 'order-history', component: OrderHistoryComponent},
