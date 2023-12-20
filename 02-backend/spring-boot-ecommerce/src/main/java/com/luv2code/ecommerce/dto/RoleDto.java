@@ -8,15 +8,8 @@ import java.util.stream.Collectors;
 
 @Data
 public class RoleDto {
-    private Long id;
-    private String name;
-
-    public RoleDto(){}
-
-    public RoleDto(Long id, String name){
-        this.id = id;
-        this.name = name;
-    }
+    private final Long id;
+    private final String name;
 
     public static Role roleDtoToRole(RoleDto roleDtos){
         return new Role(roleDtos.getId(), roleDtos.getName());

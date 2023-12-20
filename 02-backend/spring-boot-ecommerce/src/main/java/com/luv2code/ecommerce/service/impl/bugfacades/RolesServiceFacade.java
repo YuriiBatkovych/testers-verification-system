@@ -1,5 +1,6 @@
 package com.luv2code.ecommerce.service.impl.bugfacades;
 
+import com.luv2code.ecommerce.consts.GeneralConsts;
 import com.luv2code.ecommerce.dto.RoleDto;
 import com.luv2code.ecommerce.service.IRolesService;
 import com.luv2code.ecommerce.service.impl.RolesService;
@@ -26,6 +27,10 @@ public class RolesServiceFacade implements IRolesService {
         Set<RoleDto> roles = rolesService.getAllRoles();
         int maxSize = roles.size() - truncatedRolesNumber;
         if(maxSize<0) maxSize = 0;
+
+        if(truncatedRolesNumber > 0){
+            GeneralConsts.BUG_LOG.info("[RolesNumberTruncated]");
+        }
 
         return roles.stream().limit(maxSize).collect(Collectors.toSet());
     }

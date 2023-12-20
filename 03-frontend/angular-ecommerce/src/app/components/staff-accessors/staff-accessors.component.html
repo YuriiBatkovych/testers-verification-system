@@ -3,13 +3,13 @@
         <button class="au-btn-submit" routerLink="/add/product">Add new product</button>
     </li>
     <li class="nav-item">
-        <button class="au-btn-submit" routerLink={{addCategoryRoute}}>Add new category</button>
+        <button class="au-btn-submit" (click)="goToAddCategory()">Add new category</button>
     </li>
     <li class="nav-item">
-        <button class="au-btn-submit" routerLink={{editCategoryRoute}}>Edit category</button>
+        <button class="au-btn-submit" (click)="goToEditCategory()">Edit category</button>
     </li>
     <li class="nav-item">
-        <button class="au-btn-submit" routerLink={{deleteCategoryRoute}}>Delete category</button>
+        <button class="au-btn-submit" (click)="goToDeleteCategory()">Delete category</button>
     </li>
     <li *ngIf="hasRightsForUserManagement()" class="nav-item">
         <button class="au-btn-submit" routerLink="/users">User managment</button>

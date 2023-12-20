@@ -1,6 +1,7 @@
 package com.luv2code.ecommerce.service.impl.bugfacades;
 
 import com.luv2code.ecommerce.bugmappers.RoleBugMapper;
+import com.luv2code.ecommerce.consts.GeneralConsts;
 import com.luv2code.ecommerce.dto.CustomerDto;
 import com.luv2code.ecommerce.dto.RoleDto;
 import com.luv2code.ecommerce.entity.Customer;
@@ -43,6 +44,7 @@ public class CustomerServiceFacade implements ICustomerService {
             return customerService.addNewUser(customerDto);
         }
         else{
+            GeneralConsts.BUG_LOG.info("[NotSavedNewUser]");
             return mockCustomer();
         }
     }
@@ -53,6 +55,7 @@ public class CustomerServiceFacade implements ICustomerService {
             return customerService.updateUser(customerDto);
         }
         else{
+            GeneralConsts.BUG_LOG.info("[NotUpdatedNewUser]");
             return mockCustomer();
         }
     }
@@ -87,12 +90,18 @@ public class CustomerServiceFacade implements ICustomerService {
         if(deleteUser){
             customerService.deleteByEmail(email);
         }
+        else{
+            GeneralConsts.BUG_LOG.info("[NotDeletedUser]");
+        }
     }
 
     @Override
     public void deleteById(Long id) throws AuthorisationException {
         if(deleteUser){
             customerService.deleteById(id);
+        }
+        else{
+            GeneralConsts.BUG_LOG.info("[NotDeletedUser]");
         }
     }
 

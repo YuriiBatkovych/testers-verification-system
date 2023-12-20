@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LogsService } from 'src/app/services/logs.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -11,13 +12,14 @@ export class SearchComponent implements OnInit {
 
   env = environment;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+              private logsService: LogsService) { }
 
   ngOnInit(): void {
   }
 
   doSearch(value: string){
-    console.log(`value = ${value}`);
+    this.logsService.logMessage("[Serching]");
     this.router.navigateByUrl(`search/${value}`);
   }
 

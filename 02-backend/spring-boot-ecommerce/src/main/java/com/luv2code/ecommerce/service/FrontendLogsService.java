@@ -1,6 +1,7 @@
 package com.luv2code.ecommerce.service;
 
 
+import com.luv2code.ecommerce.consts.GeneralConsts;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ public class FrontendLogsService {
 
     public void logFrontendLogs(String message){
         log.info(message);
+        GeneralConsts.BUG_LOG.info(message);
     }
 
 }

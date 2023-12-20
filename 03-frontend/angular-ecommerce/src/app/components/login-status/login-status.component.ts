@@ -8,6 +8,7 @@ import { Customer } from 'src/app/common/customer';
 import { environment } from 'src/environments/environment';
 import { DiscountService } from 'src/app/services/discount.service';
 import { CartService } from 'src/app/services/cart.service';
+import { LogsService } from 'src/app/services/logs.service';
 
 @Component({
   selector: 'app-login-status',
@@ -25,7 +26,8 @@ export class LoginStatusComponent implements OnInit {
               public auth: AuthService,
               public customerService: CustomerService,
               public cartService: CartService,
-              public discountService: DiscountService){}
+              public discountService: DiscountService,
+              public logsService: LogsService){}
 
   ngOnInit(): void {
     this.customerService.setDefaultRole();
@@ -61,10 +63,12 @@ export class LoginStatusComponent implements OnInit {
   }
 
   login(){
+    this.logsService.logMessage("[Login Click]");
     this.auth.loginWithRedirect();
   }
 
   logout(){
+    this.logsService.logMessage("[Logout Click]");
     this.auth.logout({ logoutParams: { returnTo: document.location.origin } });
     this.customerService.setDefaultRole();
     this.customerService.setDefaultEmail();

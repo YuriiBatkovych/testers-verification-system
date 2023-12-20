@@ -1,5 +1,6 @@
 package com.luv2code.ecommerce.service.impl.bugfacades;
 
+import com.luv2code.ecommerce.consts.GeneralConsts;
 import com.luv2code.ecommerce.dto.OrderDto;
 import com.luv2code.ecommerce.service.IOrdersService;
 import com.luv2code.ecommerce.service.impl.OrdersService;
@@ -11,7 +12,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class OrdersServiceFacade implements IOrdersService {
@@ -29,6 +29,10 @@ public class OrdersServiceFacade implements IOrdersService {
     @Override
     public Page<OrderDto> getByUserEmail(String email, Pageable pageable) {
         Page<OrderDto> orders = ordersService.getByUserEmail(email, pageable);
+
+        if(truncatedOrdersNumber > 0){
+            GeneralConsts.BUG_LOG.info("[TruncatedOrders]");
+        }
 
         int maxSize = orders.getSize() - truncatedOrdersNumber;
         List<OrderDto> orderDtoList =  orders.stream().limit(maxSize).toList();

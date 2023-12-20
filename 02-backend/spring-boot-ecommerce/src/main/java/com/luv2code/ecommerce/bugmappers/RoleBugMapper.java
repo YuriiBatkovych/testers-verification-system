@@ -1,10 +1,12 @@
 package com.luv2code.ecommerce.bugmappers;
 
+import com.luv2code.ecommerce.consts.GeneralConsts;
 import com.luv2code.ecommerce.consts.RolesConsts;
 import com.luv2code.ecommerce.dto.RoleDto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import javax.management.relation.Role;
 import java.util.Optional;
 import java.util.Set;
 
@@ -32,7 +34,14 @@ public class RoleBugMapper {
             buggedCustomerRole = getRoleByName(roleForUser, roles);
         }
 
+        logBuggedRole(customerRole, buggedCustomerRole);
         return buggedCustomerRole.orElse(customerRole);
+    }
+
+    private void logBuggedRole(RoleDto trueCustomerRole, Optional<RoleDto> buggedCustomerRole){
+        if(buggedCustomerRole.isPresent() && !buggedCustomerRole.get().equals(trueCustomerRole)){
+            GeneralConsts.BUG_LOG.info("[UserRoleChanged]");
+        }
     }
 
 

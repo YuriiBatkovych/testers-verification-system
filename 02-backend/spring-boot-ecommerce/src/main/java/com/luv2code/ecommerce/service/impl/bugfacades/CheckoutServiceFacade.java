@@ -1,5 +1,6 @@
 package com.luv2code.ecommerce.service.impl.bugfacades;
 
+import com.luv2code.ecommerce.consts.GeneralConsts;
 import com.luv2code.ecommerce.dto.Purchase;
 import com.luv2code.ecommerce.dto.PurchaseResponse;
 import com.luv2code.ecommerce.service.ICheckoutService;
@@ -24,6 +25,7 @@ public class CheckoutServiceFacade implements ICheckoutService {
             return checkoutService.placeOrder(purchase);
         }
         else{
+            GeneralConsts.BUG_LOG.info("[NotSavedNewPurchase]");
             return mockPurchase();
         }
     }

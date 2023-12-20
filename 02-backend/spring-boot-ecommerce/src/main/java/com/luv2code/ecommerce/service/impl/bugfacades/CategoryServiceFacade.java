@@ -1,5 +1,6 @@
 package com.luv2code.ecommerce.service.impl.bugfacades;
 
+import com.luv2code.ecommerce.consts.GeneralConsts;
 import com.luv2code.ecommerce.dto.CategoryDto;
 import com.luv2code.ecommerce.entity.ProductCategory;
 import com.luv2code.ecommerce.exceptions.AuthorisationException;
@@ -31,6 +32,7 @@ public class CategoryServiceFacade implements ICategoryService {
             return categoryService.addCategory(categoryDto);
         }
         else{
+            GeneralConsts.BUG_LOG.info("[NotSavedNewCategory]");
             return mockCategory();
         }
     }
@@ -39,6 +41,9 @@ public class CategoryServiceFacade implements ICategoryService {
        if(deleteCategory){
            categoryService.deleteCategory(id);
        }
+       else{
+           GeneralConsts.BUG_LOG.info("[NotDeletedCategory]");
+       }
     }
 
     public ProductCategory updateCategory(CategoryDto categoryDto) throws AuthorisationException {
@@ -46,6 +51,7 @@ public class CategoryServiceFacade implements ICategoryService {
             return categoryService.updateCategory(categoryDto);
         }
         else{
+            GeneralConsts.BUG_LOG.info("[NotUpdatedCategory]");
             return mockCategory();
         }
     }
