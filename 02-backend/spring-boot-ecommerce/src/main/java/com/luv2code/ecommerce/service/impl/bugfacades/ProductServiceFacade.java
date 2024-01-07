@@ -1,5 +1,6 @@
 package com.luv2code.ecommerce.service.impl.bugfacades;
 
+import com.luv2code.ecommerce.consts.GeneralConsts;
 import com.luv2code.ecommerce.dto.ProductDto;
 import com.luv2code.ecommerce.entity.Product;
 import com.luv2code.ecommerce.exceptions.AuthorisationException;
@@ -34,6 +35,7 @@ public class ProductServiceFacade implements IProductService {
             return productService.addProduct(productDto);
         }
         else {
+            GeneralConsts.BUG_LOG.info("[NotSavedNewProduct]");
             return mockProduct();
         }
     }
@@ -44,6 +46,7 @@ public class ProductServiceFacade implements IProductService {
             return productService.updateProduct(productDto);
         }
         else {
+            GeneralConsts.BUG_LOG.info("[NotUpdatedNewProduct]");
             return mockProduct();
         }
     }
@@ -52,6 +55,9 @@ public class ProductServiceFacade implements IProductService {
     public void deleteProduct(Long id) {
         if(deleteProduct){
             productService.deleteProduct(id);
+        }
+        else{
+            GeneralConsts.BUG_LOG.info("[NotDeletedNewProduct]");
         }
     }
 

@@ -77,6 +77,9 @@ class App(customtkinter.CTk):
                 App.current.pack(in_=self.right_side_panel, side=tkinter.TOP, fill=tkinter.BOTH, expand=True, padx=0,
                                  pady=0)
 
+            if isinstance(App.current, BugsFrame):
+                App.current.recover()
+
     # method to create a pair button selector and its related frame
     def create_nav(self, parent, frame_id):
         self.frame_selector_bt(parent, frame_id)

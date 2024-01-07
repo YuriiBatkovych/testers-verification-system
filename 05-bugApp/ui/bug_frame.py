@@ -17,6 +17,9 @@ class BugsFrame(customtkinter.CTkScrollableFrame):
         self.bug_configs = bug_configs
         self.submit_method = submit_method
 
+        self.button = customtkinter.CTkButton(self, text="Submit", command=self.submit_front)
+        self.success_text = customtkinter.CTkLabel(self, text="Successfully saved", text_color="black")
+
         self.create_fields()
 
     def create_bug_field(self, bug_config):
@@ -36,8 +39,7 @@ class BugsFrame(customtkinter.CTkScrollableFrame):
         for bug_key, bug_config in self.bug_configs.items():
             self.create_bug_field(bug_config)
 
-        button = customtkinter.CTkButton(self, text="Submit", command=self.submit_front)
-        button.grid(row=len(self.fields), column=0, columnspan=2, pady=10)
+        self.button.grid(row=len(self.fields), column=0, columnspan=2, pady=10)
 
     def submit_front(self):
         props = {}
@@ -53,3 +55,9 @@ class BugsFrame(customtkinter.CTkScrollableFrame):
 
         if not validation_error:
             self.submit_method(props)
+            self.button.grid_remove()
+            self.success_text.grid(row=len(self.fields), column=0, columnspan=2, pady=10)
+
+    def recover(self):
+        self.success_text.grid_remove()
+        self.button.grid(row=len(self.fields), column=0, columnspan=2, pady=10)
