@@ -1,8 +1,8 @@
 package com.luv2code.ecommerce.service.impl.bugfacades;
 
-import com.luv2code.ecommerce.consts.GeneralConsts;
 import com.luv2code.ecommerce.dto.Purchase;
 import com.luv2code.ecommerce.dto.PurchaseResponse;
+import com.luv2code.ecommerce.logging.BugLogger;
 import com.luv2code.ecommerce.service.ICheckoutService;
 import com.luv2code.ecommerce.service.impl.CheckoutService;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,6 +13,8 @@ public class CheckoutServiceFacade implements ICheckoutService {
 
     @Value("${bug.save.new.purchase}")
     private boolean saveNewPurchase;
+
+    private final BugLogger bugLogger = new BugLogger();
     private final CheckoutService checkoutService;
 
     CheckoutServiceFacade(CheckoutService checkoutService){
@@ -25,7 +27,7 @@ public class CheckoutServiceFacade implements ICheckoutService {
             return checkoutService.placeOrder(purchase);
         }
         else{
-            GeneralConsts.BUG_LOG.info("[NotSavedNewPurchase]");
+            bugLogger.info("NotSavedNewPurchase");
             return mockPurchase();
         }
     }

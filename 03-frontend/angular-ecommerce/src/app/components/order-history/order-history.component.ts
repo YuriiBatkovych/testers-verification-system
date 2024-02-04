@@ -17,7 +17,7 @@ export class OrderHistoryComponent implements OnInit {
               private logsService: LogsService) { }
 
   ngOnInit(): void {
-    this.logsService.logMessage("[OrdersPage]");
+    this.logsService.logMessage("OrdersPage");
     this.handleOrderHistory();
   }
 

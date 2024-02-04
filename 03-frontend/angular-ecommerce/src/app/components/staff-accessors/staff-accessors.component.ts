@@ -25,7 +25,7 @@ export class StaffAccessorsComponent implements OnInit {
 
   goToEditCategory(){
     if(!this.editCategoryRoute.includes('edit')){
-      this.logsService.logMessage("[EditCategoryRouteBug]");
+      this.logsService.logMessage("EditCategoryRouteBug");
     }
 
     this.router.navigate([this.editCategoryRoute]);
@@ -33,7 +33,7 @@ export class StaffAccessorsComponent implements OnInit {
 
   goToAddCategory(){
     if(!this.addCategoryRoute.includes('add')){
-      this.logsService.logMessage("[AddCategoryRouteBug]");
+      this.logsService.logMessage("AddCategoryRouteBug");
     }
 
     this.router.navigate([this.addCategoryRoute]);
@@ -41,7 +41,7 @@ export class StaffAccessorsComponent implements OnInit {
 
   goToDeleteCategory(){
     if(!this.deleteCategoryRoute.includes('delete')){
-      this.logsService.logMessage("[DeleteCategoryRouteBug]");
+      this.logsService.logMessage("DeleteCategoryRouteBug");
     }
 
     this.router.navigate([this.deleteCategoryRoute]);

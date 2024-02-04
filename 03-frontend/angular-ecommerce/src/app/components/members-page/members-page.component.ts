@@ -19,7 +19,7 @@ export class MembersPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.discountPercentage = this.discountService.getDiscount();
-    this.logService.logMessage("[MembersPage]");
+    this.logService.logMessage("MembersPage");
   }
 
 

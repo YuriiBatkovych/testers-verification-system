@@ -1,7 +1,7 @@
 package com.luv2code.ecommerce.service.impl.bugfacades;
 
-import com.luv2code.ecommerce.consts.GeneralConsts;
 import com.luv2code.ecommerce.dto.RoleDto;
+import com.luv2code.ecommerce.logging.BugLogger;
 import com.luv2code.ecommerce.service.IRolesService;
 import com.luv2code.ecommerce.service.impl.RolesService;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,6 +15,7 @@ public class RolesServiceFacade implements IRolesService {
 
     @Value("${bug.truncate.roles.number}")
     private int truncatedRolesNumber;
+    private final BugLogger bugLogger = new BugLogger();
 
     private final RolesService rolesService;
 
@@ -29,7 +30,7 @@ public class RolesServiceFacade implements IRolesService {
         if(maxSize<0) maxSize = 0;
 
         if(truncatedRolesNumber > 0){
-            GeneralConsts.BUG_LOG.info("[RolesNumberTruncated]");
+            bugLogger.info("RolesNumberTruncated");
         }
 
         return roles.stream().limit(maxSize).collect(Collectors.toSet());

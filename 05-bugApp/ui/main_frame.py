@@ -7,9 +7,11 @@ from properties_management.manage_bugs import get_backend_bugs, get_frontend_bug
 from properties_management.manage_front_properties import write_frontend_properties
 from ui.bug_frame import BugsFrame
 from ui.common import prepare_bug_configs_map
+from ui.results_frame import ResultsFrame
 
 BACKEND_FRAME = "Backend Bugs"
 FRONTEND_FRAME = "Frontend Bugs"
+RESULTS_FRAME = "Results"
 
 
 class App(customtkinter.CTk):
@@ -38,6 +40,7 @@ class App(customtkinter.CTk):
         self.right_side_panel.configure(border_color="#323232")
         self.create_nav(self.left_side_panel, BACKEND_FRAME)
         self.create_nav(self.left_side_panel, FRONTEND_FRAME)
+        self.create_nav(self.left_side_panel, RESULTS_FRAME)
 
     def def_main_screen(self):
         self.bg = self.cget("fg_color")
@@ -60,6 +63,8 @@ class App(customtkinter.CTk):
         elif frame_id == FRONTEND_FRAME:
             bug_configs = prepare_bug_configs_map(get_frontend_bugs())
             App.frames[frame_id] = BugsFrame(self, bug_configs, write_frontend_properties)
+        elif frame_id == RESULTS_FRAME:
+            App.frames[frame_id] = ResultsFrame(self)
 
     # method to change frames
     def toggle_frame_by_id(self, frame_id):

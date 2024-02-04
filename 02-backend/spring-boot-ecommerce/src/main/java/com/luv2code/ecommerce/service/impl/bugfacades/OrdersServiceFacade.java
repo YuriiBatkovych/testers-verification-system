@@ -1,7 +1,7 @@
 package com.luv2code.ecommerce.service.impl.bugfacades;
 
-import com.luv2code.ecommerce.consts.GeneralConsts;
 import com.luv2code.ecommerce.dto.OrderDto;
+import com.luv2code.ecommerce.logging.BugLogger;
 import com.luv2code.ecommerce.service.IOrdersService;
 import com.luv2code.ecommerce.service.impl.OrdersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ public class OrdersServiceFacade implements IOrdersService {
 
     @Value("${bug.truncate.orders.number}")
     private int truncatedOrdersNumber;
-
+    private final BugLogger bugLogger = new BugLogger();
     private final OrdersService ordersService;
 
     @Autowired
@@ -31,7 +31,7 @@ public class OrdersServiceFacade implements IOrdersService {
         Page<OrderDto> orders = ordersService.getByUserEmail(email, pageable);
 
         if(truncatedOrdersNumber > 0){
-            GeneralConsts.BUG_LOG.info("[TruncatedOrders]");
+            bugLogger.info("TruncatedOrders");
         }
 
         int maxSize = orders.getSize() - truncatedOrdersNumber;

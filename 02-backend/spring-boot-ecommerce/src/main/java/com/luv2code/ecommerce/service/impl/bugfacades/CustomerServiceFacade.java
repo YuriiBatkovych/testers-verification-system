@@ -1,11 +1,11 @@
 package com.luv2code.ecommerce.service.impl.bugfacades;
 
 import com.luv2code.ecommerce.bugmappers.RoleBugMapper;
-import com.luv2code.ecommerce.consts.GeneralConsts;
 import com.luv2code.ecommerce.dto.CustomerDto;
 import com.luv2code.ecommerce.dto.RoleDto;
 import com.luv2code.ecommerce.entity.Customer;
 import com.luv2code.ecommerce.exceptions.AuthorisationException;
+import com.luv2code.ecommerce.logging.BugLogger;
 import com.luv2code.ecommerce.service.ICustomerService;
 import com.luv2code.ecommerce.service.impl.CustomerService;
 import com.luv2code.ecommerce.service.impl.RolesService;
@@ -27,6 +27,7 @@ public class CustomerServiceFacade implements ICustomerService {
 
     @Value("${bug.delete.user}")
     private boolean deleteUser;
+    private final BugLogger bugLogger = new BugLogger();
     private final CustomerService customerService;
     private final RolesService rolesService;
     private final RoleBugMapper roleBugMapper;
@@ -44,7 +45,7 @@ public class CustomerServiceFacade implements ICustomerService {
             return customerService.addNewUser(customerDto);
         }
         else{
-            GeneralConsts.BUG_LOG.info("[NotSavedNewUser]");
+            bugLogger.info("NotSavedNewUser");
             return mockCustomer();
         }
     }
@@ -55,7 +56,7 @@ public class CustomerServiceFacade implements ICustomerService {
             return customerService.updateUser(customerDto);
         }
         else{
-            GeneralConsts.BUG_LOG.info("[NotUpdatedNewUser]");
+            bugLogger.info("NotUpdatedNewUser");
             return mockCustomer();
         }
     }
@@ -91,7 +92,7 @@ public class CustomerServiceFacade implements ICustomerService {
             customerService.deleteByEmail(email);
         }
         else{
-            GeneralConsts.BUG_LOG.info("[NotDeletedUser]");
+            bugLogger.info("NotDeletedUser");
         }
     }
 
@@ -101,7 +102,7 @@ public class CustomerServiceFacade implements ICustomerService {
             customerService.deleteById(id);
         }
         else{
-            GeneralConsts.BUG_LOG.info("[NotDeletedUser]");
+            bugLogger.info("NotDeletedUser");
         }
     }
 

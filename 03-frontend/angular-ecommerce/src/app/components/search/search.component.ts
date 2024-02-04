@@ -19,7 +19,7 @@ export class SearchComponent implements OnInit {
   }
 
   doSearch(value: string){
-    this.logsService.logMessage("[Serching]");
+    this.logsService.logMessage("Serching");
     this.router.navigateByUrl(`search/${value}`);
   }
 

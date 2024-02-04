@@ -1,9 +1,9 @@
 package com.luv2code.ecommerce.service.impl.bugfacades;
 
-import com.luv2code.ecommerce.consts.GeneralConsts;
 import com.luv2code.ecommerce.dto.CategoryDto;
 import com.luv2code.ecommerce.entity.ProductCategory;
 import com.luv2code.ecommerce.exceptions.AuthorisationException;
+import com.luv2code.ecommerce.logging.BugLogger;
 import com.luv2code.ecommerce.service.ICategoryService;
 import com.luv2code.ecommerce.service.impl.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +21,8 @@ public class CategoryServiceFacade implements ICategoryService {
     @Value("${bug.delete.category}")
     private boolean deleteCategory;
 
+    private final BugLogger bugLogger = new BugLogger();
+
     private final CategoryService categoryService;
     @Autowired
     CategoryServiceFacade(CategoryService categoryService){
@@ -32,7 +34,7 @@ public class CategoryServiceFacade implements ICategoryService {
             return categoryService.addCategory(categoryDto);
         }
         else{
-            GeneralConsts.BUG_LOG.info("[NotSavedNewCategory]");
+            bugLogger.info("NotSavedNewCategory");
             return mockCategory();
         }
     }
@@ -42,7 +44,7 @@ public class CategoryServiceFacade implements ICategoryService {
            categoryService.deleteCategory(id);
        }
        else{
-           GeneralConsts.BUG_LOG.info("[NotDeletedCategory]");
+           bugLogger.info("NotDeletedCategory");
        }
     }
 
@@ -51,7 +53,7 @@ public class CategoryServiceFacade implements ICategoryService {
             return categoryService.updateCategory(categoryDto);
         }
         else{
-            GeneralConsts.BUG_LOG.info("[NotUpdatedCategory]");
+            bugLogger.info("NotUpdatedCategory");
             return mockCategory();
         }
     }

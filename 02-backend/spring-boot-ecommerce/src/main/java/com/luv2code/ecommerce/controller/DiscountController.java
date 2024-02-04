@@ -1,10 +1,7 @@
 package com.luv2code.ecommerce.controller;
 
-import com.luv2code.ecommerce.consts.GeneralConsts;
 import com.luv2code.ecommerce.dto.DiscountDto;
 import com.luv2code.ecommerce.service.IDiscountService;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;

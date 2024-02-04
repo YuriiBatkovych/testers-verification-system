@@ -63,12 +63,12 @@ export class LoginStatusComponent implements OnInit {
   }
 
   login(){
-    this.logsService.logMessage("[Login Click]");
+    this.logsService.logMessage("Login Click");
     this.auth.loginWithRedirect();
   }
 
   logout(){
-    this.logsService.logMessage("[Logout Click]");
+    this.logsService.logMessage("Logout Click");
     this.auth.logout({ logoutParams: { returnTo: document.location.origin } });
     this.customerService.setDefaultRole();
     this.customerService.setDefaultEmail();

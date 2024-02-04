@@ -1,9 +1,9 @@
 package com.luv2code.ecommerce.service.impl.bugfacades;
 
-import com.luv2code.ecommerce.consts.GeneralConsts;
 import com.luv2code.ecommerce.dto.ProductDto;
 import com.luv2code.ecommerce.entity.Product;
 import com.luv2code.ecommerce.exceptions.AuthorisationException;
+import com.luv2code.ecommerce.logging.BugLogger;
 import com.luv2code.ecommerce.service.IProductService;
 import com.luv2code.ecommerce.service.impl.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +23,7 @@ public class ProductServiceFacade implements IProductService {
 
     @Value("${bug.delete.product}")
     private boolean deleteProduct;
+    private final BugLogger bugLogger = new BugLogger();
     private final ProductService productService;
     @Autowired
     ProductServiceFacade(ProductService productService){
@@ -35,7 +36,7 @@ public class ProductServiceFacade implements IProductService {
             return productService.addProduct(productDto);
         }
         else {
-            GeneralConsts.BUG_LOG.info("[NotSavedNewProduct]");
+            bugLogger.info("NotSavedNewProduct");
             return mockProduct();
         }
     }
@@ -46,7 +47,7 @@ public class ProductServiceFacade implements IProductService {
             return productService.updateProduct(productDto);
         }
         else {
-            GeneralConsts.BUG_LOG.info("[NotUpdatedNewProduct]");
+            bugLogger.info("NotUpdatedNewProduct");
             return mockProduct();
         }
     }
@@ -57,7 +58,7 @@ public class ProductServiceFacade implements IProductService {
             productService.deleteProduct(id);
         }
         else{
-            GeneralConsts.BUG_LOG.info("[NotDeletedNewProduct]");
+            bugLogger.info("NotDeletedNewProduct");
         }
     }
 

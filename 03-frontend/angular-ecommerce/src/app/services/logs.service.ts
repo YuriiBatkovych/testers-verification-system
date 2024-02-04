@@ -23,7 +23,7 @@ export class LogsService {
 
   getLogsRequest(logMessage: string) : LogsRequest{
     let logsRequest = new LogsRequest();
-    logsRequest.message = "[FRONTEND] " + logMessage;
+    logsRequest.message = "(FRONTEND) " + logMessage;
     return logsRequest;
   }
 }
