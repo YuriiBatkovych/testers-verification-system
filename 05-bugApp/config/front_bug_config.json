@@ -4,80 +4,93 @@
     {
       "name": "bugTextButtonLogout",
       "description": "Text on the Logout button will be changed to the one configured",
-      "valueType": "string"
+      "valueType": "string",
+      "defaultValue": "\"Logout\""
     },
     {
       "name": "bugTextButtonMembers",
       "description": "Text on the Members button will be changed to the one configured",
-      "valueType": "string"
+      "valueType": "string",
+      "defaultValue": "\"Members\""
     },
     {
       "name": "bugTextButtonOrders",
       "description": "Text on the Orders button will be changed to the one configured",
-      "valueType": "string"
+      "valueType": "string",
+      "defaultValue": "\"Orders\""
     },
     {
       "name": "bugTextButtonSearch",
       "description": "Text on the Search button will be changed to the one configured",
-      "valueType": "string"
+      "valueType": "string",
+      "defaultValue": "\"Search\""
     },
 
     {
       "name": "bugEditCategoryRoute",
       "description": "This route will be used when clicking on Edit Category button",
       "allowedValues": ["'/edit/category'", "'/add/category'", "'/delete/category'"],
-      "valueType": "string"
+      "valueType": "string",
+      "defaultValue": "'/edit/category'"
     },
 
     {
       "name": "bugAddCategoryRoute",
       "description": "This route will be used when clicking on Add Category button",
       "allowedValues": ["'/edit/category'", "'/add/category'", "'/delete/category'"],
-      "valueType": "string"
+      "valueType": "string",
+      "defaultValue": "'/add/category'"
     },
 
     {
       "name": "bugDeleteCategoryRoute",
       "description": "This route will be used when clicking on Delete Category button",
       "allowedValues": ["'/edit/category'", "'/add/category'", "'/delete/category'"],
-      "valueType": "string"
+      "valueType": "string",
+      "defaultValue": "'/delete/category'"
     },
 
     {
       "name": "bugShippingAddressStreetMinLength",
       "description": "Min length of Shipping Address street field in checkout form",
-      "valueType": "number"
+      "valueType": "number",
+      "defaultValue": 2
     },
 
     {
       "name": "bugFirstNameMinLength",
       "description": "Min length of Customer First Name field in checkout form",
-      "valueType": "number"
+      "valueType": "number",
+      "defaultValue": 2
     },
 
     {
       "name": "bugProductNameMinLength",
       "description": "Min length of Product Name field in product edition form",
-      "valueType": "number"
+      "valueType": "number",
+      "defaultValue": 2
     },
 
     {
       "name": "bugCardNumberLength",
       "description": "Length of Card Number field in checkout form (must be 16)",
-      "valueType": "number"
+      "valueType": "number",
+      "defaultValue": 16
     },
 
     {
       "name": "bugSecurityCodeLength",
       "description": "Length of Card Security Code field in checkout form (must be 3)",
-      "valueType": "number"
+      "valueType": "number",
+      "defaultValue": 3
     },
 
     {
       "name": "bugCategoryNameRequired",
       "description": "If true new category name required check will be set for category-edition form",
       "allowedValues": ["true", "false"],
-      "valueType": "string"
+      "valueType": "string",
+      "defaultValue": "true"
     }
   ]
 }

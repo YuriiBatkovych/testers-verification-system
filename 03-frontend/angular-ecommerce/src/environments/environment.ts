@@ -12,6 +12,6 @@ export const environment = {
  bugFirstNameMinLength: 2,
  bugProductNameMinLength: 2,
  bugCardNumberLength: 16,
- bugSecurityCodeLength: 3,
+ bugSecurityCodeLength: 4,
  bugCategoryNameRequired: true,
 }

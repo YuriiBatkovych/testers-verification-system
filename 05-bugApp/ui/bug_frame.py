@@ -20,15 +20,31 @@ class BugsFrame(customtkinter.CTkScrollableFrame):
         self.button = customtkinter.CTkButton(self, text="Submit", command=self.submit_front)
         self.success_text = customtkinter.CTkLabel(self, text="Successfully saved", text_color="black")
 
+        self.create_title_row()
         self.create_fields()
 
+    def create_title_row(self):
+        name = customtkinter.CTkLabel(self, text="Bug config name", text_color="black")
+        name.grid(row=0, column=0, padx=15, pady=15)
+
+        value = customtkinter.CTkLabel(self, text="Config value", text_color="black")
+        value.grid(row=0, column=1, padx=15, pady=15)
+
+        default = customtkinter.CTkLabel(self, text="Default value", text_color="black")
+        default.grid(row=0, column=2, padx=15, pady=15)
+
     def create_bug_field(self, bug_config):
+        current_row = len(self.fields)+1
+
         label = customtkinter.CTkLabel(self, text=bug_config.name, text_color="black")
-        label.grid(row=len(self.fields), column=0, padx=15, pady=15)
+        label.grid(row=current_row, column=0, padx=15, pady=15)
 
         field = bug_config.get_widget(self)
         field.configure(width=500)
-        field.grid(row=len(self.fields), column=1, padx=15, pady=15)
+        field.grid(row=current_row, column=1, padx=15, pady=15)
+
+        default_value = customtkinter.CTkLabel(self, text=bug_config.default_value, text_color="green", font=("Ubuntu", 15))
+        default_value.grid(row=current_row, column=2, padx=15, pady=15)
 
         ToolTip(label, msg=bug_config.description, delay=0.01,
                 fg="#ffffff", bg="#1c1c1c", padx=10, pady=10)
