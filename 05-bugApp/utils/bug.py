@@ -9,7 +9,12 @@ class Bug:
         self.allowed_values = params.get("allowedValues")
         self.value_type = params.get("valueType")
         self.default_value = params.get("defaultValue")
+        self.tag = params.get("tag")
+        self.is_detected = False
         self.current_value = ""
+
+    def mark_detected(self):
+        self.is_detected = True
 
     def set_current_value(self, current_value):
         match self.value_type:
@@ -40,4 +45,4 @@ class Bug:
 
     def __repr__(self):
         return f"Bug name: {self.name}, description: {self.description}, allowed_values: {self.allowed_values}, value: {self.current_value}, valueType: {self.value_type}," \
-               f"defaultValue: {self.default_value}"
+               f"defaultValue: {self.default_value}, tag: {self.tag}"
