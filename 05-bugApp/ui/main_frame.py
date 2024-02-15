@@ -84,6 +84,8 @@ class App(customtkinter.CTk):
 
             if isinstance(App.current, BugsFrame):
                 App.current.recover()
+            elif isinstance(App.current, ResultsFrame):
+                App.current.recover()
 
     # method to create a pair button selector and its related frame
     def create_nav(self, parent, frame_id):

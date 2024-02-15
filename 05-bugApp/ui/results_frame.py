@@ -30,6 +30,8 @@ class ResultsFrame(customtkinter.CTkScrollableFrame):
         self.right_side_panel.configure(border_color="#323232")
 
         self.activated_bugs = mark_detected_bugs(get_activated_bugs())
+        self.canvas = None
+        self.field_labels = []
 
         self.create_title_row()
         self.create_fields()
@@ -53,6 +55,8 @@ class ResultsFrame(customtkinter.CTkScrollableFrame):
         ToolTip(label, msg=bug_config.description, delay=0.01,
                 fg="#ffffff", bg="#1c1c1c", padx=10, pady=10)
 
+        self.field_labels.append((label, detected_label))
+
     def create_fields(self):
         row_number = 1
         for bug in self.activated_bugs:
@@ -71,7 +75,23 @@ class ResultsFrame(customtkinter.CTkScrollableFrame):
         ax.bar(["Activated bugs", "Detected bugs"], [activated_bugs_number, detected_bugs_number], color=colors)
         ax.text(1, detected_bugs_number+0.5, f'{detected_percentage}%', ha='center')
 
-        canvas = FigureCanvasTkAgg(fig, master=self.right_side_panel)
-        canvas.draw()
-        canvas.get_tk_widget().pack(padx=10, pady=10)
+        self.canvas = FigureCanvasTkAgg(fig, master=self.right_side_panel)
+        self.canvas.draw()
+        self.canvas.get_tk_widget().pack(padx=10, pady=10)
+
+    def recover(self):
+        self.delete_old_setup()
+        self.activated_bugs = mark_detected_bugs(get_activated_bugs())
+
+        self.create_title_row()
+        self.create_fields()
+        self.create_statistics()
+
+    def delete_old_setup(self):
+        if isinstance(self.canvas, FigureCanvasTkAgg):
+            self.canvas.get_tk_widget().destroy()
+
+        for (label, detected) in self.field_labels:
+            label.destroy()
+            detected.destroy()
 

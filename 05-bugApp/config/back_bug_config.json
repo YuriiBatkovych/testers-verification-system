@@ -132,6 +132,30 @@
       "valueType": "number",
       "defaultValue": 0,
       "tag": "RolesNumberTruncated"
+    },
+
+    {
+      "name": "bug.initial.discount.orders.number",
+      "description": "Number of orders to perform to get an initial discount in 10%",
+      "valueType": "number",
+      "defaultValue": 0,
+      "tag": "OrdersForInitialDiscount"
+    },
+
+    {
+      "name": "bug.30.discount.orders.number",
+      "description": "Number of orders to perform to get a discount in 30%. The discount is given each time the user makes the configured number of orders. for example, for default number 5, a discount will be given for every 5th, 10th, 15th order and so on. It is important that discounts are not accumulated, only one discount is selected that is more useful for the user",
+      "valueType": "number",
+      "defaultValue": 5,
+      "tag": "OrdersFor30Discount"
+    },
+
+    {
+      "name": "bug.50.discount.orders.number",
+      "description": "Number of orders to perform to get a discount in 50%. The discount is given each time the user makes the configured number of orders. for example, for default number 10, a discount will be given for every 10th, 20th, 30th order and so on. It is important that discounts are not accumulated, only one discount is selected that is more useful for the user",
+      "valueType": "number",
+      "defaultValue": 10,
+      "tag": "OrdersFor50Discount"
     }
   ]
 }
