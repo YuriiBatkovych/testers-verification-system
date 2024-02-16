@@ -8,10 +8,12 @@ from properties_management.manage_front_properties import write_frontend_propert
 from ui.bug_frame import BugsFrame
 from ui.common import prepare_bug_configs_map
 from ui.results_frame import ResultsFrame
+from ui.run_frame import RunFrame
 
 BACKEND_FRAME = "Backend Bugs"
 FRONTEND_FRAME = "Frontend Bugs"
 RESULTS_FRAME = "Results"
+RUN_FRAME = "Run"
 
 
 class App(customtkinter.CTk):
@@ -40,7 +42,9 @@ class App(customtkinter.CTk):
         self.right_side_panel.configure(border_color="#323232")
         self.create_nav(self.left_side_panel, BACKEND_FRAME)
         self.create_nav(self.left_side_panel, FRONTEND_FRAME)
+        self.create_nav(self.left_side_panel, RUN_FRAME)
         self.create_nav(self.left_side_panel, RESULTS_FRAME)
+
 
     def def_main_screen(self):
         self.bg = self.cget("fg_color")
@@ -65,6 +69,8 @@ class App(customtkinter.CTk):
             App.frames[frame_id] = BugsFrame(self, bug_configs, write_frontend_properties)
         elif frame_id == RESULTS_FRAME:
             App.frames[frame_id] = ResultsFrame(self)
+        elif frame_id == RUN_FRAME:
+            App.frames[frame_id] = RunFrame(self)
 
     # method to change frames
     def toggle_frame_by_id(self, frame_id):
@@ -82,10 +88,7 @@ class App(customtkinter.CTk):
                 App.current.pack(in_=self.right_side_panel, side=tkinter.TOP, fill=tkinter.BOTH, expand=True, padx=0,
                                  pady=0)
 
-            if isinstance(App.current, BugsFrame):
-                App.current.recover()
-            elif isinstance(App.current, ResultsFrame):
-                App.current.recover()
+            App.current.recover()
 
     # method to create a pair button selector and its related frame
     def create_nav(self, parent, frame_id):
