@@ -29,7 +29,7 @@ class RunFrame(customtkinter.CTkScrollableFrame):
     def create_backend_management(self):
         if is_spring_boot_running():
             label_text = "Backend application is running"
-            button_text = "Run backend app"
+            button_text = "Stop backend app"
             button_command = stop_spring_boot
         else:
             label_text = "Backend application is NOT running"
@@ -45,7 +45,7 @@ class RunFrame(customtkinter.CTkScrollableFrame):
     def create_frontend_management(self):
         if is_npm_running():
             label_text = "Frontend application is running"
-            button_text = "Run frontend app"
+            button_text = "Stop frontend app"
             button_command = stop_npm
         else:
             label_text = "Frontend application is NOT running"
