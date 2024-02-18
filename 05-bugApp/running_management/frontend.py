@@ -1,3 +1,4 @@
+import multiprocessing
 import os
 import subprocess
 
@@ -17,6 +18,11 @@ def run_npm_app():
         print("Error running the Node application.")
     finally:
         os.chdir(os.path.dirname(os.path.realpath(__file__)))
+
+
+def run_frontend():
+    frontend_process = multiprocessing.Process(target=run_npm_app)
+    frontend_process.start()
 
 
 def is_npm_running():

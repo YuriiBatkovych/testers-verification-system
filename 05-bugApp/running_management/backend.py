@@ -1,6 +1,10 @@
+import multiprocessing
+
 import psutil
 import os
 import subprocess
+
+from logs_management.bug_logs import clean_bug_logs
 
 SPRING_BOOT_APP_NAME = 'spring-boot-ecommerce-0.0.1-SNAPSHOT.jar'
 SPRING_BOOT_APP_PROPERTIES = 'file:D://ecommerce-shop/04-modifications/modified.properties'
@@ -18,6 +22,12 @@ def run_spring_boot():
         print("Error running the Spring Boot application.")
     finally:
         os.chdir(os.path.dirname(os.path.realpath(__file__)))
+
+
+def run_backend():
+    clean_bug_logs()
+    backend_process = multiprocessing.Process(target=run_spring_boot)
+    backend_process.start()
 
 
 def is_spring_boot_running():

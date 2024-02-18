@@ -3,8 +3,8 @@ import tkinter
 import customtkinter
 from customtkinter import CTkLabel, CTkButton
 
-from running_management.backend import is_spring_boot_running, run_spring_boot, stop_spring_boot
-from running_management.frontend import is_npm_running, run_npm_app, stop_npm
+from running_management.backend import is_spring_boot_running, run_spring_boot, stop_spring_boot, run_backend
+from running_management.frontend import is_npm_running, run_npm_app, stop_npm, run_frontend
 
 
 class RunFrame(customtkinter.CTkScrollableFrame):
@@ -34,7 +34,7 @@ class RunFrame(customtkinter.CTkScrollableFrame):
         else:
             label_text = "Backend application is NOT running"
             button_text = "Run backend app"
-            button_command = run_spring_boot
+            button_command = run_backend
 
         self.back_label = customtkinter.CTkLabel(self, text=label_text, text_color="black")
         self.back_label.grid(row=0, column=0, padx=15, pady=15)
@@ -50,7 +50,7 @@ class RunFrame(customtkinter.CTkScrollableFrame):
         else:
             label_text = "Frontend application is NOT running"
             button_text = "Run frontend app"
-            button_command = run_npm_app
+            button_command = run_frontend
 
         self.front_label = customtkinter.CTkLabel(self, text=label_text, text_color="black")
         self.front_label.grid(row=1, column=0, padx=15, pady=15)

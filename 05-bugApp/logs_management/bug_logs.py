@@ -3,6 +3,10 @@ import re
 BUG_LOGS_FILE = 'D:/ecommerce-shop/logging/bugs/bugs.log'
 
 
+def clean_bug_logs():
+    open(BUG_LOGS_FILE, 'w').close()
+
+
 def parse_bug_logs():
     file_path = BUG_LOGS_FILE
 
