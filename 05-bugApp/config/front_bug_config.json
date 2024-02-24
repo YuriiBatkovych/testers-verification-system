@@ -62,7 +62,7 @@
       "description": "Min length of Shipping Address street field in checkout form",
       "valueType": "number",
       "defaultValue": 2,
-      "tag": "ShippingAddressStreetMinLengthWarning"
+      "tag": "BugShippingAddressStreetMinLength"
     },
 
     {
@@ -70,7 +70,7 @@
       "description": "Min length of Customer First Name field in checkout form",
       "valueType": "number",
       "defaultValue": 2,
-      "tag": "FirstNameMinLengthWarning"
+      "tag": "BugFirstNameMinLength"
     },
 
     {
@@ -78,7 +78,7 @@
       "description": "Min length of Product Name field in product edition form",
       "valueType": "number",
       "defaultValue": 2,
-      "tag": "ProductNameMinLengthWarning"
+      "tag": "BugProductNameMinLength"
     },
 
     {
@@ -86,7 +86,7 @@
       "description": "Length of Card Number field in checkout form (must be 16)",
       "valueType": "number",
       "defaultValue": 16,
-      "tag": "CardNumberLengthWarning"
+      "tag": "BugCardNumberPattern"
     },
 
     {
@@ -94,7 +94,7 @@
       "description": "Length of Card Security Code field in checkout form (must be 3)",
       "valueType": "number",
       "defaultValue": 3,
-      "tag": "SecurityCodeLengthWarning"
+      "tag": "BugSecurityCodePattern"
     },
 
     {
@@ -103,7 +103,7 @@
       "allowedValues": ["true", "false"],
       "valueType": "string",
       "defaultValue": "true",
-      "tag": "CategoryNameRequiredWarning"
+      "tag": "NewCategoryNameRequiredBug"
     }
   ]
 }

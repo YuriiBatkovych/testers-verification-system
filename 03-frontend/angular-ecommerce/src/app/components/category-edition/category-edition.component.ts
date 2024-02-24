@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ProductCategory } from 'src/app/common/product-category';
+import { BugsCheckerService } from 'src/app/services/bugs-checker.service';
 import { CategoryService } from 'src/app/services/category.service';
 import { Luv2ShopValidators } from 'src/app/validators/luv2-shop-validators';
 
@@ -22,7 +23,8 @@ export class CategoryEditionComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private categoryService: CategoryService,
-              private router: Router) { }
+              private router: Router,
+              private bugsChecker: BugsCheckerService) { }
 
   ngOnInit(): void {
     this.listProductCategories();
@@ -137,6 +139,10 @@ export class CategoryEditionComponent implements OnInit {
       this.categoryFormGroup.markAllAsTouched();
       return;
     }
+
+    if(!environment.bugCategoryNameRequired){
+      this.bugsChecker.checkRequired(this.newCategoryName?.value, "NewCategoryNameRequiredBug");
+    }
     
     if(this.addMode){
       this.addCategory();
@@ -174,7 +180,6 @@ export class CategoryEditionComponent implements OnInit {
     this.addMode = false;
     window.location.reload();
   }
-
 }
 
 

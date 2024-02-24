@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { interval } from 'rxjs';
 import { ProductCategory } from 'src/app/common/product-category';
 import { ProductEdition } from 'src/app/common/product-edition';
 import { ProductForForm } from 'src/app/common/product-for-form';
+import { BugsCheckerService } from 'src/app/services/bugs-checker.service';
 import { CategoryService } from 'src/app/services/category.service';
 import { ProductService } from 'src/app/services/product.service';
 import { Luv2ShopValidators } from 'src/app/validators/luv2-shop-validators';
@@ -28,7 +30,7 @@ export class ProductEditionComponent implements OnInit {
               private formBuilder: FormBuilder,
               private productService: ProductService,
               private categoryService: CategoryService,
-              private router: Router) { }
+              private bugsChecker: BugsCheckerService) { }
 
   ngOnInit(): void {
     this.listProductCategories();
@@ -36,7 +38,21 @@ export class ProductEditionComponent implements OnInit {
     this.route.paramMap.subscribe(() => {
       this.handleProductDetails();
     });
+
+    this.submitToChecker()
   }
+
+  submitToChecker(){
+    const intervalId = interval(1000) // 1000 milliseconds = 1 second
+      .subscribe(() => {
+        if (this.productFormGroup.invalid) {
+          if(this.name?.hasError('minlength')){
+            this.bugsChecker.checkBugMinLength(this.name.value, 'BugProductNameMinLength');
+          }
+        }
+      });
+  }
+
 
   get name(){ return this.productFormGroup.get('product.name'); }
   get category(){ return this.productFormGroup.get('product.categoryName'); }

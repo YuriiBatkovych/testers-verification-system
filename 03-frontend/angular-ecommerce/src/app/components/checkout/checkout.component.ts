@@ -10,8 +10,10 @@ import { CartService } from 'src/app/services/cart.service';
 import { CheckoutService } from 'src/app/services/checkout.service';
 import { Luv2ShopFormService } from 'src/app/services/luv2-shop-form.service';
 import { Luv2ShopValidators } from 'src/app/validators/luv2-shop-validators';
+import { interval } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
+import { BugsCheckerService } from 'src/app/services/bugs-checker.service';
 
 @Component({
   selector: 'app-checkout',
@@ -38,7 +40,8 @@ export class CheckoutComponent implements OnInit {
               private luv2ShopFormService: Luv2ShopFormService,
               private cartService: CartService,
               private checkoutService: CheckoutService,
-              private router: Router) { }
+              private router: Router,
+              private bugsChecker: BugsCheckerService) { }
 
   ngOnInit(): void {
 
@@ -64,8 +67,28 @@ export class CheckoutComponent implements OnInit {
         this.countries = data;
       }
     )
+    
+    this.submitToChecker();
   }
 
+  submitToChecker(){
+    const intervalId = interval(1000) // 1000 milliseconds = 1 second
+      .subscribe(() => {
+        if (this.checkoutFormGroup.invalid) {
+          if(this.firstName?.hasError('minlength')){
+            this.bugsChecker.checkBugMinLength(this.firstName.value, 'BugFirstNameMinLength');
+          }
+
+          if(this.shippingAddressStreet?.hasError('minlength')){
+            this.bugsChecker.checkBugMinLength(this.shippingAddressStreet.value, 'BugShippingAddressStreetMinLength');
+          }
+
+          this.bugsChecker.checkOnlyNumbersPattern(this.cardNumber?.hasError('pattern'), this.cardNumber?.value, 'BugCardNumberPattern', 16);
+          this.bugsChecker.checkOnlyNumbersPattern(this.securityCode?.hasError('pattern'), this.securityCode?.value, 'BugSecurityCodePattern', 4);
+        }
+      });
+  }
+  
   createCheckoutForm(){
     const theEmail = JSON.parse(this.storage.getItem('userEmail')!);
     const cardNumberPattern = `[0-9]{${environment.bugCardNumberLength}}`;
