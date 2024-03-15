@@ -1,5 +1,7 @@
 import re
 
+from logs_management.special_cases import special_marking_detected
+
 BUG_LOGS_FILE = 'D:/ecommerce-shop/logging/bugs/bugs.log'
 
 
@@ -25,6 +27,7 @@ def mark_detected_bugs(activated_bugs):
 
     for bug in activated_bugs:
         if bug.tag in logged_bug_tags:
-            bug.mark_detected()
+            if special_marking_detected(bug, logged_bug_tags):
+                bug.mark_detected()
 
     return activated_bugs

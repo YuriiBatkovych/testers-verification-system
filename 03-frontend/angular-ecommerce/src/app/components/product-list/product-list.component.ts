@@ -5,6 +5,9 @@ import { CartItem } from 'src/app/common/cart-item';
 import { CartService } from 'src/app/services/cart.service';
 import { ProductEdition } from 'src/app/common/product-edition';
 
+import { environment } from 'src/environments/environment';
+import { LogsService } from 'src/app/services/logs.service';
+
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list-grid.component.html',
@@ -25,7 +28,8 @@ export class ProductListComponent implements OnInit {
 
   constructor(private productService: ProductService,
               private cartService: CartService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private logsService: LogsService) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(() => {
@@ -103,11 +107,19 @@ export class ProductListComponent implements OnInit {
   }
 
   addToCart(addedProduct: ProductEdition) {
-    console.log(`Added product ${addedProduct.name} price ${addedProduct.unitPrice}`);
-
-    const cartItem = new CartItem(addedProduct.id, addedProduct.name, addedProduct.imageUrl, addedProduct.unitPrice);
-
-    this.cartService.addToCart(cartItem);
+    if(environment.bugReplaceProductInCart){
+      this.productService.getProduct(addedProduct.id+1).subscribe(
+        product => {
+          const cartItem = new CartItem(product.id, product.name, product.imageUrl, product.unitPrice);
+          this.cartService.addToCart(cartItem);
+          this.logsService.logMessage("ReplacingProductInCart");
+        }
+      )
+    }
+    else{
+      const cartItem = new CartItem(addedProduct.id, addedProduct.name, addedProduct.imageUrl, addedProduct.unitPrice);
+      this.cartService.addToCart(cartItem);
+    }
   }
 
 }

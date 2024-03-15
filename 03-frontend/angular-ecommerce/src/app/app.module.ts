@@ -27,6 +27,7 @@ import { ProductEditionComponent } from './components/product-edition/product-ed
 import { CategoryEditionComponent } from './components/category-edition/category-edition.component';
 import { UserManagementComponent } from './components/user-management/user-management.component';
 import { UserEditionComponent } from './components/user-edition/user-edition.component';
+import { BugDeclareComponent } from './components/bug-declare/bug-declare.component';
 
 const routes: Routes = [
   {path: 'members', component: MembersPageComponent},
@@ -68,7 +69,8 @@ const routes: Routes = [
     ProductEditionComponent,
     CategoryEditionComponent,
     UserManagementComponent,
-    UserEditionComponent
+    UserEditionComponent,
+    BugDeclareComponent
   ],
   imports: [
     RouterModule.forRoot(routes),

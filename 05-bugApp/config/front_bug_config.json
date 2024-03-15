@@ -104,6 +104,15 @@
       "valueType": "string",
       "defaultValue": "true",
       "tag": "NewCategoryNameRequiredBug"
+    },
+
+    {
+      "name": "bugReplaceProductInCart",
+      "description": "If true inappropriate product will be added to the cart, when adding through the main page",
+      "allowedValues": ["true", "false"],
+      "valueType": "string",
+      "defaultValue": "false",
+      "tag": "ReplacingProductInCart"
     }
   ]
 }

@@ -6,12 +6,13 @@ export const environment = {
  bugTextButtonOrders: "Orders",
  bugTextButtonSearch: "Search",
  bugEditCategoryRoute: '/edit/category',
- bugAddCategoryRoute: '/add/category',
+ bugAddCategoryRoute: '/edit/category',
  bugDeleteCategoryRoute: '/delete/category',
- bugShippingAddressStreetMinLength: 3,
+ bugShippingAddressStreetMinLength: 2,
  bugFirstNameMinLength: 4,
  bugProductNameMinLength: 5,
  bugCardNumberLength: 10,
  bugSecurityCodeLength: 3,
  bugCategoryNameRequired: false,
+ bugReplaceProductInCart: true
 }

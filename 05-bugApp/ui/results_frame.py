@@ -52,8 +52,7 @@ class ResultsFrame(customtkinter.CTkScrollableFrame):
         detected_label = customtkinter.CTkLabel(self.left_side_panel, text=bug_config.is_detected, text_color=detected_label_color)
         detected_label.grid(row=current_row, column=1, padx=15, pady=15)
 
-        ToolTip(label, msg=bug_config.description, delay=0.01,
-                fg="#ffffff", bg="#1c1c1c", padx=10, pady=10)
+        ToolTip(label, msg=bug_config.description, delay=0.01, fg="#ffffff", bg="#1c1c1c", padx=10, pady=10)
 
         self.field_labels.append((label, detected_label))
 
