@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ecommerce Shop Manual</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+  }
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  h1 {
+    color: #007bff;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+  }
+  h2 {
+    color: #007bff;
+    margin-top: 30px;
+    font-size: 20px;
+  }
+  p, strong {
+    font-size: 18px;
+  }
+  ol, ul {
+    font-size: 18px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  th, td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    font-size: 18px;
+  }
+  th {
+    background-color: #f2f2f2;
+    text-align: left;
+    font-weight: bold;
+  }
+  .info {
+    background-color: #f7f7f7;
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 8px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Ecommerce Shop Manual</h1>
+  <div class="chapter">
+    <h2>Introduction</h2>
+    <p><strong>Basic information</strong></p>
+    <p>The proposed e-commerce shop (hereinafter referred to as the shop) available for testing offers the possibility to purchase goods in 4 categories:</p>
+    <ul>
+      <li>Books</li>
+      <li>Coffee mugs</li>
+      <li>Luggage tags</li>
+      <li>Mouse Pads</li>
+    </ul>
+    <p>Selected items can be ordered to a limited number of countries, the list of which should be visible during the checkout screen. These countries are: Brazil, Canada, Germany, Turkey, India, United States. The mentioned countries are fully supported, meaning that orders can be shipped to any part of the specified countries.</p>
+    <p>Each user of the online store is assigned one specific role out of three: USER, STAFF, ADMIN. An unregistered user is treated as having the USER role. Details about the permissions and capabilities of users with each role will be described in the following chapters.</p>
+  </div>
+
+  <div class="chapter">
+    <h2>User Authentication</h2>
+    <p><strong>Login</strong></p>
+    <p>Upon entering the main page of the online store, a user who wishes to log in or create an account should click the "<strong>Login</strong>" button located at the top of the page.</p>
+    <p>In the opened window:</p>
+    <ul>
+      <li>If a person has an account in the system, they should log in by entering their email and password in the appropriate fields or by using a Google account, by clicking the appropriate button, which will direct the user to the authentication procedure provided by Google.</li>
+      <li>If the user does not have an account in the system of the tested shop, they should click on the "<strong>Sign up</strong>" button and create an account in the shop's domain by entering their email and a chosen password in the appropriate fields or by choosing the option to create an account using Google. Each new user is assigned the USER role.</li>
+    </ul>
+    <div class="info">
+      <p><strong>Existing Test Accounts:</strong></p>
+      <table>
+        <thead>
+          <tr>
+            <th>Email</th>
+            <th>Password</th>
+            <th>Role</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>staff.test@mail.com</td>
+            <td>staffTest_1</td>
+            <td>STAFF</td>
+          </tr>
+          <tr>
+            <td>andrew.tests3@mail.com</td>
+            <td>andrewTest_3</td>
+            <td>USER</td>
+          </tr>
+          <tr>
+            <td>vasyl.petrenko@mail.com</td>
+            <td>vasylPetrentko_12</td>
+            <td>USER</td>
+          </tr>
+          <tr>
+            <td>test123@gmail.com</td>
+            <td>TestPassword12_</td>
+            <td>ADMIN</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="chapter">
+    <h2>Browsing Products</h2>
+    <p>On the main store page, products are presented by categories. The following basic information about the product should be displayed there:</p>
+    <ol>
+      <li>Name</li>
+      <li>Sample product image</li>
+      <li>Price</li>
+    </ol>
+    <p>Under each product, there is a button "<strong>Add to cart</strong>" which adds the product to the cart with a quantity of 1 piece.</p>
+    <p>By default, 10 products can be viewed on one page. The user can change this number by selecting the desired quantity from the dropdown labeled "<strong>Page size</strong>". Possible options are 5, 10, 20, 50.</p>
+    <p>To navigate to the next page of products, the user should click on the page number or arrow in the list of available pages at the bottom of the screen.</p>
+    <p>In the left part of the page, there is a list of current product categories. Currently, the store has 4 categories of products:</p>
+    <ul>
+      <li>Books</li>
+      <li>Coffee mugs</li>
+      <li>Luggage tags</li>
+      <li>Mouse Pads</li>
+    </ul>
+    <p>The default category for browsing products is books. To change the category, the user should click on the name of the desired category on the list in the left sidebar.</p>
+    <p>Additionally, there is an option to view detailed information about a selected product. To do this, the user should click on the image or name of the product of interest. It should open a page containing a detailed description of the product.</p>
+    <p>The page with a detailed product description also includes an "<strong>Add to cart</strong>" button, allowing the user to add the product to the cart. This button is located at the bottom of the screen.</p>
+  </div>
+
+  <div class="chapter">
+    <h2>Searching Products</h2>
+    <p>To search for a desired product, the user should enter a known part of the product name in the search panel located at the top of the screen and labeled with the text "<em>Search for products &hellip;</em>", then click the "<strong>Search</strong>" button or press <strong>Enter.</strong></p>
+    <p>If there are any products with names that partially match the entered text, a list of these products should be displayed on the screen. Otherwise, the user should see a message informing them that such products do not exist.</p>
+  </div>
+
+  <div class="chapter">
+    <h2>Order History</h2>
+    <p>The option to check the order history is only available for registered and logged-in users.</p>
+    <p>To view the order history, a logged-in user, while on the main store page, should click the "<strong>Orders</strong>" button. After that, a page containing basic information about all the orders placed by the user will be opened.</p>
+    <p>The following fields should be displayed precisely in the form of table columns:</p>
+    <ol>
+      <li>Order Tracking Number</li>
+      <li>Total Price</li>
+      <li>Total Quantity</li>
+      <li>Order Placement Date</li>
+    </ol>
+    <p>If the user has not placed any orders, upon accessing the Orders page, a message indicating the absence of orders will be displayed.</p>
+  </div>
+
+  <div class="chapter">
+    <h2>Members Page</h2>
+    <p>The Members page allows users to check discounts and/or promotions available to a specific user. This option is available only for registered and logged-in users.</p>
+    <p>By clicking the "<strong>Members</strong>" button, the user is redirected to a page with information about the discounts granted to them or their absence.</p>
+    <p>Discounts are granted as follows:</p>
+    <ul>
+      <li>Every new user receives a <strong>10%</strong> discount.</li>
+      <li>For every 5 orders (except every 10th order), the user receives a <strong>30%</strong> discount. This means the user will have a 30% discount on the 5th, 15th, 25th order, and so on.</li>
+      <li>For every 10 orders, the user receives a <strong>50%</strong> discount. This means the user will have a 50% discount on the 10th, 20th, 30th order, and so on.</li>
+    </ul>
+  </div>
+</div>
+</body>
+</html>
+
+
+
