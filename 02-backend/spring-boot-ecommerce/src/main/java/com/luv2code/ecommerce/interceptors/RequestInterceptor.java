@@ -18,7 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class RequestInterceptor implements HandlerInterceptor {
 
     private final Log log = LogFactory.getLog(RequestInterceptor.class);
-    MyAppContext myAppContext;
+    private final MyAppContext myAppContext;
 
     @Autowired
     public RequestInterceptor(MyAppContext myAppContext){

@@ -6,8 +6,8 @@
 <title>Ecommerce Shop Manual</title>
 <style>
   body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f4;
     margin: 0;
     padding: 20px;
     color: #333;
@@ -16,26 +16,28 @@
     max-width: 800px;
     margin: 0 auto;
     background-color: #fff;
-    padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    padding: 30px;
   }
   h1 {
     color: #007bff;
     text-align: center;
     margin-bottom: 20px;
-    font-size: 24px;
+    font-size: 28px;
   }
   h2 {
     color: #007bff;
     margin-top: 30px;
-    font-size: 20px;
+    font-size: 24px;
   }
   p, strong {
-    font-size: 18px;
+    font-size: 16px;
+    line-height: 1.6;
   }
   ol, ul {
-    font-size: 18px;
+    font-size: 16px;
+    line-height: 1.6;
   }
   table {
     width: 100%;
@@ -43,9 +45,9 @@
     margin-top: 20px;
   }
   th, td {
-    padding: 10px;
+    padding: 12px;
     border-bottom: 1px solid #ddd;
-    font-size: 18px;
+    font-size: 16px;
   }
   th {
     background-color: #f2f2f2;
@@ -54,9 +56,19 @@
   }
   .info {
     background-color: #f7f7f7;
-    padding: 10px;
+    padding: 20px;
     margin-top: 20px;
     border-radius: 8px;
+  }
+  .highlight {
+    color: #007bff;
+    font-weight: bold;
+  }
+  .restriction {
+    background-color: #ffc107;
+    padding: 2px 5px;
+    border-radius: 4px;
+    font-weight: bold;
   }
 </style>
 </head>
@@ -176,6 +188,126 @@
       <li>For every 10 orders, the user receives a <strong>50%</strong> discount. This means the user will have a 50% discount on the 10th, 20th, 30th order, and so on.</li>
     </ul>
   </div>
+
+   <div class="chapter">
+    <h2>Cart Details</h2>
+    <p>In the top right corner of the screen, the user can see the number of products currently in their cart and their total value in US dollars.</p>
+    <p><strong>Important:</strong> If any discount is available for the user, it is automatically applied to the current order. Consequently, the total value of products in the user's cart will be reduced by the percentage of the available discount. This reduced value will be displayed in the top right corner of the screen.</p>
+    <p>To view detailed information about the products currently in the cart, the user should click on the <strong>shopping cart icon</strong> located in the top right corner of the store interface.</p>
+    <p>Upon clicking the cart icon, a page will be displayed containing the following information in the form of a table:</p>
+    <ol>
+      <li><span class="highlight">Product Image</span></li>
+      <li><span class="highlight">Name and price of each item</span></li>
+      <li><span class="highlight">Quantity of specific items in the cart</span></li>
+    </ol>
+    <p>The Cart Details interface allows users to remove products from the cart, increase or decrease the quantity of specific items in the cart.</p>
+    <p>Additionally, information about the total quantity of items in the cart, the total cost of items, and the shipping cost is displayed on a separate row for the user.</p>
+    <p>If a discount is applied to the order, information about it will also be displayed.</p>
+  </div>
+
+  <div class="chapter">
+    <h2>Completing an Order</h2>
+    <p>To complete an order, the user should go to the Checkout page by clicking the <strong>Checkout</strong> button located in the bottom right corner of the Cart Details page, fill in all the required fields, and click the <strong>Purchase</strong> button.</p>
+    <p>All fields on the Checkout page are required to be filled, with:</p>
+    <ul>
+      <li>The customer's email automatically filled in for registered users, with the option to change its value</li>
+      <li>The Expiration Month and Expiration Year of the credit card automatically filled with the current year and month, with the option to change</li>
+    </ul>
+    <p>Restrictions on some fields:</p>
+    <ul>
+      <li>The email field value should be a valid email, which must be checked with appropriate regular expressions in the code</li>
+      <li>The values of the <span class="highlight">First name</span> and <span class="highlight">Last name</span> fields should be at least <span class="restriction">2</span> characters long</li>
+      <li>The values of the <span class="highlight">Street</span>, <span class="highlight">City</span>, and <span class="highlight">Zip code</span> fields should be at least <span class="restriction">2</span> characters long</li>
+      <li>The <span class="highlight">Country</span> field value is selected from the list of available countries. These are the following countries: Brazil, Canada, Germany, Turkey, India, United States.</li>
+      <li>The selection of the <span class="highlight">State</span> field value is only possible after choosing the Country. State is selected from the list of regions of the respective country</li>
+      <li>The <span class="highlight">Cart type</span> field value is selected from two available options: Mastercard and Visa</li>
+      <li>The <span class="highlight">Name on card</span> field value should be at least <span class="restriction">2</span> characters long</li>
+      <li>The values of the <span class="highlight">Security code</span> and <span class="highlight">Card number</span> fields should contain only numeric characters</li>
+      <li>The <span class="highlight">Security code</span> field value should have <span class="restriction">3</span> characters</li>
+      <li>The <span class="highlight">Card number</span> field value should have <span class="restriction">16</span> characters</li>
+    </ul>
+    <p>If the restrictions for the fields are not met, the user will be shown an appropriate message.</p>
+    <p>Checking the checkbox labeled "<em>Billing Address same as Shipping Address</em>" automatically fills the <em>Billing Address</em> section with values identical to the values of the fields in the Shipping Address section</p>
+  </div>
+
+  <div class="chapter">
+    <h2>Adding, Editing, and Deleting Products</h2>
+    <div class="section">
+      <h3>Adding a New Product</h3>
+      <p>The functionality of adding a new product is available only to users with ADMIN or STAFF roles.</p>
+      <p>To add a new product, the user should click on the "<span class="highlight">Add new product</span>" button located in the left panel of the screen, fill in all the required fields in the displayed form, and confirm the form by clicking the "<span class="highlight">Add</span>" button.</p>
+      <p>All fields on the new product adding page are required to be filled, with:</p>
+      <ul>
+        <li>The product category being selected from a dropdown list containing names of all categories currently available in the system.</li>
+        <li>The <span class="highlight">Unit price</span> and <span class="highlight">Units in stock</span> fields are automatically filled with zeros.</li>
+        <li>The <span class="highlight">Active</span> field is set to <span class="highlight">False</span> by default.</li>
+      </ul>
+      <p>Restrictions on some fields:</p>
+      <ul>
+        <li>The values of the <span class="highlight">Name</span>, <span class="highlight">Sku</span>, <span class="highlight">Image URL</span>, and <span class="highlight">Description</span> fields should be at least <span class="restriction">2</span> characters long.</li>
+        <li>The value of the <span class="highlight">Units in stock</span> field should be a natural number.</li>
+        <li>The value of the <span class="highlight">Unit price</span> field should be a number greater than or equal to zero.</li>
+      </ul>
+      <p>If the restrictions for the fields are not met, the user will be shown an appropriate message. In case of failure to add a new product, the user will be shown an appropriate message.</p>
+    </div>
+
+    <div class="section">
+      <h3>Editing an Existing Product</h3>
+      <p>The functionality of editing an existing product is available only to users with ADMIN or STAFF roles.</p>
+      <p>To update information about an existing product, the user should navigate to the page containing detailed information about that product, click on the "<span class="highlight">Update product</span>" button, fill in all the required fields in the product editing form, and then confirm the form by clicking the "<span class="highlight">Edit</span>" button.</p>
+      <p>All fields in the product editing form are automatically filled with the current values for that product, with the option to change them. The editing form is identical to the adding form. Therefore, the requirements and restrictions for the fields in the editing form repeat the requirements for the fields in the adding form.</p>
+      <p>If the restrictions for the fields are not met, the user will be shown an appropriate message. In case of failure to update the product information, the user will be shown an appropriate message.</p>
+    </div>
+
+    <div class="section">
+      <h3>Deleting an Existing Product</h3>
+      <p>The functionality of deleting an existing product is available only to users with ADMIN or STAFF roles.</p>
+      <p>To delete an existing product, the user should navigate to the page containing detailed information about that product and click on the "<span class="highlight">Delete product</span>" button.</p>
+      <p>In case of failure to delete the product, the user will be shown an appropriate message.</p>
+    </div>
+  </div>
+
+  <div class="chapter">
+    <h2>Adding, Editing, and Deleting Categories</h2>
+    <div class="section">
+      <h3>Adding a New Category</h3>
+      <p>The functionality of adding a new category is available only to users with ADMIN or STAFF roles.</p>
+      <p>To add a new category, the user should click the "<span class="highlight">Add new category</span>" button located in the left panel of the screen, enter the name of the new category in the appropriate field of the form, and confirm the form by clicking the "<span class="highlight">Add</span>" button.</p>
+      <p>The form for adding a new category contains only one field, "<span class="highlight">New Category name</span>," with:</p>
+      <ul>
+        <li>It is required to be filled.</li>
+        <li>The value of the field should contain at least <span class="restriction">2</span> non-empty characters.</li>
+        <li>The value of the field should be different from the names of other product categories already existing in the system.</li>
+      </ul>
+      <p>If the restrictions for the field are not met, the user will be shown an appropriate message. In case of failure to add a new category, the user will be shown an appropriate message.</p>
+    </div>
+
+    <div class="section">
+      <h3>Editing an Existing Category</h3>
+      <p>The functionality of editing a category is available only to users with ADMIN or STAFF roles.</p>
+      <p>To edit categories, the user should click the "<span class="highlight">Edit category</span>" button located in the left panel of the screen, fill in the required fields of the form, and confirm the form by clicking the "<span class="highlight">Edit</span>" button.</p>
+      <p>The form for editing a category contains two fields, both of which are mandatory, with:</p>
+      <ul>
+        <li>The "<span class="highlight">Current Category Name</span>" field is filled by choosing from a dropdown list containing names of all product categories currently supported by the system.</li>
+        <li>The "<span class="highlight">New Category name</span>" field should contain at least <span class="restriction">2</span> non-empty characters, and its value should not repeat the name of existing categories.</li>
+      </ul>
+      <p>If the restrictions for the field are not met, the user will be shown an appropriate message. In case of failure to edit the category, the user will be shown an appropriate message.</p>
+    </div>
+
+    <div class="section">
+      <h3>Deleting an Existing Category</h3>
+      <p>The functionality of deleting a category is available only to users with ADMIN or STAFF roles.</p>
+      <p>To delete categories, the user should click the "<span class="highlight">Delete category</span>" button located in the left panel of the screen, select the category to delete, and confirm by clicking the "<span class="highlight">Delete</span>" button.</p>
+      <p><strong>Note:</strong> Deleting a category will also delete all products in that category.</p>
+      <p>The form for deleting a category contains only one field, "<span class="highlight">Current Category name</span>," with:</p>
+      <ul>
+        <li>The field is mandatory.</li>
+        <li>The field is filled by choosing from a dropdown list containing names of all product categories currently supported by the system.</li>
+      </ul>
+      <p>If the restrictions for the field are not met, the user will be shown an appropriate message. In case of failure to delete the category, the user will be shown an appropriate message.</p>
+    </div>
+  </div>
+
 </div>
 </body>
 </html>
