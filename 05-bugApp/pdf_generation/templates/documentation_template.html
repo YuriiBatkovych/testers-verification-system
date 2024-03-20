@@ -31,6 +31,11 @@
     margin-top: 30px;
     font-size: 24px;
   }
+  h3 {
+    color: #007bff;
+    margin-top: 20px;
+    font-size: 20px;
+  }
   p, strong {
     font-size: 16px;
     line-height: 1.6;
@@ -70,6 +75,22 @@
     border-radius: 4px;
     font-weight: bold;
   }
+  .important {
+    font-size: 18px;
+    font-weight: bold;
+    color: #dc3545;
+  }
+  .red-button {
+    color: #dc3545;
+    font-weight: bold;
+  }
+  .note {
+    background-color: #e6ffe6;
+    padding: 20px;
+    margin-top: 20px;
+    border-left: 5px solid #28a745;
+    border-radius: 8px;
+  }
 </style>
 </head>
 <body>
@@ -87,6 +108,13 @@
     </ul>
     <p>Selected items can be ordered to a limited number of countries, the list of which should be visible during the checkout screen. These countries are: Brazil, Canada, Germany, Turkey, India, United States. The mentioned countries are fully supported, meaning that orders can be shipped to any part of the specified countries.</p>
     <p>Each user of the online store is assigned one specific role out of three: USER, STAFF, ADMIN. An unregistered user is treated as having the USER role. Details about the permissions and capabilities of users with each role will be described in the following chapters.</p>
+  </div>
+
+  <div class="chapter">
+    <h2>Note</h2>
+    <div class="note">
+      <p><span class="important">Note:</span> As soon as you notice any bug while testing the system, immediately click the red "<span class="red-button">Declare bug</span>" button located in the left panel of the screen. This will help us understand that you have noticed incorrect behavior.</p>
+    </div>
   </div>
 
   <div class="chapter">
@@ -305,6 +333,56 @@
         <li>The field is filled by choosing from a dropdown list containing names of all product categories currently supported by the system.</li>
       </ul>
       <p>If the restrictions for the field are not met, the user will be shown an appropriate message. In case of failure to delete the category, the user will be shown an appropriate message.</p>
+    </div>
+  </div>
+
+  <div class="chapter">
+    <h2>User Management</h2>
+    <div class="section">
+      <h3>User Management Overview</h3>
+      <p>The functionality of user management is available only to users with an ADMIN role.</p>
+      <p>To access the user management panel, the admin should click the "<span class="highlight">User management</span>" button located in the left panel of the screen.</p>
+      <p>On the displayed page, a full list of all system users will be shown along with the following information about them:</p>
+      <ul>
+        <li><span class="highlight">First Name</span></li>
+        <li><span class="highlight">Last Name</span></li>
+        <li><span class="highlight">Email Address</span></li>
+        <li><span class="highlight">Role</span></li>
+      </ul>
+      <p>Email address and role are essential pieces of information for each user.</p>
+    </div>
+
+    <div class="section">
+      <h3>Adding a User</h3>
+      <p>To add a user, the admin should click the "<span class="highlight">Add</span>" button located at the bottom of the account management panel, fill in the user addition form, and confirm it by clicking the "<span class="highlight">Add</span>" button at the bottom of the form.</p>
+      <p>The user addition form contains 4 fields: <span class="highlight">First name</span>, <span class="highlight">Last name</span>, <span class="highlight">Email</span>, and <span class="highlight">Role</span>, with:</p>
+      <ul>
+        <li>The email field is mandatory.</li>
+        <li>The value of the email field must be a valid email address, which is checked using appropriate regular expressions.</li>
+        <li>Values of the <span class="highlight">First name</span> and <span class="highlight">Last name</span> fields should be at least <span class="restriction">2</span> characters long.</li>
+        <li>The <span class="highlight">Role</span> field is filled by choosing from a dropdown list containing all possible roles currently supported in the system.</li>
+      </ul>
+      <p>If the restrictions for the field are not met, the user will be shown an appropriate message. In case of failure to add a user, the user will be shown an appropriate message.</p>
+    </div>
+
+    <div class="section">
+      <h3>Editing a User</h3>
+      <p>To update user information, the admin should click the "<span class="highlight">Update</span>" button located in the respective row of the user table, fill in the user editing form, and confirm it by clicking the "<span class="highlight">Edit</span>" button at the bottom of the form.</p>
+      <p>The user editing form contains 4 fields: <span class="highlight">First name</span>, <span class="highlight">Last name</span>, <span class="highlight">Email</span>, and <span class="highlight">Role</span>. The form is automatically filled with the current user data with the option to change them. Additionally:</p>
+      <ul>
+        <li>The email field is mandatory.</li>
+        <li>The value of the email field must be a valid email address, which is checked using appropriate regular expressions.</li>
+        <li>Values of the <span class="highlight">First name</span> and <span class="highlight">Last name</span> fields should be at least <span class="restriction">2</span> characters long.</li>
+        <li>The <span class="highlight">Role</span> field is filled by choosing from a dropdown list containing all possible roles currently supported in the system.</li>
+      </ul>
+      <p>If the restrictions for the field are not met, the user will be shown an appropriate message. In case of failure to edit a user, the user will be shown an appropriate message.</p>
+    </div>
+
+    <div class="section">
+      <h3>Deleting a User</h3>
+      <p>To delete a user, the admin should click the "<span class="highlight">Delete</span>" button located in the respective row of the user table.</p>
+      <p><span class="important">Note:</span> Deleting a user will permanently remove their data from the system, and this action cannot be undone.</p>
+      <p>In case of failure to delete a user, the user will be shown an appropriate message.</p>
     </div>
   </div>
 
