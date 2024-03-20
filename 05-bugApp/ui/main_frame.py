@@ -7,6 +7,7 @@ from properties_management.manage_bugs import get_backend_bugs, get_frontend_bug
 from properties_management.manage_front_properties import write_frontend_properties
 from ui.bug_frame import BugsFrame
 from ui.common import prepare_bug_configs_map
+from ui.documentation_frame import DocumentationFrame
 from ui.results_frame import ResultsFrame
 from ui.run_frame import RunFrame
 
@@ -14,6 +15,7 @@ BACKEND_FRAME = "Backend Bugs"
 FRONTEND_FRAME = "Frontend Bugs"
 RESULTS_FRAME = "Results"
 RUN_FRAME = "Run"
+DOCUMENTATION_FRAME = "Documentation"
 
 
 class App(customtkinter.CTk):
@@ -40,11 +42,12 @@ class App(customtkinter.CTk):
         self.right_side_panel.pack(side=tkinter.LEFT, fill=tkinter.BOTH, expand=True, padx=0, pady=0)
         self.right_side_panel.configure(border_width=1)
         self.right_side_panel.configure(border_color="#323232")
+
         self.create_nav(self.left_side_panel, BACKEND_FRAME)
         self.create_nav(self.left_side_panel, FRONTEND_FRAME)
         self.create_nav(self.left_side_panel, RUN_FRAME)
         self.create_nav(self.left_side_panel, RESULTS_FRAME)
-
+        self.create_nav(self.left_side_panel, DOCUMENTATION_FRAME)
 
     def def_main_screen(self):
         self.bg = self.cget("fg_color")
@@ -71,6 +74,8 @@ class App(customtkinter.CTk):
             App.frames[frame_id] = ResultsFrame(self)
         elif frame_id == RUN_FRAME:
             App.frames[frame_id] = RunFrame(self)
+        elif frame_id == DOCUMENTATION_FRAME:
+            App.frames[frame_id] = DocumentationFrame(self)
 
     # method to change frames
     def toggle_frame_by_id(self, frame_id):
