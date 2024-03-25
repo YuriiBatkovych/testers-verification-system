@@ -61,7 +61,8 @@
       "name": "bugShippingAddressStreetMinLength",
       "description": "Min length of Shipping Address street field in checkout form",
       "valueType": "number",
-      "defaultValue": 2,
+      "defaultConfigurable": true,
+      "defaultTag": "defaultShippingAddressStreetMinLength",
       "tag": "BugShippingAddressStreetMinLength"
     },
 
@@ -69,15 +70,17 @@
       "name": "bugFirstNameMinLength",
       "description": "Min length of Customer First Name field in checkout form",
       "valueType": "number",
-      "defaultValue": 2,
-      "tag": "BugFirstNameMinLength"
+      "tag": "BugFirstNameMinLength",
+      "defaultConfigurable": true,
+      "defaultTag": "defaultFirstNameMinLength"
     },
 
     {
       "name": "bugProductNameMinLength",
       "description": "Min length of Product Name field in product edition form",
       "valueType": "number",
-      "defaultValue": 2,
+      "defaultConfigurable": true,
+      "defaultTag": "defaultProductNameMinLength",
       "tag": "BugProductNameMinLength"
     },
 

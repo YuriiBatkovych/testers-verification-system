@@ -9,10 +9,13 @@ export const environment = {
  bugAddCategoryRoute: '/add/category',
  bugDeleteCategoryRoute: '/delete/category',
  bugShippingAddressStreetMinLength: 2,
- bugFirstNameMinLength: 2,
+ bugFirstNameMinLength: 3,
  bugProductNameMinLength: 2,
  bugCardNumberLength: 16,
  bugSecurityCodeLength: 3,
  bugCategoryNameRequired: true,
- bugReplaceProductInCart: false
+ bugReplaceProductInCart: false,
+ defaultShippingAddressStreetMinLength: 2,
+ defaultFirstNameMinLength: 2,
+ defaultProductNameMinLength: 2,
 }

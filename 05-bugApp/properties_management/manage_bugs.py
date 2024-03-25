@@ -1,18 +1,34 @@
 from properties_management.manage_back_properties import read_backend_properties
 from properties_management.manage_front_properties import read_frontend_properties
 from properties_management.parse_bug_configs import parse_bug_configs
+from utils.default_config import DefaultConfig
 
 BACKEND_BUG_CONFIG_FILE = "./config/back_bug_config.json."
 FRONTEND_BUG_CONFIG_FILE = "./config/front_bug_config.json."
 
 
-def get_bug_configs(config_file, bug_properties):
+def get_bug_configs(config_file, bug_properties, default_configs=None):
+    if default_configs is None:
+        default_configs = {}
+
     bugs_configs = parse_bug_configs(config_file)
 
     for bug in bugs_configs:
         bug.set_current_value(bug_properties.get(bug.name))
 
+        if bug.default_configurable:
+            bug.set_default_value(default_configs)
+
     return bugs_configs
+
+
+def get_defaults_configs(defaults_dictionary):
+    defaults = []
+
+    for key, value in defaults_dictionary.items():
+        defaults.append(DefaultConfig(key, value))
+
+    return defaults
 
 
 def get_backend_bugs():
@@ -21,8 +37,13 @@ def get_backend_bugs():
 
 
 def get_frontend_bugs():
-    properties = read_frontend_properties(True)
-    return get_bug_configs(FRONTEND_BUG_CONFIG_FILE, properties)
+    bug_configs = read_frontend_properties(True)
+    default_configs = read_frontend_properties(True, "default")
+    return get_bug_configs(FRONTEND_BUG_CONFIG_FILE, bug_configs, default_configs)
+
+
+def get_frontend_defaults():
+    return get_defaults_configs(read_frontend_properties(True, "default"))
 
 
 def get_all_bug_configs():
@@ -31,6 +52,10 @@ def get_all_bug_configs():
 
     all_bugs = back_configs + front_configs
     return all_bugs
+
+
+def get_all_defaults_map():
+    return read_frontend_properties(True, "default")
 
 
 def get_activated_bugs():

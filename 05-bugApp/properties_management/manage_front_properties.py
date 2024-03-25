@@ -18,15 +18,15 @@ def split_string_at_colon(input_string):
         return input_string.strip(), ""
 
 
-def should_return_front_property(filter_only_bugs, prop_key, prop_val):
+def should_return_front_property(filter_only_bugs, filter_word, prop_key, prop_val):
     if prop_key and prop_val:
-        return (filter_only_bugs and prop_key.startswith("bug")) or \
-               (not filter_only_bugs and not prop_key.startswith("bug"))
+        return (filter_only_bugs and prop_key.startswith(filter_word)) or \
+               (not filter_only_bugs)
     else:
         return False
 
 
-def read_frontend_properties(filter_only_bugs):
+def read_frontend_properties(filter_only, filter_word="bug"):
     properties_dict = {}
 
     with open(FRONTEND_PROPERTIES_FILE, 'r') as file:
@@ -40,7 +40,7 @@ def read_frontend_properties(filter_only_bugs):
 
             elif inside_environment_block:
                 prop_key, prop_val = split_string_at_colon(line)
-                if should_return_front_property(filter_only_bugs, prop_key, prop_val):
+                if should_return_front_property(filter_only, filter_word, prop_key, prop_val):
                     properties_dict[prop_key] = prop_val
 
     return properties_dict
@@ -63,6 +63,23 @@ def write_frontend_properties(properties_map):
 
         for prop_key, prop_val in prop_preview.items():
             if not prop_key.startswith("bug"):
+                write_property(properties_file, prop_key, prop_val)
+
+        for key, value in properties_map.items():
+            write_property(properties_file, key, value)
+
+        properties_file.write("}\n")
+
+
+def write_frontend_defaults(properties_map):
+    prop_preview = read_frontend_properties(False)
+
+    with open(FRONTEND_PROPERTIES_FILE, 'w+') as properties_file:
+
+        properties_file.write("export const environment = {\n")
+
+        for prop_key, prop_val in prop_preview.items():
+            if not prop_key.startswith("default"):
                 write_property(properties_file, prop_key, prop_val)
 
         for key, value in properties_map.items():

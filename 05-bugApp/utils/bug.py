@@ -8,6 +8,8 @@ class Bug:
         self.description = params.get("description")
         self.allowed_values = params.get("allowedValues")
         self.value_type = params.get("valueType")
+        self.default_configurable = params.get("defaultConfigurable")
+        self.default_tag = params.get("defaultTag")
         self.default_value = params.get("defaultValue")
         self.tag = params.get("tag")
         self.is_detected = False
@@ -22,6 +24,16 @@ class Bug:
                 self.current_value = int(current_value)
             case _:
                 self.current_value = current_value
+
+    def set_default_value(self, default_configs):
+        for default_name, default_value in default_configs.items():
+            if default_name == self.default_tag:
+                match self.value_type:
+                    case "number":
+                        self.default_value = int(default_value)
+                    case _:
+                        self.default_value = default_value
+                break
 
     def get_widget(self, root):
         if type(self.allowed_values) == list:

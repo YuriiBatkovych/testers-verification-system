@@ -47,7 +47,7 @@ export class ProductEditionComponent implements OnInit {
       .subscribe(() => {
         if (this.productFormGroup.invalid) {
           if(this.name?.hasError('minlength')){
-            this.bugsChecker.checkBugMinLength(this.name.value, 'BugProductNameMinLength');
+            this.bugsChecker.checkBugMinLength(this.name.value, environment.defaultProductNameMinLength, 'BugProductNameMinLength');
           }
         }
       });

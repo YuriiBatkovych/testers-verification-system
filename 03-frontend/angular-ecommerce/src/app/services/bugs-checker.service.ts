@@ -6,10 +6,16 @@ import { LogsService } from './logs.service';
 })
 export class BugsCheckerService {
 
+  defaultMinLength: number = 2;
+
   constructor(private logsService: LogsService) { }
 
-  checkBugMinLength(value: string, bugMessage: string){
-    if(value.length >= 2){
+  checkBugMinLengthDefault(value: string, bugMessage: string){
+    this.checkBugMinLength(value, this.defaultMinLength, bugMessage);
+  }
+
+  checkBugMinLength(value: string, minLength: number, bugMessage: string){
+    if(value.length >= minLength){
       this.logsService.logMessage(bugMessage)
     }
   }

@@ -156,8 +156,10 @@
     <p>Restrictions on some fields:</p>
     <ul>
       <li>The email field value should be a valid email, which must be checked with appropriate regular expressions in the code</li>
-      <li>The values of the <span class="highlight">First name</span> and <span class="highlight">Last name</span> fields should be at least <span class="restriction">2</span> characters long</li>
-      <li>The values of the <span class="highlight">Street</span>, <span class="highlight">City</span>, and <span class="highlight">Zip code</span> fields should be at least <span class="restriction">2</span> characters long</li>
+      <li>The values of the <span class="highlight">First name</span> field should be at least <span class="restriction">{{defaultFirstNameMinLength}}</span> characters long</li>
+      <li>The values of the <span class="highlight">Last name</span> field should be at least <span class="restriction">2</span> characters long</li>
+      <li>The values of the <span class="highlight">Street</span> fields should be at least <span class="restriction">{{defaultShippingAddressStreetMinLength}}</span> characters long</li>
+      <li>The values of the <span class="highlight">City</span>, and <span class="highlight">Zip code</span> fields should be at least <span class="restriction">2</span> characters long</li>
       <li>The <span class="highlight">Country</span> field value is selected from the list of available countries. These are the following countries: Brazil, Canada, Germany, Turkey, India, United States.</li>
       <li>The selection of the <span class="highlight">State</span> field value is only possible after choosing the Country. State is selected from the list of regions of the respective country</li>
       <li>The <span class="highlight">Cart type</span> field value is selected from two available options: Mastercard and Visa</li>
@@ -184,7 +186,8 @@
       </ul>
       <p>Restrictions on some fields:</p>
       <ul>
-        <li>The values of the <span class="highlight">Name</span>, <span class="highlight">Sku</span>, <span class="highlight">Image URL</span>, and <span class="highlight">Description</span> fields should be at least <span class="restriction">2</span> characters long.</li>
+        <li>The values of the <span class="highlight">Name</span> field should be at least <span class="restriction">{{defaultProductNameMinLength}}</span> characters long.</li>
+        <li>The values of the <span class="highlight">Sku</span>, <span class="highlight">Image URL</span>, and <span class="highlight">Description</span> fields should be at least <span class="restriction">2</span> characters long.</li>
         <li>The value of the <span class="highlight">Units in stock</span> field should be a natural number.</li>
         <li>The value of the <span class="highlight">Unit price</span> field should be a number greater than or equal to zero.</li>
       </ul>

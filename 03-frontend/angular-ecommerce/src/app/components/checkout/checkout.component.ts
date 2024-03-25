@@ -76,11 +76,11 @@ export class CheckoutComponent implements OnInit {
       .subscribe(() => {
         if (this.checkoutFormGroup.invalid) {
           if(this.firstName?.hasError('minlength')){
-            this.bugsChecker.checkBugMinLength(this.firstName.value, 'BugFirstNameMinLength');
+            this.bugsChecker.checkBugMinLength(this.firstName.value, environment.defaultFirstNameMinLength, 'BugFirstNameMinLength');
           }
 
           if(this.shippingAddressStreet?.hasError('minlength')){
-            this.bugsChecker.checkBugMinLength(this.shippingAddressStreet.value, 'BugShippingAddressStreetMinLength');
+            this.bugsChecker.checkBugMinLength(this.shippingAddressStreet.value, environment.defaultShippingAddressStreetMinLength, 'BugShippingAddressStreetMinLength');
           }
 
           this.bugsChecker.checkOnlyNumbersPattern(this.cardNumber?.hasError('pattern'), this.cardNumber?.value, 'BugCardNumberPattern', 16);
