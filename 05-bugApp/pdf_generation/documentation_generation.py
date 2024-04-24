@@ -1,15 +1,15 @@
 import pdfkit
 import jinja2
 
+from environment_config.path_reader import get_path
 from properties_management.manage_bugs import get_all_defaults_map
-
-path_to_wkhtmltopdf = "D:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe"
-
-DOCUMENTATION_TEMPLATE_FOLDER = './pdf_generation/templates/'
-DOCUMENTATION_CSS_PATH = './pdf_generation/css/documentation.css'
 
 
 def generate_pdf_documentation():
+    path_to_wkhtmltopdf = get_path("path_to_wkhtmltopdf")
+    DOCUMENTATION_TEMPLATE_FOLDER = get_path("DOCUMENTATION_TEMPLATE_FOLDER")
+    DOCUMENTATION_CSS_PATH = get_path("DOCUMENTATION_CSS_PATH")
+
     context = get_all_defaults_map()
 
     template_loader = jinja2.FileSystemLoader(DOCUMENTATION_TEMPLATE_FOLDER)

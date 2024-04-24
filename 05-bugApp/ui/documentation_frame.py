@@ -1,7 +1,4 @@
-import tkinter
 import webbrowser
-from tkinter import filedialog
-
 import customtkinter
 
 from pdf_generation.documentation_generation import generate_pdf_documentation

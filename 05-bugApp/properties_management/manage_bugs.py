@@ -1,10 +1,8 @@
+from environment_config.path_reader import get_path
 from properties_management.manage_back_properties import read_backend_properties
 from properties_management.manage_front_properties import read_frontend_properties
 from properties_management.parse_bug_configs import parse_bug_configs
 from utils.default_config import DefaultConfig
-
-BACKEND_BUG_CONFIG_FILE = "./config/back_bug_config.json."
-FRONTEND_BUG_CONFIG_FILE = "./config/front_bug_config.json."
 
 
 def get_bug_configs(config_file, bug_properties, default_configs=None):
@@ -33,13 +31,13 @@ def get_defaults_configs(defaults_dictionary):
 
 def get_backend_bugs():
     properties = read_backend_properties()
-    return get_bug_configs(BACKEND_BUG_CONFIG_FILE, properties)
+    return get_bug_configs(get_path("BACKEND_BUG_CONFIG_FILE"), properties)
 
 
 def get_frontend_bugs():
     bug_configs = read_frontend_properties(True)
     default_configs = read_frontend_properties(True, "default")
-    return get_bug_configs(FRONTEND_BUG_CONFIG_FILE, bug_configs, default_configs)
+    return get_bug_configs(get_path("FRONTEND_BUG_CONFIG_FILE"), bug_configs, default_configs)
 
 
 def get_frontend_defaults():

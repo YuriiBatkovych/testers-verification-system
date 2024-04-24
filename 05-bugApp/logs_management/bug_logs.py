@@ -1,16 +1,16 @@
 import re
 
+from environment_config.path_reader import get_path
 from logs_management.special_cases import special_marking_detected
-
-BUG_LOGS_FILE = 'D:/ecommerce-shop/logging/bugs/bugs.log'
 
 
 def clean_bug_logs():
-    open(BUG_LOGS_FILE, 'w').close()
+    file_path = get_path("BUG_LOGS_FILE")
+    open(file_path, 'w').close()
 
 
 def parse_bug_logs():
-    file_path = BUG_LOGS_FILE
+    file_path = get_path("BUG_LOGS_FILE")
 
     bug_tags = []
     with open(file_path, 'r') as file:

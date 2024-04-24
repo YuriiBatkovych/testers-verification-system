@@ -1,11 +1,11 @@
 from jproperties import Properties
 
-BACKEND_PROPERTIES_FILE = 'D:/ecommerce-shop/04-modifications/modified.properties'
+from environment_config.path_reader import get_path
 
 
 def read_backend_properties():
     configs = Properties()
-
+    BACKEND_PROPERTIES_FILE = get_path("BACKEND_PROPERTIES_FILE")
     with open(BACKEND_PROPERTIES_FILE, 'rb') as read_prop:
         configs.load(read_prop)
 
@@ -28,6 +28,7 @@ def write_property(file, key, value):
 
 def write_backend_properties(managed_properties_map):
     configs = Properties()
+    BACKEND_PROPERTIES_FILE = get_path("BACKEND_PROPERTIES_FILE")
 
     with open(BACKEND_PROPERTIES_FILE, 'rb') as read_properties:
         configs.load(read_properties)

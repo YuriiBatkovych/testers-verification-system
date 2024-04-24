@@ -4,12 +4,11 @@ import subprocess
 
 import psutil
 
-NODE_APP_DIRECTORY = 'D:/ecommerce-shop/03-frontend/angular-ecommerce'
-NODE_APP_NAME = 'angular-ecommerce'
+from environment_config.path_reader import get_path
 
 
 def run_npm_app():
-    node_directory_path = NODE_APP_DIRECTORY
+    node_directory_path = get_path("NODE_APP_DIRECTORY")
     try:
         os.chdir(node_directory_path)
         command = ["npm", "start"]
@@ -26,6 +25,8 @@ def run_frontend():
 
 
 def is_npm_running():
+    NODE_APP_NAME = get_path("NODE_APP_NAME")
+
     for proc in psutil.process_iter(attrs=['pid', 'name', 'cmdline']):
         if proc.info['name'] == 'node.exe':
             for arg in proc.info['cmdline']:
@@ -35,6 +36,8 @@ def is_npm_running():
 
 
 def stop_npm():
+    NODE_APP_NAME = get_path("NODE_APP_NAME")
+
     for proc in psutil.process_iter(attrs=['pid', 'name', 'cmdline']):
         if proc.info['name'] == 'node.exe':
             for arg in proc.info['cmdline']:

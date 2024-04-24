@@ -1,6 +1,5 @@
 import customtkinter
 
-
 class Bug:
 
     def __init__(self, params):

@@ -1,10 +1,8 @@
-import tkinter
-
 import customtkinter
 from customtkinter import CTkLabel, CTkButton
 
-from running_management.backend import is_spring_boot_running, run_spring_boot, stop_spring_boot, run_backend
-from running_management.frontend import is_npm_running, run_npm_app, stop_npm, run_frontend
+from running_management.backend import is_spring_boot_running, stop_spring_boot, run_backend
+from running_management.frontend import is_npm_running, stop_npm, run_frontend
 
 
 class RunFrame(customtkinter.CTkScrollableFrame):

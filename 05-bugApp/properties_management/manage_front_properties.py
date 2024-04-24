@@ -1,6 +1,6 @@
 import re
 
-FRONTEND_PROPERTIES_FILE = 'D:/ecommerce-shop/03-frontend/angular-ecommerce/src/environments/environment.ts'
+from environment_config.path_reader import get_path
 
 
 def split_string_at_colon(input_string):
@@ -28,6 +28,7 @@ def should_return_front_property(filter_only_bugs, filter_word, prop_key, prop_v
 
 def read_frontend_properties(filter_only, filter_word="bug"):
     properties_dict = {}
+    FRONTEND_PROPERTIES_FILE = get_path("FRONTEND_PROPERTIES_FILE")
 
     with open(FRONTEND_PROPERTIES_FILE, 'r') as file:
         inside_environment_block = False
@@ -56,6 +57,7 @@ def write_property(file, key, value):
 
 def write_frontend_properties(properties_map):
     prop_preview = read_frontend_properties(False)
+    FRONTEND_PROPERTIES_FILE = get_path("FRONTEND_PROPERTIES_FILE")
 
     with open(FRONTEND_PROPERTIES_FILE, 'w+') as properties_file:
 
@@ -73,6 +75,7 @@ def write_frontend_properties(properties_map):
 
 def write_frontend_defaults(properties_map):
     prop_preview = read_frontend_properties(False)
+    FRONTEND_PROPERTIES_FILE = get_path("FRONTEND_PROPERTIES_FILE")
 
     with open(FRONTEND_PROPERTIES_FILE, 'w+') as properties_file:
 

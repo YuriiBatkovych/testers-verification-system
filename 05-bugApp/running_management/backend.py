@@ -4,15 +4,14 @@ import psutil
 import os
 import subprocess
 
+from environment_config.path_reader import get_path
 from logs_management.bug_logs import clean_bug_logs
-
-SPRING_BOOT_APP_NAME = 'spring-boot-ecommerce-0.0.1-SNAPSHOT.jar'
-SPRING_BOOT_APP_PROPERTIES = 'file:D://ecommerce-shop/04-modifications/modified.properties'
-SPRING_BOOT_APP_DIRECTORY = 'D:/ecommerce-shop/04-modifications'
 
 
 def run_spring_boot():
-    spring_directory_path = SPRING_BOOT_APP_DIRECTORY
+    spring_directory_path = get_path("SPRING_BOOT_APP_DIRECTORY")
+    SPRING_BOOT_APP_NAME = get_path("SPRING_BOOT_APP_NAME")
+    SPRING_BOOT_APP_PROPERTIES = get_path("SPRING_BOOT_APP_PROPERTIES")
 
     try:
         os.chdir(spring_directory_path)
@@ -31,6 +30,8 @@ def run_backend():
 
 
 def is_spring_boot_running():
+    SPRING_BOOT_APP_NAME = get_path("SPRING_BOOT_APP_NAME")
+
     for proc in psutil.process_iter(attrs=['pid', 'name', 'cmdline']):
         if proc.info['name'] == 'java.exe':
             if any(SPRING_BOOT_APP_NAME in arg for arg in proc.info['cmdline']):
@@ -39,6 +40,8 @@ def is_spring_boot_running():
 
 
 def stop_spring_boot():
+    SPRING_BOOT_APP_NAME = get_path("SPRING_BOOT_APP_NAME")
+
     for proc in psutil.process_iter(attrs=['pid', 'name', 'cmdline']):
         if proc.info['name'] == 'java.exe':
             if any(SPRING_BOOT_APP_NAME in arg for arg in proc.info['cmdline']):
