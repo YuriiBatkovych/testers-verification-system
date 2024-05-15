@@ -1,6 +1,7 @@
 import tkinter
 
 import customtkinter
+from matplotlib.ticker import MaxNLocator
 from tktooltip import ToolTip
 
 import matplotlib.pyplot as plt
@@ -62,6 +63,17 @@ class ResultsFrame(customtkinter.CTkScrollableFrame):
             self.create_bug_field(bug, row_number)
             row_number += 1
 
+    def count_detected_bugs_by_type(self):
+        bug_dictionary = {}
+        for bug in self.activated_bugs:
+            if bug.type in bug_dictionary:
+                bug_dictionary[bug.type][0] += 1
+                if bug.is_detected:
+                    bug_dictionary[bug.type][1] += 1
+            else:
+                bug_dictionary[bug.type] = [1, 1 if bug.is_detected else 0]
+        return bug_dictionary
+
     def create_statistics(self):
         activated_bugs_number = len(self.activated_bugs)
         detected_bugs_number = sum(1 for bug in self.activated_bugs if bug.is_detected)
@@ -69,14 +81,32 @@ class ResultsFrame(customtkinter.CTkScrollableFrame):
 
         colors = ["blue", "green"]
 
-        fig, ax = plt.subplots()
+        fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 10))
 
-        ax.bar(["Activated bugs", "Detected bugs"], [activated_bugs_number, detected_bugs_number], color=colors)
-        ax.text(1, detected_bugs_number+0.5, f'{detected_percentage}%', ha='center')
+        ax1.bar(["Activated bugs", "Detected bugs"], [activated_bugs_number, detected_bugs_number], color=colors)
+        ax1.text(1, detected_bugs_number+0.5, f'{detected_percentage}%', ha='center')
+        ax1.set_title("All activated bugs")
+        ax1.legend()
+
+        bugs_by_type = self.count_detected_bugs_by_type()
+        categories = list(bugs_by_type.keys())
+        bugs_by_category = [bug[0] for bug in bugs_by_type.values()]
+        detected_by_category = [bug[1] for bug in bugs_by_type.values()]
+
+        x = range(len(categories))
+        ax2.bar(x, bugs_by_category, width=0.2, label='Activated Bugs', color='blue')
+        ax2.bar(x, detected_by_category, width=0.2, label='Detected Bugs', color='green')
+        ax2.set_xticks(x)
+        ax2.set_xticklabels(categories, rotation=45)
+        ax2.yaxis.set_major_locator(MaxNLocator(integer=True))
+        ax2.set_title("Bugs by category")
+        ax2.legend()
 
         self.canvas = FigureCanvasTkAgg(fig, master=self.right_side_panel)
         self.canvas.draw()
         self.canvas.get_tk_widget().pack(padx=10, pady=10)
+
+        print(self.count_detected_bugs_by_type())
 
     def recover(self):
         self.delete_old_setup()

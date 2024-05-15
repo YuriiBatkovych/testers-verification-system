@@ -11,6 +11,7 @@ class Bug:
         self.default_tag = params.get("defaultTag")
         self.default_value = params.get("defaultValue")
         self.tag = params.get("tag")
+        self.type = params.get("type")
         self.is_detected = False
         self.current_value = ""
 

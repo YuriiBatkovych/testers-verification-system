@@ -4,6 +4,7 @@
     {
       "name": "bugTextButtonLogout",
       "description": "Text on the Logout button will be changed to the one configured",
+      "type": "User Interface",
       "valueType": "string",
       "defaultValue": "\"Logout\"",
       "tag": "Logout Click"
@@ -11,6 +12,7 @@
     {
       "name": "bugTextButtonMembers",
       "description": "Text on the Members button will be changed to the one configured",
+      "type": "User Interface",
       "valueType": "string",
       "defaultValue": "\"Members\"",
       "tag": "MembersPage"
@@ -18,6 +20,7 @@
     {
       "name": "bugTextButtonOrders",
       "description": "Text on the Orders button will be changed to the one configured",
+      "type": "User Interface",
       "valueType": "string",
       "defaultValue": "\"Orders\"",
       "tag": "OrdersPage"
@@ -25,6 +28,7 @@
     {
       "name": "bugTextButtonSearch",
       "description": "Text on the Search button will be changed to the one configured",
+      "type": "User Interface",
       "valueType": "string",
       "defaultValue": "\"Search\"",
       "tag": "Searching"
@@ -34,6 +38,7 @@
       "name": "bugEditCategoryRoute",
       "description": "This route will be used when clicking on Edit Category button",
       "allowedValues": ["'/edit/category'", "'/add/category'", "'/delete/category'"],
+      "type": "Routing",
       "valueType": "string",
       "defaultValue": "'/edit/category'",
       "tag": "EditCategoryRouteBug"
@@ -43,6 +48,7 @@
       "name": "bugAddCategoryRoute",
       "description": "This route will be used when clicking on Add Category button",
       "allowedValues": ["'/edit/category'", "'/add/category'", "'/delete/category'"],
+      "type": "Routing",
       "valueType": "string",
       "defaultValue": "'/add/category'",
       "tag": "AddCategoryRouteBug"
@@ -52,6 +58,7 @@
       "name": "bugDeleteCategoryRoute",
       "description": "This route will be used when clicking on Delete Category button",
       "allowedValues": ["'/edit/category'", "'/add/category'", "'/delete/category'"],
+      "type": "Routing",
       "valueType": "string",
       "defaultValue": "'/delete/category'",
       "tag": "DeleteCategoryRouteBug"
@@ -60,6 +67,7 @@
     {
       "name": "bugShippingAddressStreetMinLength",
       "description": "Min length of Shipping Address street field in checkout form",
+      "type": "Border bug",
       "valueType": "number",
       "defaultConfigurable": true,
       "defaultTag": "defaultShippingAddressStreetMinLength",
@@ -69,6 +77,7 @@
     {
       "name": "bugFirstNameMinLength",
       "description": "Min length of Customer First Name field in checkout form",
+      "type": "Border bug",
       "valueType": "number",
       "tag": "BugFirstNameMinLength",
       "defaultConfigurable": true,
@@ -78,6 +87,7 @@
     {
       "name": "bugProductNameMinLength",
       "description": "Min length of Product Name field in product edition form",
+      "type": "Border bug",
       "valueType": "number",
       "defaultConfigurable": true,
       "defaultTag": "defaultProductNameMinLength",
@@ -87,6 +97,7 @@
     {
       "name": "bugCardNumberLength",
       "description": "Length of Card Number field in checkout form (must be 16)",
+      "type": "Functionality",
       "valueType": "number",
       "defaultValue": 16,
       "tag": "BugCardNumberPattern"
@@ -95,6 +106,7 @@
     {
       "name": "bugSecurityCodeLength",
       "description": "Length of Card Security Code field in checkout form (must be 3)",
+      "type": "Functionality",
       "valueType": "number",
       "defaultValue": 3,
       "tag": "BugSecurityCodePattern"
@@ -104,6 +116,7 @@
       "name": "bugCategoryNameRequired",
       "description": "If true new category name required check will be set for category-edition form",
       "allowedValues": ["true", "false"],
+      "type": "Error prevention",
       "valueType": "string",
       "defaultValue": "true",
       "tag": "NewCategoryNameRequiredBug"
@@ -113,6 +126,7 @@
       "name": "bugReplaceProductInCart",
       "description": "If true inappropriate product will be added to the cart, when adding through the main page",
       "allowedValues": ["true", "false"],
+      "type": "Functionality",
       "valueType": "string",
       "defaultValue": "false",
       "tag": "ReplacingProductInCart"
